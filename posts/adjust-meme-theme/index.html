@@ -222,86 +222,213 @@ kimbie
 <h3 id=页脚添加今日诗词>页脚添加今日诗词</h3>
 <p>参考：https://guanqr.com/tech/website/add-jinrishici-in-meme/<br>
 在 MemE 主题的自定义页脚文件中添加以下代码即可：</p>
-<pre tabindex=0><code>&lt;!-- 文件位置：~/layouts/partials/custom/footer.html --&gt;
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=c>&lt;!-- 文件位置：~/layouts/partials/custom/footer.html --&gt;</span>
 
-&lt;script src=&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;text class=&quot;poem_sentence&quot;&gt;&lt;/text&gt;
-&lt;text class=&quot;poem_info&quot;&gt;&lt;/text&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-  jinrishici.load(function(result) {
-    var sentence = document.querySelector(&quot;.poem_sentence&quot;)
-    var info = document.querySelector(&quot;.poem_info&quot;)
-    sentence.innerHTML = result.data.content
-    info.innerHTML = '——' + result.data.origin.author
-  });
-&lt;/script&gt;
-</code></pre><p>这里我出现了一个问题，因为设置了诗句和作者之间用破折号「——」连接，而我按照教程在<code>~/layouts/partials/custom/footer.html</code>中添加了代码后发现破折号显示乱码，而且生成的诗句被放在了最下方，而我希望诗句处在作者和版权之间，所以我在<code>~/layouts/partials/footer.html</code>的适当位置添加代码。</p>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://sdk.jinrishici.com/v2/browser/jinrishici.js&#34;</span> <span class=na>charset</span><span class=o>=</span><span class=s>&#34;utf-8&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>text</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;poem_sentence&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>text</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>text</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;poem_info&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>text</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+  <span class=nx>jinrishici</span><span class=p>.</span><span class=nx>load</span><span class=p>(</span><span class=kd>function</span><span class=p>(</span><span class=nx>result</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kd>var</span> <span class=nx>sentence</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;.poem_sentence&#34;</span><span class=p>)</span>
+    <span class=kd>var</span> <span class=nx>info</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;.poem_info&#34;</span><span class=p>)</span>
+    <span class=nx>sentence</span><span class=p>.</span><span class=nx>innerHTML</span> <span class=o>=</span> <span class=nx>result</span><span class=p>.</span><span class=nx>data</span><span class=p>.</span><span class=nx>content</span>
+    <span class=nx>info</span><span class=p>.</span><span class=nx>innerHTML</span> <span class=o>=</span> <span class=s1>&#39;——&#39;</span> <span class=o>+</span> <span class=nx>result</span><span class=p>.</span><span class=nx>data</span><span class=p>.</span><span class=nx>origin</span><span class=p>.</span><span class=nx>author</span>
+  <span class=p>});</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里我出现了一个问题，因为设置了诗句和作者之间用破折号「——」连接，而我按照教程在<code>~/layouts/partials/custom/footer.html</code>中添加了代码后发现破折号显示乱码，而且生成的诗句被放在了最下方，而我希望诗句处在作者和版权之间，所以我在<code>~/layouts/partials/footer.html</code>的适当位置添加代码。</p>
 <blockquote>
 <p>需要注意我直接修改了meme主题的页脚文件而不是主题的自定义页脚文件，只适用于手动安装主题，如果是 git submodule 方式安装主题则不要直接修改主题页脚文件，否则不利于主题后续更新。</p>
 </blockquote>
 <h3 id=加载进度条>加载进度条</h3>
 <p>参考：https://zhixuan2333.github.io/posts/ac760353/#加载进度条</p>
-<pre tabindex=0><code>&lt;!-- layouts/partials/footer/custom.html --&gt;
-&lt;script
-    src=&quot;https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js&quot;
-    integrity=&quot;sha384-bHDlAEUFxsRI7JfULv3DTpL2IXbbgn4JHQJibgo5iiXSK6Iu8muwqHANhun74Cqg&quot;
-    crossorigin=&quot;anonymous&quot;
-&gt;&lt;/script&gt;
-&lt;link
-    rel=&quot;stylesheet&quot;
-    href=&quot;https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/css/nprogress.css&quot;
-    integrity=&quot;sha384-KJyhr2syt5+4M9Pz5dipCvTrtvOmLk/olWVdfhAp858UCa64Ia5GFpTN7+G4BWpE&quot;
-    crossorigin=&quot;anonymous&quot;
-/&gt;
-&lt;script&gt;
-    NProgress.start();
-    document.addEventListener(&quot;readystatechange&quot;, () =&gt; {
-        if (document.readyState === &quot;interactive&quot;) NProgress.inc(0.8);
-        if (document.readyState === &quot;complete&quot;) NProgress.done();
-    });
-&lt;/script&gt;
-</code></pre><p>需要注意stack和meme的页脚文件位置不太一样，meme的在<code>~/layouts/partials/custom/footer.html</code>。不过进度条是在页面顶端，所以我选择在<code>header.html</code>添加代码。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=c>&lt;!-- layouts/partials/footer/custom.html --&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span>
+    <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js&#34;</span>
+    <span class=na>integrity</span><span class=o>=</span><span class=s>&#34;sha384-bHDlAEUFxsRI7JfULv3DTpL2IXbbgn4JHQJibgo5iiXSK6Iu8muwqHANhun74Cqg&#34;</span>
+    <span class=na>crossorigin</span><span class=o>=</span><span class=s>&#34;anonymous&#34;</span>
+<span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>link</span>
+    <span class=na>rel</span><span class=o>=</span><span class=s>&#34;stylesheet&#34;</span>
+    <span class=na>href</span><span class=o>=</span><span class=s>&#34;https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/css/nprogress.css&#34;</span>
+    <span class=na>integrity</span><span class=o>=</span><span class=s>&#34;sha384-KJyhr2syt5+4M9Pz5dipCvTrtvOmLk/olWVdfhAp858UCa64Ia5GFpTN7+G4BWpE&#34;</span>
+    <span class=na>crossorigin</span><span class=o>=</span><span class=s>&#34;anonymous&#34;</span>
+<span class=p>/&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+    <span class=nx>NProgress</span><span class=p>.</span><span class=nx>start</span><span class=p>();</span>
+    <span class=nb>document</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s2>&#34;readystatechange&#34;</span><span class=p>,</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+        <span class=k>if</span> <span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>readyState</span> <span class=o>===</span> <span class=s2>&#34;interactive&#34;</span><span class=p>)</span> <span class=nx>NProgress</span><span class=p>.</span><span class=nx>inc</span><span class=p>(</span><span class=mf>0.8</span><span class=p>);</span>
+        <span class=k>if</span> <span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>readyState</span> <span class=o>===</span> <span class=s2>&#34;complete&#34;</span><span class=p>)</span> <span class=nx>NProgress</span><span class=p>.</span><span class=nx>done</span><span class=p>();</span>
+    <span class=p>});</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意stack和meme的页脚文件位置不太一样，meme的在<code>~/layouts/partials/custom/footer.html</code>。不过进度条是在页面顶端，所以我选择在<code>header.html</code>添加代码。</p>
 <h2 id=短代码>短代码</h2>
 <h3 id=在博客中插入b站视频>在博客中插入B站视频</h3>
 <p>参考：https://mogeko.me/posts/zh-cn/079/<br>
 虽然我个人相当不喜欢bilibili，但bili在哪都能看，而油管不行。</p>
 <h4 id=添加代码>添加代码</h4>
 <p>在<code>layouts/shortcodes</code>文件夹中创建文件<code>bilibili.html</code>(如果没有那个文件夹就自己新建一个)，我选择在博客根目录下建<code>layouts/shortcodes</code>文件夹，后续换主题的时候方便管理。然后粘贴如下代码：</p>
-<pre tabindex=0><code>{{ $videoID := index .Params 0 }}
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html>{{ $videoID := index .Params 0 }}
 {{ $pageNum := index .Params 1 | default 1}}
 
-{{ if (findRE &quot;^[bB][vV][0-9a-zA-Z]+$&quot; $videoID) }}
-&lt;div&gt;&lt;iframe id=&quot;biliplayer&quot; src=&quot;//player.bilibili.com/player.html?bvid={{ $videoID }}&amp;page={{ $pageNum }}&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot; loading=&quot;lazy&quot; &gt; &lt;/iframe&gt;&lt;/div&gt;
+{{ if (findRE &#34;^[bB][vV][0-9a-zA-Z]+$&#34; $videoID) }}
+<span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;&lt;</span><span class=nt>iframe</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;biliplayer&#34;</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;//player.bilibili.com/player.html?bvid={{ $videoID }}&amp;page={{ $pageNum }}&#34;</span> <span class=na>scrolling</span><span class=o>=</span><span class=s>&#34;no&#34;</span> <span class=na>border</span><span class=o>=</span><span class=s>&#34;0&#34;</span> <span class=na>frameborder</span><span class=o>=</span><span class=s>&#34;no&#34;</span> <span class=na>framespacing</span><span class=o>=</span><span class=s>&#34;0&#34;</span> <span class=na>allowfullscreen</span><span class=o>=</span><span class=s>&#34;true&#34;</span> <span class=na>loading</span><span class=o>=</span><span class=s>&#34;lazy&#34;</span> <span class=p>&gt;</span> <span class=p>&lt;/</span><span class=nt>iframe</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
 {{ else }}
-&lt;div&gt;&lt;iframe id=&quot;biliplayer&quot; src=&quot;//player.bilibili.com/player.html?aid={{ $videoID }}&amp;page={{ $pageNum }}&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot; loading=&quot;lazy&quot; &gt; &lt;/iframe&gt;&lt;/div&gt;
+<span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;&lt;</span><span class=nt>iframe</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;biliplayer&#34;</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;//player.bilibili.com/player.html?aid={{ $videoID }}&amp;page={{ $pageNum }}&#34;</span> <span class=na>scrolling</span><span class=o>=</span><span class=s>&#34;no&#34;</span> <span class=na>border</span><span class=o>=</span><span class=s>&#34;0&#34;</span> <span class=na>frameborder</span><span class=o>=</span><span class=s>&#34;no&#34;</span> <span class=na>framespacing</span><span class=o>=</span><span class=s>&#34;0&#34;</span> <span class=na>allowfullscreen</span><span class=o>=</span><span class=s>&#34;true&#34;</span> <span class=na>loading</span><span class=o>=</span><span class=s>&#34;lazy&#34;</span> <span class=p>&gt;</span> <span class=p>&lt;/</span><span class=nt>iframe</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
 {{ end }}
-</code></pre><p>然后用 CSS 修改播放器的尺寸，最好能根据不同的屏幕大小 (PC 和手机) 动态调整。在<code>/assets/scss/components/_post-meta.scss</code>中插入：</p>
-<pre tabindex=0><code>// 嵌入 BiliBili 视频
-#biliplayer {
-  width: 100%;
-  height: 550px;
-}
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  #biliplayer {
-    width: 100%;
-    height: 250px;
-  }
-}
-</code></pre><p>或者直接在刚刚的<code>layouts/shortcodes/bilibili.html</code>中添加：</p>
-<pre tabindex=0><code>&lt;style&gt;
-// 嵌入 BiliBili 视频
-#biliplayer {
-  width: 100%;
-  height: 550px;
-}
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  #biliplayer {
-    width: 100%;
-    height: 250px;
-  }
-}
-&lt;/style&gt;
-</code></pre><p>我在这里做了一点改动，第二步css/html的id应该是biliplayer而不是bilibili，如果看不懂的话直接复制我的代码即可。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后用 CSS 修改播放器的尺寸，最好能根据不同的屏幕大小 (PC 和手机) 动态调整。在<code>/assets/scss/components/_post-meta.scss</code>中插入：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=o>//</span> <span class=nt>嵌入</span> <span class=nt>BiliBili</span> <span class=nt>视频</span>
+<span class=p>#</span><span class=nn>biliplayer</span> <span class=p>{</span>
+  <span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>550</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>@</span><span class=k>media</span> <span class=nt>only</span> <span class=nt>screen</span> <span class=nt>and</span> <span class=o>(</span><span class=nt>min-device-width</span><span class=o>:</span> <span class=nt>320px</span><span class=o>)</span> <span class=nt>and</span> <span class=o>(</span><span class=nt>max-device-width</span><span class=o>:</span> <span class=nt>480px</span><span class=o>)</span> <span class=p>{</span>
+  <span class=p>#</span><span class=nn>biliplayer</span> <span class=p>{</span>
+    <span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+    <span class=k>height</span><span class=p>:</span> <span class=mi>250</span><span class=kt>px</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>或者直接在刚刚的<code>layouts/shortcodes/bilibili.html</code>中添加：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+<span class=o>//</span> <span class=nt>嵌入</span> <span class=nt>BiliBili</span> <span class=nt>视频</span>
+<span class=p>#</span><span class=nn>biliplayer</span> <span class=p>{</span>
+  <span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>550</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>@</span><span class=k>media</span> <span class=nt>only</span> <span class=nt>screen</span> <span class=nt>and</span> <span class=o>(</span><span class=nt>min-device-width</span><span class=o>:</span> <span class=nt>320px</span><span class=o>)</span> <span class=nt>and</span> <span class=o>(</span><span class=nt>max-device-width</span><span class=o>:</span> <span class=nt>480px</span><span class=o>)</span> <span class=p>{</span>
+  <span class=p>#</span><span class=nn>biliplayer</span> <span class=p>{</span>
+    <span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+    <span class=k>height</span><span class=p>:</span> <span class=mi>250</span><span class=kt>px</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我在这里做了一点改动，第二步css/html的id应该是biliplayer而不是bilibili，如果看不懂的话直接复制我的代码即可。</p>
+<h4 id=应用>应用</h4>
+<p>在你想插入 B 站视频的地方写下 (AV号不带 av/AV，BV号必须带bv/BV，PV号控制分P，默认为 1，直接写不需要代码框)</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown>{{<span class=p>&lt;</span> <span class=nt>bilibili</span> <span class=err>[</span><span class=na>AV号</span><span class=err>/</span><span class=na>BV号</span><span class=err>]</span> <span class=err>[</span><span class=na>PV号</span><span class=err>]</span> <span class=p>&gt;</span>}}
+</code></pre></td></tr></table>
+</div>
+</div><p>以<a href=https://www.bilibili.com/video/av21139681>长毛象的介绍</a>这段影片为例：</p>
+<p>可以写做：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown>{{<span class=p>&lt;</span> <span class=nt>bilibili</span> <span class=na>BV1UW411g7eq</span> <span class=p>&gt;</span>}}
+</code></pre></td></tr></table>
+</div>
+</div><p>或者</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown>{{<span class=p>&lt;</span> <span class=nt>bilibili</span> <span class=na>21139681</span> <span class=p>&gt;</span>}}
+</code></pre></td></tr></table>
+</div>
+</div><p>效果如下：<br>
+<div><iframe id=biliplayer src="//player.bilibili.com/player.html?aid=21139681&page=1" scrolling=no border=0 frameborder=no framespacing=0 allowfullscreen loading=lazy></iframe></div>
+<style>#biliplayer{width:100%;height:550px}@media only screen and (min-device-width:320px) and (max-device-width:480px){#biliplayer{width:100%;height:250px}}</style>
+</p>
 <h3 id=黑幕文字>黑幕文字</h3>
 <p>可以直接参考：https://mogeko.me/posts/zh-cn/080/</p>
 <h3 id=还有更多>还有更多&mldr;</h3>
@@ -381,6 +508,8 @@ Roelxy
 <a href=https://toot.tantalum.life/@Zokiio title=mastodon aria-label=mastodon><svg fill="#000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="25" height="25"><path fill="currentcolor" d="M15.9375 4.03125C12.917 4.0435 9.9179219 4.4269844 8.3574219 5.1464844c0 0-3.3574219 1.528375-3.3574219 6.7343746C5 18.077859 4.9955 25.860234 10.5625 27.365234c2.132.573 3.965453.696327999999998 5.439453.611328 2.675-.151 3.998047-.970703 3.998047-.970703L19.910156 25.029297S18.176297 25.640313 16.029297 25.570312C13.902297 25.495313 11.6615 25.335688 11.3125 22.679688 11.2805 22.432688 11.264625 22.182594 11.265625 21.933594c4.507 1.119 8.350203.487375 9.408203.359375 2.954-.358999999999998 5.525516-2.211297 5.853516-3.904297.513999999999999-2.668.470703-6.507813.470703-6.507813.0-5.2059996-3.351563-6.7343746-3.351563-6.7343746C22.000984 4.3779844 18.958 4.019 15.9375 4.03125zM12.705078 8.0019531c1.034875.0277500000000011 2.0575.49075 2.6875 1.46875l.609375 1.0351559.607422-1.0351559c1.265-1.967 4.100219-1.8442656 5.449219-.3222656C23.302594 10.596438 23.025391 11.531 23.025391 18V18.001953H20.578125V12.373047c0-2.6350001-3.359375-2.7367658-3.359375.365234000000001V16H14.787109V12.738281c0-3.1019998-3.357421-3.0021872-3.357421-.367187000000001V18H8.9765625c0-6.474-.272203100000001-7.414562.9667969-8.8515625.6794996-.766 1.7268436-1.1742344 2.7617186-1.1464844z"/></svg>
 </a>
 <a href=@avazoie:o3o.cafe title=matrix aria-label=matrix><svg fill="currentcolor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25"><path d="M3 4V20H6V18H5V6H6V4H3zM18 4V6h1V18H18v2h3V4H18zM14.751953 8.4238281c-.498709-.0100663999999995-1.002375.1135-1.40625.390625-.26.179-.483234.4079532-.740234000000001.6269531-.391-.7769999-1.097297-.9840468-1.904297-.998046799999999C9.8831719 8.4303594 9.2496406 8.8005156 8.6816406 9.4785156V8.640625H7v6.347656H8.7871094S8.7840625 12.608594 8.7890625 11.433594C8.7900625 11.224594 8.80075 11.011641 8.84375 10.806641c.132-.628.6704531-1.014891 1.314453-.962891000000001C10.771203 9.89375 11.050078 10.227172 11.080078 10.951172 11.085078 11.077172 11.087891 14.984375 11.087891 14.984375h1.810547C12.898437 14.984375 12.891344 12.512891 12.902344 11.462891 12.905344 11.191891 12.932047 10.914344 12.998047 10.652344 13.146047 10.064344 13.623484 9.7766563 14.271484 9.8476562 14.843484 9.9096562 15.129875 10.225656 15.171875 10.847656V15h1.802734s.0289999999999999-3.119562.0-4.601562C16.968609 10.095438 16.871375 9.7710938 16.734375 9.4960938 16.401875 8.8292188 15.583135 8.4406055 14.751953 8.4238281z"/></svg>
+</a>
+<a href=https://t.me/Avazoie title=telegram aria-label=telegram><svg data-name="telegram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="25" height="25"><path fill="currentcolor" d="M26.070313 3.996094C25.734375 4.011719 25.417969 4.109375 25.136719 4.21875H25.132813C24.847656 4.332031 23.492188 4.902344 21.433594 5.765625 19.375 6.632813 16.703125 7.757813 14.050781 8.875 8.753906 11.105469 3.546875 13.300781 3.546875 13.300781L3.609375 13.277344S3.25 13.394531 2.875 13.652344c-.191406.125-.402344.296875-.585937.566406000000001C2.105469 14.488281 1.957031 14.902344 2.011719 15.328125 2.101563 16.050781 2.570313 16.484375 2.90625 16.722656 3.246094 16.964844 3.570313 17.078125 3.570313 17.078125H3.578125l4.882813 1.644531c.21875.703125 1.488281 4.875 1.792968 5.835938C10.433594 25.132813 10.609375 25.492188 10.828125 25.765625 10.933594 25.90625 11.058594 26.023438 11.207031 26.117188 11.265625 26.152344 11.328125 26.179688 11.390625 26.203125 11.410156 26.214844 11.429688 26.21875 11.453125 26.222656L11.402344 26.210938C11.417969 26.214844 11.429688 26.226563 11.441406 26.230469 11.480469 26.242188 11.507813 26.246094 11.558594 26.253906 12.332031 26.488281 12.953125 26.007813 12.953125 26.007813L12.988281 25.980469l2.882813-2.625L20.703125 27.0625l.109375.046875C21.820313 27.550781 22.839844 27.304688 23.378906 26.871094 23.921875 26.433594 24.132813 25.875 24.132813 25.875L24.167969 25.785156 27.902344 6.65625C28.007813 6.183594 28.035156 5.742188 27.917969 5.3125 27.800781 4.882813 27.5 4.480469 27.136719 4.265625 26.769531 4.046875 26.40625 3.980469 26.070313 3.996094zM25.96875 6.046875C25.964844 6.109375 25.976563 6.101563 25.949219 6.222656V6.234375L22.25 25.164063C22.234375 25.191406 22.207031 25.25 22.132813 25.308594 22.054688 25.371094 21.992188 25.410156 21.667969 25.28125L15.757813 20.75 12.1875 24.003906l.75-4.789062s9.257813-8.628906 9.65625-9C22.992188 9.84375 22.859375 9.765625 22.859375 9.765625 22.886719 9.3125 22.257813 9.632813 22.257813 9.632813L10.082031 17.175781 10.078125 17.15625 4.242188 15.191406V15.1875C4.238281 15.1875 4.230469 15.183594 4.226563 15.183594 4.230469 15.183594 4.257813 15.171875 4.257813 15.171875l.03125-.015625L4.320313 15.144531S9.53125 12.949219 14.828125 10.71875c2.652344-1.117187 5.324219-2.242187 7.378906-3.109375 2.054688-.863281 3.574219-1.496094 3.660157-1.53125C25.949219 6.046875 25.910156 6.046875 25.96875 6.046875z"/></svg>
 </a>
 </div>
 </div>
@@ -496,6 +625,7 @@ See Also
 <li><a href=#在博客中插入b站视频>在博客中插入B站视频</a>
 <ul>
 <li><a href=#添加代码>添加代码</a></li>
+<li><a href=#应用>应用</a></li>
 </ul>
 </li>
 <li><a href=#黑幕文字>黑幕文字</a></li>
@@ -534,6 +664,8 @@ See Also
 <a href=https://toot.tantalum.life/@Zokiio title=mastodon aria-label=mastodon><svg fill="#000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"><path fill="currentcolor" d="M15.9375 4.03125C12.917 4.0435 9.9179219 4.4269844 8.3574219 5.1464844c0 0-3.3574219 1.528375-3.3574219 6.7343746C5 18.077859 4.9955 25.860234 10.5625 27.365234c2.132.573 3.965453.696327999999998 5.439453.611328 2.675-.151 3.998047-.970703 3.998047-.970703L19.910156 25.029297S18.176297 25.640313 16.029297 25.570312C13.902297 25.495313 11.6615 25.335688 11.3125 22.679688 11.2805 22.432688 11.264625 22.182594 11.265625 21.933594c4.507 1.119 8.350203.487375 9.408203.359375 2.954-.358999999999998 5.525516-2.211297 5.853516-3.904297.513999999999999-2.668.470703-6.507813.470703-6.507813.0-5.2059996-3.351563-6.7343746-3.351563-6.7343746C22.000984 4.3779844 18.958 4.019 15.9375 4.03125zM12.705078 8.0019531c1.034875.0277500000000011 2.0575.49075 2.6875 1.46875l.609375 1.0351559.607422-1.0351559c1.265-1.967 4.100219-1.8442656 5.449219-.3222656C23.302594 10.596438 23.025391 11.531 23.025391 18V18.001953H20.578125V12.373047c0-2.6350001-3.359375-2.7367658-3.359375.365234000000001V16H14.787109V12.738281c0-3.1019998-3.357421-3.0021872-3.357421-.367187000000001V18H8.9765625c0-6.474-.272203100000001-7.414562.9667969-8.8515625.6794996-.766 1.7268436-1.1742344 2.7617186-1.1464844z"/></svg>
 </a>
 <a href=@avazoie:o3o.cafe title=matrix aria-label=matrix><svg fill="currentcolor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path d="M3 4V20H6V18H5V6H6V4H3zM18 4V6h1V18H18v2h3V4H18zM14.751953 8.4238281c-.498709-.0100663999999995-1.002375.1135-1.40625.390625-.26.179-.483234.4079532-.740234000000001.6269531-.391-.7769999-1.097297-.9840468-1.904297-.998046799999999C9.8831719 8.4303594 9.2496406 8.8005156 8.6816406 9.4785156V8.640625H7v6.347656H8.7871094S8.7840625 12.608594 8.7890625 11.433594C8.7900625 11.224594 8.80075 11.011641 8.84375 10.806641c.132-.628.6704531-1.014891 1.314453-.962891000000001C10.771203 9.89375 11.050078 10.227172 11.080078 10.951172 11.085078 11.077172 11.087891 14.984375 11.087891 14.984375h1.810547C12.898437 14.984375 12.891344 12.512891 12.902344 11.462891 12.905344 11.191891 12.932047 10.914344 12.998047 10.652344 13.146047 10.064344 13.623484 9.7766563 14.271484 9.8476562 14.843484 9.9096562 15.129875 10.225656 15.171875 10.847656V15h1.802734s.0289999999999999-3.119562.0-4.601562C16.968609 10.095438 16.871375 9.7710938 16.734375 9.4960938 16.401875 8.8292188 15.583135 8.4406055 14.751953 8.4238281z"/></svg>
+</a>
+<a href=https://t.me/Avazoie title=telegram aria-label=telegram><svg data-name="telegram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"><path fill="currentcolor" d="M26.070313 3.996094C25.734375 4.011719 25.417969 4.109375 25.136719 4.21875H25.132813C24.847656 4.332031 23.492188 4.902344 21.433594 5.765625 19.375 6.632813 16.703125 7.757813 14.050781 8.875 8.753906 11.105469 3.546875 13.300781 3.546875 13.300781L3.609375 13.277344S3.25 13.394531 2.875 13.652344c-.191406.125-.402344.296875-.585937.566406000000001C2.105469 14.488281 1.957031 14.902344 2.011719 15.328125 2.101563 16.050781 2.570313 16.484375 2.90625 16.722656 3.246094 16.964844 3.570313 17.078125 3.570313 17.078125H3.578125l4.882813 1.644531c.21875.703125 1.488281 4.875 1.792968 5.835938C10.433594 25.132813 10.609375 25.492188 10.828125 25.765625 10.933594 25.90625 11.058594 26.023438 11.207031 26.117188 11.265625 26.152344 11.328125 26.179688 11.390625 26.203125 11.410156 26.214844 11.429688 26.21875 11.453125 26.222656L11.402344 26.210938C11.417969 26.214844 11.429688 26.226563 11.441406 26.230469 11.480469 26.242188 11.507813 26.246094 11.558594 26.253906 12.332031 26.488281 12.953125 26.007813 12.953125 26.007813L12.988281 25.980469l2.882813-2.625L20.703125 27.0625l.109375.046875C21.820313 27.550781 22.839844 27.304688 23.378906 26.871094 23.921875 26.433594 24.132813 25.875 24.132813 25.875L24.167969 25.785156 27.902344 6.65625C28.007813 6.183594 28.035156 5.742188 27.917969 5.3125 27.800781 4.882813 27.5 4.480469 27.136719 4.265625 26.769531 4.046875 26.40625 3.980469 26.070313 3.996094zM25.96875 6.046875C25.964844 6.109375 25.976563 6.101563 25.949219 6.222656V6.234375L22.25 25.164063C22.234375 25.191406 22.207031 25.25 22.132813 25.308594 22.054688 25.371094 21.992188 25.410156 21.667969 25.28125L15.757813 20.75 12.1875 24.003906l.75-4.789062s9.257813-8.628906 9.65625-9C22.992188 9.84375 22.859375 9.765625 22.859375 9.765625 22.886719 9.3125 22.257813 9.632813 22.257813 9.632813L10.082031 17.175781 10.078125 17.15625 4.242188 15.191406V15.1875C4.238281 15.1875 4.230469 15.183594 4.226563 15.183594 4.230469 15.183594 4.257813 15.171875 4.257813 15.171875l.03125-.015625L4.320313 15.144531S9.53125 12.949219 14.828125 10.71875c2.652344-1.117187 5.324219-2.242187 7.378906-3.109375 2.054688-.863281 3.574219-1.496094 3.660157-1.53125C25.949219 6.046875 25.910156 6.046875 25.96875 6.046875z"/></svg>
 </a>
 <a href=http://blog.tantalum.life/posts/index.xml type=application/rss+xml title=RSS aria-label="RSS Feed Link"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><circle fill="currentcolor" cx="6.18" cy="17.82" r="2.18"/><path fill="currentcolor" d="M5.59 10.23c-.84-.14-1.59.55-1.59 1.4.0.71.53 1.28 1.23 1.4 2.92.51 5.22 2.82 5.74 5.74.12.7.69 1.23 1.4 1.23.85.0 1.54-.75 1.41-1.59-.68-4.2-3.99-7.51-8.19-8.18zm-.03-5.71C4.73 4.43 4 5.1 4 5.93c0 .73.55 1.33 1.27 1.4 6.01.6 10.79 5.38 11.39 11.39.07.73.67 1.28 1.4 1.28.84.0 1.5-.73 1.42-1.56-.73-7.34-6.57-13.19-13.92-13.92z"/></svg>
 </a>
