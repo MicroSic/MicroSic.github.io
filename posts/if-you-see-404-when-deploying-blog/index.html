@@ -200,7 +200,7 @@ kimbie
 <blockquote class=quote>
 <p>受害者Roelxy：虽然这篇文章的标题是"博客折腾记"，但实际上我只是为博客换了个功能更强大的主题，结果一不小心就404了&mldr;我能怎么办，我也很绝望啊！</p></blockquote>
 <style>blockquote.quote{position:relative;margin:2em auto;padding-left:3em;border:none;&::before { position:absolute; left:0; content:'“'; color:var(--color-contrast-low); font-family:'JetBrains Mono','Amstelvar','Noto Serif SC',serif; font-size:3em; font-weight:bold; line-height:1; } &.poetry { display:table; padding:0; &::before { left:-1em; } p:last-child { margin:0; } } &.en { p { line-height:1.618; text-align:left; hyphens:auto; -webkit-hyphens:auto; -moz-hyphens:auto; } }}@media(max-width:$maxWidth){blockquote.quote{&.poetry { padding-left: 3em; &::before { left: 0; } }}}</style>
-<p>看重Zzo主题的搜索、代码样式和目录，狠下心来从简洁风格的MemE跳槽而来。步骤十分傻白甜：没有<code>git submodule</code>，直接把仓库文件下载到本地的博客根目录，然后替换配置文件并做基础改动。<code>Hugo server -D</code>本地预览毫无问题，怎么就，怎么就构建失败了呢？</p>
+<p>看中Zzo主题的搜索、代码样式和目录，英文字体也很好看，狠下心来从简洁风格的MemE跳槽而来。步骤十分傻白甜：没有<code>git submodule</code>，直接把仓库文件下载到本地的博客根目录，然后替换配置文件并做基础改动。<code>Hugo server -D</code>本地预览毫无问题，怎么就，怎么就构建失败了呢？</p>
 <blockquote>
 <p>The path you are accessing was not found in the Build Outputs of your Deployment.If you want to view your Build Outputs directly, you can turn on the Directory Listing.</p>
 </blockquote>
@@ -305,11 +305,11 @@ Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-cr
 <p>感觉和Vercel的404错误差不多&mldr;</p>
 <h2 id=搭建之后还可以继续优化>搭建之后还可以继续优化！</h2>
 <h3 id=如何获得国内加速>如何获得国内加速</h3>
-<p>由于github在国内加载速度极慢，我没有填写自定义域名。如果想获得国内加速，可以加一层cloudflare证书，或者是Vercel。这里推荐后者，可以绑定自己的域名，同时获得不错的国内加速。</p>
-<p>点击 Verce 注册页面，选择使用 Github 账号注册，弹出授权窗口时，点击Authorize Vercel，随后跳转到Let&rsquo;s build something new页面（如果没有，在Dashboard点击 New project），在Import Git Repository下方选择Add github org or account，弹出安装窗口，点击Install。之后再在GIT SCOPE中点击你的 Github 账户，下方的项目选择<code>username.github.io</code>，也就是你的编译仓库，点击skip，输入Vercel项目名（随意），然后deploy，等看到Congratulations和满屏烟花时，恭喜你，你获得了不错的国内加速。</p>
+<p>由于github在国内加载速度极慢，我没有填写自定义域名。如果想获得国内加速，可以加一层cloudflare证书，或者是Vercel(需要自有域名，Vercel分配的域名很丑)。这里推荐后者，可以绑定自己的域名，同时获得不错的国内加速。</p>
+<p>点击<a href=https://vercel.com/signup>Vercel</a>注册页面，选择使用 Github 账号注册，弹出授权窗口时，点击Authorize Vercel，随后跳转到Let&rsquo;s build something new页面（如果没有，在Dashboard点击 New project），在Import Git Repository下方选择Add github org or account，弹出安装窗口，点击Install。之后再在GIT SCOPE中点击你的 Github 账户，下方的项目选择<code>username.github.io</code>，也就是你的编译仓库，点击skip，输入Vercel项目名（随意），然后deploy，等看到Congratulations和满屏烟花时，你获得了不错的国内加速。</p>
 <h3 id=关于自定义域名>关于自定义域名</h3>
-<p>如果你在填写workflow那一步就添加了自有域名，请参考Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-create-your-own-blog-and-deploy-automatically/#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9>自定义域名注意事项</a>。但这样其实没什么必要啦，如果将域名交给Vercel保管的话，这样会获得两个博客地址，一个是github.io（国外访问）一个是自己的域名（国内加速），好处多多喔！</p>
-<p>Vercel点进刚刚添加的项目，右上角setting中选择domains，输入你的域名，点击add，然后refresh一下查看应该添加的DNS记录，按要求去DNS提供商那里添加（一般是内容为<code>76.76.21.21</code>的A记录或内容为<code>cname.vercel-dns.com</code>的CNAME记录），最后回到Vercel中refresh一下看到两个蓝色对号就是成功了，这时你已经可以使用你的域名进行访问了。</p>
+<p>如果你在源码仓库填写workflow那一步就添加了自有域名，请参考Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-create-your-own-blog-and-deploy-automatically/#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9>自定义域名注意事项</a>。但这样其实没什么必要啦，如果将域名交给Vercel保管的话，这样会获得两个博客地址，一个是github.io（国外访问）一个是自己的域名（国内加速），好处多多喔！</p>
+<p>Vercel点进刚刚添加的项目，右上角setting中选择domains，输入你的域名，点击add，然后refresh一下查看应该添加的DNS记录，按要求去DNS提供商那里添加（一般是内容为<code>76.76.21.21</code>的A记录或内容为<code>cname.vercel-dns.com</code>的CNAME记录），最后回到Vercel中refresh一下看到两个蓝色对号就是成功了，恭喜你，这时你已经可以使用你的域名进行访问了。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -378,6 +378,11 @@ See Also
 <div class=pagination-single__left-title>Hugo | 记录MemE主题美化过程</div>
 </a>
 <div class=grow></div>
+<a href=http://blog.tantalum.life/posts/add-waline-in-hugo-blog/ class=pagination-single__right>
+<div class=pagination-single__right-title>Hugo | 为Zzo主题添加Waline评论</div>
+<div class=pagination-single__icon><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentcolor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03.0 1.42.39.39 1.02.39 1.41.0l6.59-6.59c.39-.39.39-1.02.0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41.0s-.39 1.02.0 1.41L16.17 11H5c-.55.0-1 .45-1 1s.45 1 1 1z"/></svg>
+</div>
+</a>
 </nav>
 <head>
 <script src=//cdn.jsdelivr.net/npm/@waline/client></script>
@@ -498,6 +503,7 @@ See Also
 </a>
 </div>
 </div>
+<a rel=me href=https://toot.tantalum.life/@Zokiio></a>
 <div id=gtt>
 <div class=gtt><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentcolor" d="M8.12 14.71 12 10.83l3.88 3.88c.39.39 1.02.39 1.41.0s.39-1.02.0-1.41L12.7 8.71c-.39-.39-1.02-.39-1.41.0L6.7 13.3c-.39.39-.39 1.02.0 1.41.39.38 1.03.39 1.42.0z"/></svg>
 </div>
