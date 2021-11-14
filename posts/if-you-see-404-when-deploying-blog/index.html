@@ -182,7 +182,7 @@ kimbie
 <div class=single__nojs>This page looks best with JavaScript enabled</div>
 <script>document.querySelector('.single').classList.remove('hide'),document.querySelector('.single__nojs').classList.add('hide')</script>
 <h2 class=single__title data-ani=true>Hugo | 菜鸟博客折腾记</h2>
-<h3 class=single__subtitle></h3>
+<h3 class=single__subtitle>从Vercel自动部署迁移到Github Pages</h3>
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Nov 13, 2021 </time>
@@ -212,11 +212,11 @@ kimbie
 Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-create-your-own-blog-and-deploy-automatically/>利用Github Pages与Github Action搭建并部署Hugo博客</a>
 </div>
 <h3 id=对新仓库打声招呼>对新仓库打声招呼</h3>
-<p>在Github中建立两个仓库：可以设为私密的源码仓库（随意命名，例如<code>blog</code>）和需要公开的编译仓库。由于一些原因，如果编译仓库的名字不是<code>username.github.io</code>（username是你的Github用户名）的话，会导致一些问题，比如css样式无法加载，具体来说就是将<code>config.toml</code>的baseURL设置为含子路径的地址，不能正确的处理所有资源的构建位置。想了解更多请看<a href=https://mantyke.icu/2021/47a5331b/#github-action>这篇博客</a>。</p>
+<p>在Github中建立两个仓库：可以设为私密的源码仓库（存放你的博客根目录，可以随意命名，例如<code>blog</code>）和需要公开的编译仓库。由于一些原因，如果编译仓库的名字不是<code>username.github.io</code>（username是你的Github用户名）的话，会导致一些问题，比如css样式无法加载，具体来说就是将<code>config.toml</code>的baseURL设置为含子路径的地址，不能正确的处理所有资源的构建位置。想了解更多请看<a href=https://mantyke.icu/2021/47a5331b/#github-action>这篇博客</a>。</p>
 <p>由于我之前按照<a href=https://mantyke.icu/2021/hugo-build-blog/>这篇博客</a>搭建过博客，所以我进行过git全局配置，且本地存有SSH key，所以略过SSH生成与上传公钥步骤。</p>
 <p>Github登录后右上角Settings里找到Developer settings，再点Personal access tokens，Generate new token生成新的token，Select scopes里勾选repo全部内容与workflow，最后点击绿色按钮生成，将生成的Token保存下来。然后使用可视化的git工具：Github Desktop将支离破碎的博客根目录push到源码仓库中（使用代码也可）。进入源码仓库，可以发现本地的文件已经被推送到源码仓库了。</p>
 <p>点进源码仓库的Settings中，找到Secrets，点击New repository secret，名称为<code>PERSONAL_TOKEN</code>，内容为之前备份下来的Token。</p>
-<h3 id=github-pages是什么能吃吗>Github Pages是什么能吃吗</h3>
+<h3 id=github-action是什么能吃吗>Github Action是什么能吃吗</h3>
 <p>源码仓库中点击上方的Actions，set up a workflow yourself，之后你会发现github会在根目录下新建/.github/workflows/xxx.yml文件，下方是这个文件的编辑区域。把下面的配置复制进去，yml文件的名称与配置第一行的name随意填，特别注意我添加注释的地方。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -263,7 +263,7 @@ Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-cr
 </span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
 </span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
 </span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=l>main </span><span class=w> </span><span class=c># 博客根目录的默认分支，这里是main，有时也是master</span><span class=w>
+</span><span class=w>      </span>- <span class=l>main </span><span class=w> </span><span class=c># 源码仓库的默认分支，这里是main，有时也是master</span><span class=w>
 </span><span class=w>  </span><span class=nt>pull_request</span><span class=p>:</span><span class=w>
 </span><span class=w>
 </span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
@@ -297,7 +297,7 @@ Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-cr
 </span></code></pre></td></tr></table>
 </div>
 </div><p>以上代码来自Suica！</p>
-<p>提交commit，保存，然后可以发现action在尝试运行，绿色代表部署成功。这个时候编译仓库里可以看到自动建了一个名为gh-pages的分支，里面出现了许多东西。如果你没有填写自定义域名，那么<code>username.github.io</code>就是你的博客地址，此时打开你的博客域名应该已经可以看到博客内容。这种搭建方式就是Hugo+Github Pages。</p>
+<p>提交commit，保存，然后可以发现action在尝试运行，绿色代表部署成功。这个时候编译仓库里可以看到自动建了一个名为gh-pages的分支，里面出现了许多东西。如果你没有填写自定义域名，那么<code>username.github.io</code>就是你的博客地址，此时打开你的博客域名应该已经可以看到博客内容。这种搭建方式就是Hugo+Github Action自动部署。</p>
 <p>很奇怪的是，如果我参考这个<a href=https://github.com/he-sb/tech/blob/master/.github/workflows/build.yml>workflow</a>，在部署（deploy）那步会出现奇怪的错误：</p>
 <blockquote>
 <p>error:src refspec main does not match any</p>
@@ -457,7 +457,7 @@ See Also
 <li><a href=#历史总是惊人的相似>历史总是惊人的相似</a>
 <ul>
 <li><a href=#对新仓库打声招呼>对新仓库打声招呼</a></li>
-<li><a href=#github-pages是什么能吃吗>Github Pages是什么能吃吗</a></li>
+<li><a href=#github-action是什么能吃吗>Github Action是什么能吃吗</a></li>
 </ul>
 </li>
 <li><a href=#搭建之后还可以继续优化>搭建之后还可以继续优化！</a>
