@@ -46,7 +46,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Hugo | 为Zzo主题添加Waline评论","datePublished":"2021-11-14T09:10:21+08:00","dateModified":"2021-11-14T09:10:21+08:00","url":"http://blog.tantalum.life/posts/add-waline-in-hugo-blog/","description":"为什么要水这篇文章 给博客换主题的时候发现MemE主题和Zzo主题的评论配置文件有出入，不能直接套用现有的MemE主题Waline配置。所以我","keywords":["Hugo","Waline"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Roelxy's Blog","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Hugo | 为Zzo主题添加Waline评论","datePublished":"2021-11-14T09:10:21+08:00","dateModified":"2021-11-14T09:10:21+08:00","url":"http://blog.tantalum.life/posts/add-waline-in-hugo-blog/","description":"**友情提示：**本教程适合把超链接打开并缓慢阅读 为什么要水这篇文章 给博客换主题的时候发现MemE主题和Zzo主题的评论配置文件有出入，不能","keywords":["Hugo","Waline"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Roelxy's Blog","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -186,7 +186,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Nov 14, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;2&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;6&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -197,19 +197,254 @@ kimbie
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
+<blockquote>
+<p>**友情提示：**本教程适合把超链接打开并缓慢阅读</p>
+</blockquote>
 <h2 id=为什么要水这篇文章>为什么要水这篇文章</h2>
 <p>给博客换主题的时候发现MemE主题和Zzo主题的评论配置文件有出入，不能直接套用现有的<a href=https://guanqr.com/tech/website/introduction-and-basic-setting-of-waline/>MemE主题Waline配置</a>。所以我灵机一动：要不我自己搞吧。</p>
+<p>以MemE,Zzo和stack三个主题为例，看一下不同主题的评论配置有什么不同：</p>
 <h3 id=首先看一下meme主题的评论配置>首先看一下MemE主题的评论配置</h3>
-<p>同样在MemE主题的github项目中<a href="https://github.com/reuixiy/hugo-theme-meme/search?q=valine">搜索Valine</a>，同样可以看到除了<code>config-examples/zh-cn/config.toml</code>（主题的简体配置文件，这里不考虑繁体中文和英文，只是配置文件的语言项）以外，还有三个文件提到了Valine，分别是<code>layouts/partials/third-party/valine.html</code>，<code>layouts/partials/third-party/script.html</code>和<code>layouts/partials/components/comments.html</code>。</p>
+<p>MemE主题支持Valine，因为Waline是Valine的改良版，所以可以互相参考配置。首先主题的github项目中<a href="https://github.com/reuixiy/hugo-theme-meme/search?q=valine">搜索Valine</a>，同样可以看到除了<code>config-examples/zh-cn/config.toml</code>（主题的简体配置文件，这里不考虑繁体中文和英文，只是配置文件的语言项）以外，还有三个文件提到了Valine，分别是<code>layouts/partials/third-party/valine.html</code>，<code>layouts/partials/third-party/script.html</code>和<code>layouts/partials/components/comments.html</code>。</p>
 <p>各文件的作用：<br>
 -<code>comments.html</code>文件的作用是控制是否开启评论（enableComments），开启哪个评论系统（enableValine），如果开启，则插入相关评论的<code>&lt;div></code>标签 id；<br>
--<code>script.html </code>文件的作用是载入开启的评论的相应 HTML 文件<code>（valine.html）</code>；<br>
+-<code>script.html</code>文件的作用是载入开启的评论的相应 HTML 文件<code>（valine.html）</code>；<br>
 -<code>valine.html</code>文件的作用是调用<code>valine.js</code>，对评论功能进行设定。</p>
 <h3 id=再来来看一下zzo主题的评论配置>再来来看一下Zzo主题的评论配置</h3>
-<p>Zzo主题支持Valine，所以配置Valine只需要抄格式就行了。首先在github项目中<a href="https://github.com/zzossig/hugo-theme-zzo/search?q=valine">搜索Valine</a>，可以看到除了<code>config/_default/params.toml</code>（主题的配置文件，Zzo主题把正常的<code>config.toml</code>分成了四个）以外，还有两个文件：<code>layouts/partials/comments/valine.html</code>和<code>layouts/partials/comments/comments.html</code>。</p>
-<p>-<code>comments.html</code>文件的作用是控制是否开启评论（enableComments），开启哪个评论系统（enableValine），如果开启，则直接载入开启的评论的相应 HTML 文件<code>（valine.html）</code>；<br>
+<p>同样在MemE在github项目中<a href="https://github.com/zzossig/hugo-theme-zzo/search?q=valine">搜索Valine</a>，可以看到除了<code>config/_default/params.toml</code>（主题的配置文件之一，Zzo主题把正常的<code>config.toml</code>分成了四个，<code>params.toml</code>是其中一个）以外，还有两个文件：<code>layouts/partials/comments/valine.html</code>和<code>layouts/partials/comments/comments.html</code>。</p>
+<p>各文件的作用：<br>
+-<code>comments.html</code>文件的作用是控制是否开启评论（enableComments），开启哪个评论系统（enableValine），如果开启，则直接载入开启的评论的相应 HTML 文件<code>（valine.html）</code>；<br>
 -<code>valine.html</code>文件的作用是对评论功能进行设定。</p>
-<p>回到本地的博客根目录，进入Zzo主题文件夹</p>
+<p>这样一来，Zzo就不用像MemE一样需要<code>script.html</code>文件专门用来载入<code>valine.html</code>，因为功能被合并了。</p>
+<h3 id=附加题看看同样美貌的stack主题>附加题：看看同样美貌的stack主题！</h3>
+<p>stack主题支持Waline而不支持Valine，这是我万万没想到的（笑）。同样地，首先在项目中搜索<a href="https://github.com/CaiJimmy/hugo-theme-stack/search?q=waline">Waline</a>，发现除了<code>config.yaml</code>（stack主题的配置文件，和<code>config.toml</code>是一个东西）以外只有<code>layouts/partials/comments/provider/waline.html</code>提到了Waline，而且在文件中强制插入<code>&lt;div></code>标签 id，并且也对评论功能进行设定。</p>
+<h2 id=waline是什么为什么说他是valine的改良版>Waline是什么，为什么说他是Valine的改良版</h2>
+<p>请看<a href=https://guanqr.com/tech/website/introduction-and-basic-setting-of-waline/#%E4%B8%BA%E4%BD%95%E9%80%89%E6%8B%A9-waline>这篇博客</a>。简而言之就是Gitalk 和 Valine都有一定的安全隐患，于是Waline诞生了。</p>
+<h2 id=部署waline>部署Waline</h2>
+<p>按照Waline<a href=https://waline.js.org/guide/get-started.html#leancloud-%E8%AE%BE%E7%BD%AE-%E6%95%B0%E6%8D%AE%E5%BA%93>官方文档</a>快速开始。</p>
+<p>第一步推荐使用 LeanCloud 国际版，因为国内版还需要和备案的域名绑定，很是麻烦。第二步利用Vercel部署Waline，点击官方给出的<a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example">快速部署链接</a>，也就是那个deploy蓝色按钮，然后按照官方文档继续部署，直到你获得<code>ServerURL</code>，也就是服务端地址。</p>
+<blockquote>
+<p>题外话：有段时间Waline的快速部署链接失效，因为github仓库的主分支由master改为main，而快速部署链接还没来得及修改，因此clone project会出现错误，现在已经没问题了。</p>
+</blockquote>
+<h3 id=域名问题>域名问题</h3>
+<p>如果你购买了一个域名，推荐你为这个Vercel项目添加一个子域名。因为Vercel分配的域名很丑，而且每次更改环境变量之后都要Redeploy（重新部署）使改动生效，而每次改动生效后你的<code>ServerURL</code>都可能有变化，这个时候需要修改你的配置文件，否则会影响你的使用。</p>
+<h2 id=开始配置吧>开始配置吧</h2>
+<h3 id=修改配置文件>修改配置文件</h3>
+<p><strong>以Zzo主题为例</strong>，回到本地的博客根目录，在<code>config/_default/params.toml</code>中，打开评论全局设置，然后找到Valine的配置，按照Valine的格式在他的下方抄一份Waline的配置，比如我的如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=p>[</span><span class=nx>Waline</span><span class=p>]</span>
+    <span class=nx>enable</span> <span class=p>=</span> <span class=kc>true</span>
+    <span class=nx>appId</span> <span class=p>=</span> <span class=s1>&#39;你的appId&#39;</span>
+    <span class=nx>appKey</span> <span class=p>=</span> <span class=s1>&#39;你的appKey&#39;</span>
+    <span class=nx>ServerURL</span> <span class=p>=</span> <span class=s2>&#34;你的ServerURL&#34;</span>
+    <span class=nx>Placeholder</span> <span class=p>=</span> <span class=s2>&#34;你的邮箱&#34;</span>  <span class=c>#用来收取评论通知</span>
+    <span class=nx>Avatar</span> <span class=p>=</span> <span class=s2>&#34;mp&#34;</span>
+    <span class=nx>Meta</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;nick&#34;</span><span class=p>,</span> <span class=s2>&#34;mail&#34;</span><span class=p>,</span> <span class=s2>&#34;link&#34;</span><span class=p>]</span>
+    <span class=nx>PageSize</span> <span class=p>=</span> <span class=mi>10</span>
+    <span class=nx>Lang</span> <span class=p>=</span> <span class=s2>&#34;zh-CN&#34;</span>
+    <span class=nx>Highlight</span> <span class=p>=</span> <span class=kc>true</span>
+    <span class=nx>AvatarCDN</span> <span class=p>=</span> <span class=s2>&#34;https://cdn.v2ex.com/gravatar/&#34;</span>  <span class=c>#waline的评论头像可以使用某种样式也可以使用cdn，这里用v2ex的cdn</span>
+    <span class=nx>RequiredFields</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;nick&#34;</span><span class=p>,</span> <span class=s2>&#34;mail&#34;</span><span class=p>]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>进入Zzo主题文件夹，找到之前说过的两个和Valine有关的文件，也就是<code>layouts/partials/comments/valine.html</code>和<code>layouts/partials/comments/comments.html</code>，把他们两个复制到<code>~/layouts/partials/comments/valine.html</code>和<code>~/layouts/partials/comments/comments.html</code>中（博客根目录下）。</p>
+<h3 id=valine是你的模板waline要长得和他一模一样>Valine是你的模板，Waline要长得和他一模一样</h3>
+<p>将<code>valine.html</code>重命名为<code>waline.html</code>用visual studio打开，看一下这个文件长什么样：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html>{{- if .Site.Params.valine.visitor -}}
+  <span class=p>&lt;</span><span class=nt>span</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;{{ .RelPermalink | relLangURL }}&#34;</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;leancloud_visitors&#34;</span> <span class=na>data-flag-title</span><span class=o>=</span><span class=s>&#34;{{ .Title }}&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>span</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;post-meta-item-text&#34;</span><span class=p>&gt;</span>文章阅读量 <span class=p>&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>span</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;leancloud-visitors-count&#34;</span><span class=p>&gt;</span>0<span class=p>&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+  <span class=p>&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+{{- end }}
+<span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;vcomments&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;//cdn1.lncld.net/static/js/3.0.4/av-min.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#39;//unpkg.com/valine/dist/Valine.min.js&#39;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+  <span class=k>new</span> <span class=nx>Valine</span><span class=p>({</span>
+      <span class=nx>el</span><span class=o>:</span> <span class=s1>&#39;#vcomments&#39;</span> <span class=p>,</span>
+      <span class=nx>appId</span><span class=o>:</span> <span class=s1>&#39;{{ .Site.Params.valine.appId }}&#39;</span><span class=p>,</span>
+      <span class=nx>appKey</span><span class=o>:</span> <span class=s1>&#39;{{ .Site.Params.valine.appKey }}&#39;</span><span class=p>,</span>
+      <span class=nx>notify</span><span class=o>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Site</span><span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>valine</span><span class=p>.</span><span class=nx>notify</span> <span class=p>}},</span>
+      <span class=nx>verify</span><span class=o>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Site</span><span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>valine</span><span class=p>.</span><span class=nx>verify</span> <span class=p>}},</span>
+      <span class=nx>avatar</span><span class=o>:</span><span class=s1>&#39;{{ .Site.Params.valine.avatar }}&#39;</span><span class=p>,</span>
+      <span class=nx>placeholder</span><span class=o>:</span> <span class=s1>&#39;{{ .Site.Params.valine.placeholder }}&#39;</span><span class=p>,</span>
+      <span class=nx>visitor</span><span class=o>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Site</span><span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>valine</span><span class=p>.</span><span class=nx>visitor</span> <span class=p>}}</span>
+  <span class=p>});</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>以<code>appId</code>为例，有些主题的<code>valine.html</code>文件会写成<code>appId: '{{ .Site.Params.valineappId }}'</code>或者更奇怪的，但一定要记住这个格式，因为要和他的格式完全对应。</p>
+<p>删掉所有代码，修改为<a href=https://waline.js.org/guide/get-started.html#html-%E5%BC%95%E5%85%A5-%E5%AE%A2%E6%88%B7%E7%AB%AF>官方文档</a>给出的代码：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;//cdn.jsdelivr.net/npm/@waline/client&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;waline&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+    <span class=nx>Waline</span><span class=p>({</span>
+      <span class=nx>el</span><span class=o>:</span> <span class=s1>&#39;#waline&#39;</span><span class=p>,</span>
+      <span class=nx>serverURL</span><span class=o>:</span> <span class=s1>&#39;https://your-domain.vercel.app&#39;</span><span class=p>,</span>
+    <span class=p>});</span>
+  <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>将serverURL的值修改为<code>'{{ .Site.Params.waline.serverURL }}'</code>，然后打开<code>params.toml</code>，根据之前添加的项，在serverURL的下一行继续添加：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html>        placeholder: &#39;{{ .Site.Params.waline.Placeholder }}&#39;,
+        avatar: &#39;{{ .Site.Params.waline.Avatar }}&#39;,
+        meta: {{ .Site.Params.waline.Meta }},
+        pageSize: {{ .Site.Params.waline.PageSize }},
+        lang: &#39;{{ .Site.Params.waline.Lang }}&#39;,
+        highlight: {{ .Site.Params.waline.Highlight }},
+        avatarCDN: &#39;{{ .Site.Params.waline.AvatarCDN }}&#39;,
+        requiredFields: {{ .Site.Params.waline.RequiredFields }}
+</code></pre></td></tr></table>
+</div>
+</div><p>最后，我的<code>waline.html</code>是这样的：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;//cdn.jsdelivr.net/npm/@waline/client&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>  
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;waline&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+    <span class=nx>Waline</span><span class=p>({</span>
+      <span class=nx>el</span><span class=o>:</span> <span class=s1>&#39;#waline&#39;</span><span class=p>,</span>
+        <span class=nx>serverURL</span><span class=o>:</span> <span class=s1>&#39;{{ .Site.Params.waline.ServerURL }}&#39;</span><span class=p>,</span>
+        <span class=nx>placeholder</span><span class=o>:</span> <span class=s1>&#39;{{ .Site.Params.waline.Placeholder }}&#39;</span><span class=p>,</span>
+        <span class=nx>avatar</span><span class=o>:</span> <span class=s1>&#39;{{ .Site.Params.waline.Avatar }}&#39;</span><span class=p>,</span>
+        <span class=nx>meta</span><span class=o>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Site</span><span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>waline</span><span class=p>.</span><span class=nx>Meta</span> <span class=p>}},</span>
+        <span class=nx>pageSize</span><span class=o>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Site</span><span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>waline</span><span class=p>.</span><span class=nx>PageSize</span> <span class=p>}},</span>
+        <span class=nx>lang</span><span class=o>:</span> <span class=s1>&#39;{{ .Site.Params.waline.Lang }}&#39;</span><span class=p>,</span>
+        <span class=nx>highlight</span><span class=o>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Site</span><span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>waline</span><span class=p>.</span><span class=nx>Highlight</span> <span class=p>}},</span>
+        <span class=nx>avatarCDN</span><span class=o>:</span> <span class=s1>&#39;{{ .Site.Params.waline.AvatarCDN }}&#39;</span><span class=p>,</span>
+        <span class=nx>requiredFields</span><span class=o>:</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>Site</span><span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>waline</span><span class=p>.</span><span class=nx>RequiredFields</span> <span class=p>}}</span>
+    <span class=p>});</span>
+    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>打开<code>comments.html</code>,找到valine那段代码，复制一下放到他的下面，并把valine改为waline，大概是这样：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html>    {{ else if $.Param &#34;valine.enable&#34; }}
+    {{ partial &#34;comments/valine.html&#34; . }}
+
++   {{ else if $.Param &#34;waline.enable&#34; }}
++   {{ partial &#34;comments/waline.html&#34; . }}
+
+    {{ else if $.Param &#34;changyan.changyanAppid&#34; }}
+    {{ partial &#34;comments/changyan.html&#34; . }}
+</code></pre></td></tr></table>
+</div>
+</div><p>大功告成了。</p>
+<h3 id=总而言之>总而言之</h3>
+<p>总而言之，就按照valine的配置方法去配置waline就没问题了。</p>
+<h2 id=后续魔改>后续魔改</h2>
+<p>参考<a href=https://mantyke.icu/2021/comment/>https://mantyke.icu/2021/comment/</a></p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -355,8 +590,23 @@ See Also
 <ul>
 <li><a href=#首先看一下meme主题的评论配置>首先看一下MemE主题的评论配置</a></li>
 <li><a href=#再来来看一下zzo主题的评论配置>再来来看一下Zzo主题的评论配置</a></li>
+<li><a href=#附加题看看同样美貌的stack主题>附加题：看看同样美貌的stack主题！</a></li>
 </ul>
 </li>
+<li><a href=#waline是什么为什么说他是valine的改良版>Waline是什么，为什么说他是Valine的改良版</a></li>
+<li><a href=#部署waline>部署Waline</a>
+<ul>
+<li><a href=#域名问题>域名问题</a></li>
+</ul>
+</li>
+<li><a href=#开始配置吧>开始配置吧</a>
+<ul>
+<li><a href=#修改配置文件>修改配置文件</a></li>
+<li><a href=#valine是你的模板waline要长得和他一模一样>Valine是你的模板，Waline要长得和他一模一样</a></li>
+<li><a href=#总而言之>总而言之</a></li>
+</ul>
+</li>
+<li><a href=#后续魔改>后续魔改</a></li>
 </ul>
 </nav>
 </div>
