@@ -46,7 +46,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Hugo | 为Zzo主题添加Waline评论","datePublished":"2021-11-14T09:10:21+08:00","dateModified":"2021-11-14T09:10:21+08:00","url":"http://blog.tantalum.life/posts/add-waline-in-hugo-blog/","description":"为什么要水这篇文章 给博客换主题的时候发现MemE主题和Zzo主题的评论配置文件有出入，不能直接套用","keywords":["Hugo","Waline"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Roelxy's Blog","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Hugo | 为Zzo主题添加Waline评论","datePublished":"2021-11-14T09:10:21+08:00","dateModified":"2021-11-14T09:10:21+08:00","url":"http://blog.tantalum.life/posts/add-waline-in-hugo-blog/","description":"为什么要水这篇文章 给博客换主题的时候发现MemE主题和Zzo主题的评论配置文件有出入，不能直接套用现有的MemE主题Waline配置。所以我","keywords":["Hugo","Waline"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Roelxy's Blog","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -182,11 +182,11 @@ kimbie
 <div class=single__nojs>This page looks best with JavaScript enabled</div>
 <script>document.querySelector('.single').classList.remove('hide'),document.querySelector('.single__nojs').classList.add('hide')</script>
 <h2 class=single__title data-ani=true>Hugo | 为Zzo主题添加Waline评论</h2>
-<h3 class=single__subtitle>稍微修改一下可能适用于所有Hugo主题？（怎么可能）</h3>
+<h3 class=single__subtitle>如果熟悉原理可能适用于所有Hugo主题？（怎么可能）</h3>
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Nov 14, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;1&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;2&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -198,7 +198,18 @@ kimbie
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
 <h2 id=为什么要水这篇文章>为什么要水这篇文章</h2>
-<p>给博客换主题的时候发现MemE主题和Zzo主题的评论配置文件有出入，不能直接套用</p>
+<p>给博客换主题的时候发现MemE主题和Zzo主题的评论配置文件有出入，不能直接套用现有的<a href=https://guanqr.com/tech/website/introduction-and-basic-setting-of-waline/>MemE主题Waline配置</a>。所以我灵机一动：要不我自己搞吧。</p>
+<h3 id=首先看一下meme主题的评论配置>首先看一下MemE主题的评论配置</h3>
+<p>同样在MemE主题的github项目中<a href="https://github.com/reuixiy/hugo-theme-meme/search?q=valine">搜索Valine</a>，同样可以看到除了<code>config-examples/zh-cn/config.toml</code>（主题的简体配置文件，这里不考虑繁体中文和英文，只是配置文件的语言项）以外，还有三个文件提到了Valine，分别是<code>layouts/partials/third-party/valine.html</code>，<code>layouts/partials/third-party/script.html</code>和<code>layouts/partials/components/comments.html</code>。</p>
+<p>各文件的作用：<br>
+-<code>comments.html</code>文件的作用是控制是否开启评论（enableComments），开启哪个评论系统（enableValine），如果开启，则插入相关评论的<code>&lt;div></code>标签 id；<br>
+-<code>script.html </code>文件的作用是载入开启的评论的相应 HTML 文件<code>（valine.html）</code>；<br>
+-<code>valine.html</code>文件的作用是调用<code>valine.js</code>，对评论功能进行设定。</p>
+<h3 id=再来来看一下zzo主题的评论配置>再来来看一下Zzo主题的评论配置</h3>
+<p>Zzo主题支持Valine，所以配置Valine只需要抄格式就行了。首先在github项目中<a href="https://github.com/zzossig/hugo-theme-zzo/search?q=valine">搜索Valine</a>，可以看到除了<code>config/_default/params.toml</code>（主题的配置文件，Zzo主题把正常的<code>config.toml</code>分成了四个）以外，还有两个文件：<code>layouts/partials/comments/valine.html</code>和<code>layouts/partials/comments/comments.html</code>。</p>
+<p>-<code>comments.html</code>文件的作用是控制是否开启评论（enableComments），开启哪个评论系统（enableValine），如果开启，则直接载入开启的评论的相应 HTML 文件<code>（valine.html）</code>；<br>
+-<code>valine.html</code>文件的作用是对评论功能进行设定。</p>
+<p>回到本地的博客根目录，进入Zzo主题文件夹</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -340,7 +351,12 @@ See Also
 <div class=toc data-dir=ltr data-folding=true data-ani=true>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#为什么要水这篇文章>为什么要水这篇文章</a></li>
+<li><a href=#为什么要水这篇文章>为什么要水这篇文章</a>
+<ul>
+<li><a href=#首先看一下meme主题的评论配置>首先看一下MemE主题的评论配置</a></li>
+<li><a href=#再来来看一下zzo主题的评论配置>再来来看一下Zzo主题的评论配置</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 </div>
