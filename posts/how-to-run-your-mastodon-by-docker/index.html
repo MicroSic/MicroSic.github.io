@@ -340,7 +340,7 @@ aws configure        #调试aws-cli
 <p>此处参考<a href=https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html>pullopen站长同步已有媒体的步骤</a>，运行：</p>
 <pre tabindex=0><code>aws s3 sync public/system s3://【你的bucket名】/ --endpoint-url=https://你的储存桶地区地址 --acl public-read    
 </code></pre><p>等待媒体文件全部上传至外部存储服务即可，在此期间可以<code>ps -ef | grep aws</code>用screen做守护进程。完成后运行<code>docker reload</code>重启 Mastodon服务。</p>
-<p>最后，salt站长的教程中绑定 Cloudflare这里，最后注意添加一步：<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup><strong>在3.3.0版本之后会影响网页打开，请勿勾选！</strong></p>
+<p>最后，salt站长的教程中绑定 Cloudflare这里，最后注意添加一步：Auto Minify（位置：speed>最佳化>自动缩制）<strong>在3.3.0版本之后会影响网页打开，请勿勾选！</strong></p>
 <p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/%E5%9C%96%E7%89%87.png alt></p>
 <p>确定设置无误后，执行以下命令：</p>
 <pre tabindex=0><code>docker reload   #重启Mastodon的docker容器
@@ -357,14 +357,6 @@ rm -rf /opt/mastodon/public/system  #清理本地文件
 <h2 id=落笔感悟>落笔感悟</h2>
 <p>虽然本教程基本都是兔子大佬的成果，但怎么说从看教程到整理材料落笔写教程这个过程也是有很大收获的。从第一次接触Linux到着手购买域名开始建站一共也就两个月的时间，到现在这篇教程完成也只是将近三个月。三个月从:wq到虚拟机再到购买主机开始建站，从谷歌如何用vm打开一个新的虚拟机到能用命令行基础运维一个网站，我也没想到有些事情我就是能。虽然这个过程该踩的坑都踩过了，但毕竟是我经历的，那就有话可说。</p>
 <p>在这里也非常感谢各位站长的教程，bgme站长帮我迁移docker，还有兔酱的对我提问所做的回答，以及ta非常优秀的脚本。虽然我依旧是个小白，但我相信我能走下去。</p>
-<div class=footnotes role=doc-endnotes>
-<hr>
-<ol>
-<li id=fn:1 role=doc-endnote>
-<p>位置：speed>最佳化>自动缩制&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
