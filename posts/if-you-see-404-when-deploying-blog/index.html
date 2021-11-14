@@ -189,14 +189,19 @@ kimbie
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
 <h2 id=事情的发展难以预料>事情的发展难以预料</h2>
-<blockquote class=quote>
-<p>受害者Roelxy：虽然这篇文章的标题是"博客折腾记"，但实际上我只是为博客换了个功能更强大的主题，结果一不小心就404了&mldr;我能怎么办，我也很绝望啊！</p></blockquote>
-<style>blockquote.quote{position:relative;margin:2em auto;padding-left:3em;border:none;&::before { position:absolute; left:0; content:'“'; color:var(--color-contrast-low); font-family:'JetBrains Mono','Amstelvar','Noto Serif SC',serif; font-size:3em; font-weight:bold; line-height:1; } &.poetry { display:table; padding:0; &::before { left:-1em; } p:last-child { margin:0; } } &.en { p { line-height:1.618; text-align:left; hyphens:auto; -webkit-hyphens:auto; -moz-hyphens:auto; } }}@media(max-width:$maxWidth){blockquote.quote{&.poetry { padding-left: 3em; &::before { left: 0; } }}}</style>
+<div class="alert alert-info" role=alert data-dir=ltr>受害者Roelxy：虽然这篇文章的标题是"博客折腾记"，但实际上我只是为博客换了个功能更强大的主题，结果一不小心就404了&mldr;我能怎么办，我也很绝望啊！</div>
 <p>看中Zzo主题的搜索、代码样式和目录，英文字体也很好看，狠下心来从简洁风格的MemE跳槽而来。步骤十分傻白甜：没有<code>git submodule</code>，直接把仓库文件下载到本地的博客根目录，然后替换配置文件并做基础改动。<code>Hugo server -D</code>本地预览毫无问题，怎么就，怎么就构建失败了呢？</p>
 <blockquote>
 <p>The path you are accessing was not found in the Build Outputs of your Deployment.If you want to view your Build Outputs directly, you can turn on the Directory Listing.</p>
 </blockquote>
-<p><img src=https://user-images.githubusercontent.com/62823814/141422382-5bb1b72d-17cd-4a58-84bf-743cf90f6adb.png alt=访问博客时弹出的错误提示></p>
+<p><img src=https://user-images.githubusercontent.com/62823814/141422382-5bb1b72d-17cd-4a58-84bf-743cf90f6adb.png alt=访问博客时弹出的错误提示>‘</p>
+<figure>
+<img data-src=https://user-images.githubusercontent.com/62823814/141422382-5bb1b72d-17cd-4a58-84bf-743cf90f6adb.png alt="image alt" data-caption="Image with title, caption, alt, ..." src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 d=%22M0 0h24v24H0V0z%22/%3E%3Cpath fill=%22%23aaa%22 d=%22M19 3H5c-1.1.0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1.0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55.0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55.0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41.0.65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79.0z%22/%3E%3C/svg%3E" class=lazyload style=width:;height:>
+<figcaption style=text-align:center>
+<strong>访问博客时弹出的错误提示</strong>:
+Image with title, caption, alt, ...
+</figcaption>
+</figure>
 <p>博客搭建方式是hugo+Vercel，并把源码推送到Github中让其连接Vercel进行自动部署。对于这种本地预览完全没问题，但部署过程出现错误这种情况我毫无头绪，甚至还有一点小崩溃。虽然我留有存档，能一键回滚到前一个版本，但亲眼看见自己的成果功亏一篑多少还是有些难受&mldr;（没错我是小白，建博客也就不到一周时间）</p>
 <p>修改了博客文件夹的一些内容，试图让他构建成功，无果。把这件事跟皮塔丘说了一下，她为我提供了新的思路：本地渲染，把渲染出的文件推到一个新仓库，用Github Pages发布，也就是Hugo+Github Pages的搭建方式。为了优先拯救404的博客，我先用存档将其回归正常（现在成了堆放随笔的地方），然后准备用新的域名试水（也就是这个博客）。</p>
 <h2 id=历史总是惊人的相似>历史总是惊人的相似</h2>
