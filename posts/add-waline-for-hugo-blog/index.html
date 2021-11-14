@@ -197,7 +197,7 @@ kimbie
 <p>给博客换主题的时候发现MemE主题和Zzo主题的评论配置文件有出入，不能直接套用现有的<a href=https://guanqr.com/tech/website/introduction-and-basic-setting-of-waline/>MemE主题Waline配置</a>。所以我灵机一动：要不我自己搞吧。</p>
 <p>以MemE,Zzo和stack三个主题为例，看一下不同主题的评论配置有什么不同：</p>
 <h3 id=首先看一下meme主题的评论配置>首先看一下MemE主题的评论配置</h3>
-<p>MemE主题支持Valine，因为Waline是Valine的改良版，所以可以互相参考配置。首先主题的github项目中<a href="https://github.com/reuixiy/hugo-theme-meme/search?q=valine">搜索Valine</a>，同样可以看到除了<code>config-examples/zh-cn/config.toml</code>（主题的简体配置文件，这里不考虑繁体中文和英文，只是配置文件的语言项）以外，还有三个文件提到了Valine，分别是<code>layouts/partials/third-party/valine.html</code>，<code>layouts/partials/third-party/script.html</code>和<code>layouts/partials/components/comments.html</code>。</p>
+<p>MemE主题支持Valine，因为Waline是Valine的改良版，所以可以互相参考配置。首先主题的github项目中<a href="https://github.com/reuixiy/hugo-theme-meme/search?q=valine">搜索Valine</a>，可以看到除了<code>config-examples/zh-cn/config.toml</code>（主题的简体配置文件，这里不考虑繁体中文和英文，只是配置文件的语言项）以外，还有三个文件提到了Valine，分别是<code>layouts/partials/third-party/valine.html</code>，<code>layouts/partials/third-party/script.html</code>和<code>layouts/partials/components/comments.html</code>。</p>
 <p>各文件的作用：<br>
 -<code>comments.html</code>文件的作用是控制是否开启评论（enableComments），开启哪个评论系统（enableValine），如果开启，则插入相关评论的<code>&lt;div></code>标签 id；<br>
 -<code>script.html</code>文件的作用是载入开启的评论的相应 HTML 文件<code>（valine.html）</code>；<br>
@@ -225,6 +225,31 @@ kimbie
 <p><strong>以Zzo主题为例</strong>，回到本地的博客根目录，在<code>config/_default/params.toml</code>中，打开评论全局设置，然后找到Valine的配置，按照Valine的格式在他的下方抄一份Waline的配置，比如我的如下：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=p>[</span><span class=nx>waline</span><span class=p>]</span>
+  <span class=nx>enable</span> <span class=p>=</span> <span class=kc>false</span>
+  <span class=nx>appId</span> <span class=p>=</span> <span class=s1>&#39;你的appId&#39;</span>
+  <span class=nx>appKey</span> <span class=p>=</span> <span class=s1>&#39;你的appKey&#39;</span>
+  <span class=nx>notify</span> <span class=p>=</span> <span class=kc>false</span>  <span class=c># mail notifier , https://github.com/xCss/Valine/wiki</span>
+  <span class=nx>verify</span> <span class=p>=</span> <span class=kc>false</span> <span class=c># Verification code</span>
+  <span class=nx>avatar</span> <span class=p>=</span> <span class=s1>&#39;mm&#39;</span> 
+  <span class=nx>placeholder</span> <span class=p>=</span> <span class=s1>&#39;说点什么吧...&#39;</span>
+  <span class=nx>visitor</span> <span class=p>=</span> <span class=kc>false</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>但是这些配置项是valine需要的，而不一定是waline需要的。根据官方文档给出的<a href=https://waline.js.org/reference/client.html>前端配置</a>，我对<code>params.toml</code>进行了改动，最后的配置如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -236,14 +261,10 @@ kimbie
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
 </span></code></pre></td>
 <td class=lntd>
 <pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=p>[</span><span class=nx>Waline</span><span class=p>]</span>
     <span class=nx>enable</span> <span class=p>=</span> <span class=kc>true</span>
-    <span class=nx>appId</span> <span class=p>=</span> <span class=s1>&#39;你的appId&#39;</span>
-    <span class=nx>appKey</span> <span class=p>=</span> <span class=s1>&#39;你的appKey&#39;</span>
     <span class=nx>ServerURL</span> <span class=p>=</span> <span class=s2>&#34;你的ServerURL&#34;</span>
     <span class=nx>Placeholder</span> <span class=p>=</span> <span class=s2>&#34;你的邮箱&#34;</span>  <span class=c>#用来收取评论通知</span>
     <span class=nx>Avatar</span> <span class=p>=</span> <span class=s2>&#34;mp&#34;</span>
@@ -504,7 +525,7 @@ kimbie
 </span><span class=lnt>40
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>Application</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;@waline/vercel&#39;</span><span class=p>);</span>
+<pre tabindex=0 class=chroma><code class=language-JavaScript data-lang=JavaScript><span class=kr>const</span> <span class=nx>Application</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s1>&#39;@waline/vercel&#39;</span><span class=p>);</span>
 
 <span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=nx>Application</span><span class=p>({</span>
   <span class=nx>mailSubject</span><span class=o>:</span> <span class=s1>&#39;{{parent.nick}}，您在博客「{{site.name}}」上的评论收到了回复&#39;</span><span class=p>,</span>
