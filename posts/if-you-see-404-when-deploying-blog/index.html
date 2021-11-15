@@ -178,7 +178,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Nov 13, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;6&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;7&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -210,7 +210,7 @@ Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-cr
 </div>
 <h3 id=对新仓库打声招呼>对新仓库打声招呼</h3>
 <p>在Github中建立两个仓库：可以设为私密的源码仓库（存放你的博客根目录，可以随意命名，例如<code>blog</code>）和需要公开的编译仓库。由于一些原因，如果编译仓库的名字不是<code>username.github.io</code>（username是你的Github用户名）的话，会导致一些问题，比如css样式无法加载，具体来说就是将<code>config.toml</code>的baseURL设置为含子路径的地址，不能正确的处理所有资源的构建位置。想了解更多请看<a href=https://mantyke.icu/2021/47a5331b/#github-action>这篇博客</a>。</p>
-<p>由于我之前按照<a href=https://mantyke.icu/2021/hugo-build-blog/>这篇博客</a>搭建过博客，所以我进行过git全局配置，且本地存有SSH key，所以略过SSH生成与上传公钥步骤。</p>
+<p>由于我之前按照<a href=https://mantyke.icu/2021/hugo-build-blog/>这篇博客</a>搭建过博客，所以我进行过git全局配置，且本地存有SSH key，因此略过SSH生成与上传公钥步骤。</p>
 <p>Github登录后右上角Settings里找到Developer settings，再点Personal access tokens，Generate new token生成新的token，Select scopes里勾选repo全部内容与workflow，最后点击绿色按钮生成，将生成的Token保存下来。然后使用可视化的git工具：Github Desktop将支离破碎的博客根目录push到源码仓库中（使用代码也可）。进入源码仓库，可以发现本地的文件已经被推送到源码仓库了。</p>
 <p>点进源码仓库的Settings中，找到Secrets，点击New repository secret，名称为<code>PERSONAL_TOKEN</code>，内容为之前备份下来的Token。</p>
 <h3 id=github-action是什么能吃吗>Github Action是什么能吃吗</h3>
@@ -294,19 +294,22 @@ Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-cr
 </span></code></pre></td></tr></table>
 </div>
 </div><p>以上代码来自Suica！</p>
+<blockquote>
+<p>最后那行填写自定义域名，推荐第一次部署时先注释掉，搭建完成后如果对国内/外访问速度满意的话再填写，这篇文章的最后会讲到。</p>
+</blockquote>
 <p>提交commit，保存，然后可以发现action在尝试运行，绿色代表部署成功。这个时候编译仓库里可以看到自动建了一个名为gh-pages的分支，里面出现了许多东西。如果你没有填写自定义域名，那么<code>username.github.io</code>就是你的博客地址，此时打开你的博客域名应该已经可以看到博客内容。这种搭建方式就是Hugo+Github Action自动部署。</p>
 <p>很奇怪的是，如果我参考这个<a href=https://github.com/he-sb/tech/blob/master/.github/workflows/build.yml>workflow</a>，在部署（deploy）那步会出现奇怪的错误：</p>
 <blockquote>
 <p>error:src refspec main does not match any</p>
 </blockquote>
-<p>感觉和Vercel的404错误差不多&mldr;</p>
-<h2 id=搭建之后还可以继续优化>搭建之后还可以继续优化！</h2>
-<h3 id=如何获得国内加速>如何获得国内加速</h3>
-<p>由于github在国内加载速度极慢，我没有填写自定义域名。如果想获得国内加速，可以加一层cloudflare证书，或者是Vercel(需要自有域名，Vercel分配的域名很丑)。这里推荐后者，可以绑定自己的域名，同时获得不错的国内加速。</p>
+<p>因为有deploy的步骤，让我感觉感觉和Vercel的404错误差不多&mldr;</p>
+<h2 id=如果你有自有域名>如果你有自有域名！</h2>
+<h3 id=在workflow中添加自有域名>在workflow中添加自有域名</h3>
+<p>如果你想在源码仓库添加workflow那一步添加自有域名，请参考Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-create-your-own-blog-and-deploy-automatically/#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9>自定义域名注意事项</a>。具体来说就是先去<code>config.toml</code>中将<code>baseURL</code>改为你的自有域名，并且为workflow文件中最后注释的一行删掉注释，然后在DNS管理商那里添加一项内容为<code>username.github.io</code>的<code>CNAME</code>记录。最后进入编译仓库settings，pages页面添加自定义域名，勾选github上的强制https按钮。你也可以打开cloudflare的代理，但这样做会无法勾选强制https按钮。</p>
+<p>但是，由于github在国内加载速度极慢，如果想获得国内加速，可以加一层cloudflare证书，或者是Vercel(需要自有域名，Vercel分配的域名很丑)。这里推荐后者，将域名交给Vercel保管可以获得两个博客地址，一个是<code>user.github.io</code>（国外访问）一个是自己的域名（国内加速），好处多多。但如果你使用的主题有一些功能旨在重定向到<code>baseURL</code>的话，这样可能会导致一些功能出现故障（多数情况是没问题的），建议仔细检查一下。</p>
+<h3 id=请问你要来点国内加速魔法吗>请问你要来点国内加速魔法吗</h3>
 <p>点击<a href=https://vercel.com/signup>Vercel</a>注册页面，选择使用 Github 账号注册，弹出授权窗口时，点击Authorize Vercel，随后跳转到Let&rsquo;s build something new页面（如果没有，在Dashboard点击 New project），在Import Git Repository下方选择Add github org or account，弹出安装窗口，点击Install。之后再在GIT SCOPE中点击你的 Github 账户，下方的项目选择<code>username.github.io</code>，也就是你的编译仓库，点击skip，输入Vercel项目名（随意），然后deploy，等看到Congratulations和满屏烟花时，你获得了不错的国内加速。</p>
-<h3 id=关于自定义域名>关于自定义域名</h3>
-<p>如果你在源码仓库填写workflow那一步就添加了自有域名，请参考Suica的<a href=https://suicablog.cobaltkiss.blue/2021/09/use-github-pages-to-create-your-own-blog-and-deploy-automatically/#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9>自定义域名注意事项</a>。但这样其实没什么必要啦，如果将域名交给Vercel保管的话，这样会获得两个博客地址，一个是github.io（国外访问）一个是自己的域名（国内加速），好处多多喔！</p>
-<p>Vercel点进刚刚添加的项目，右上角setting中选择domains，输入你的域名，点击add，然后refresh一下查看应该添加的DNS记录，按要求去DNS提供商那里添加（一般是内容为<code>76.76.21.21</code>的A记录或内容为<code>cname.vercel-dns.com</code>的CNAME记录），最后回到Vercel中refresh一下看到两个蓝色对号就是成功了，恭喜你，这时你已经可以使用你的域名进行访问了。</p>
+<p>Vercel点进刚刚添加的项目，右上角setting中选择domains，输入你的域名，点击add，然后refresh一下查看应该添加的DNS记录，按要求去DNS提供商那里添加（一般是内容为<code>76.76.21.21</code>的A记录或内容为<code>cname.vercel-dns.com</code>的CNAME记录），最后回到Vercel中refresh一下看到两个蓝色对号就是成功了。记得去<code>config.toml</code>中将<code>baseURL</code>改为你的自有域名，稍等一分钟就可以使用你的域名进行访问了。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -457,10 +460,10 @@ See Also
 <li><a href=#github-action是什么能吃吗>Github Action是什么能吃吗</a></li>
 </ul>
 </li>
-<li><a href=#搭建之后还可以继续优化>搭建之后还可以继续优化！</a>
+<li><a href=#如果你有自有域名>如果你有自有域名！</a>
 <ul>
-<li><a href=#如何获得国内加速>如何获得国内加速</a></li>
-<li><a href=#关于自定义域名>关于自定义域名</a></li>
+<li><a href=#在workflow中添加自有域名>在workflow中添加自有域名</a></li>
+<li><a href=#请问你要来点国内加速魔法吗>请问你要来点国内加速魔法吗</a></li>
 </ul>
 </li>
 </ul>
