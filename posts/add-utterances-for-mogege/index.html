@@ -183,10 +183,10 @@ kimbie
 <article class=single__contents data-dir=ltr data-ani=true>
 <h2 id=背景提要>背景提要</h2>
 <p>给自家男孩子搭博客的时候我向他推荐了Mogeko二次开发的<a href=https://github.com/mogeko/mogege>Mogege</a>主题（基于Leavelt主题，现已被作者弃坑）。虽然Mogege主题也被弃坑了，但是简洁好用，去掉了很多实用性不高的功能，而且配置文件有部分汉化，相当适合小白。</p>
-<p>但另一方面，由于作者对主题进行了真·个性化魔改，也使得评论功能有点被阉割的感觉。当时作者正在使用Gitalk。虽然现在由于安全问题已经改用<a href=https://utteranc.es/>Utterances</a>了，但依旧没有在Mogege主题中显现出来，这就直接导致了<code>config.toml</code>中开箱即用的评论系统只有Gitalk，而<code>Disqus</code>和<code>Utteranc</code>虽然在html文件中有所体现，但都没有出现在主题配置文件中，更可怜的<code>Disqus</code>连自己的html都没有&mldr;</p>
+<p>但另一方面，由于作者对主题进行了真·个性化魔改，也使得评论功能有点被阉割的感觉。当时作者正在使用Gitalk。虽然现在由于安全问题已经改用<a href=https://utteranc.es/>Utterances</a>了，但依旧没有在Mogege主题中显现出来，这就直接导致了<code>config.toml</code>中开箱即用的评论系统只有Gitalk，而<code>Disqus</code>和<code>Utterances</code>虽然在html文件中有所体现，但都没有出现在主题配置文件中，更可怜的<code>Disqus</code>连自己的html都没有&mldr;</p>
 <h2 id=选择utteranc评论系统的原因>选择Utteranc评论系统的原因</h2>
 <p>基于 github issues 的评论系统，比较流行的有<a href=https://github.com/imsun/gitment>gitment</a>和<a href=https://github.com/gitalk/gitalk>gitalk</a>，因为使用的是 GitHub Issue 的 api，不依赖任何第三方平台，而是直接和github仓库绑在一起。言外之意，只要Github不倒闭，你的评论系统就不会被关闭。缺点就是若要登录Github对博客进行评论，索要权限实在过多，而且似乎没有将权限减少的意思，风险确实可能达到能让不怀好意之人通过OAuth冒充登录帐号并删库跑路的程度。</p>
-<p>虽然我自己的博客使用的是无后端的Waline主题，但鉴于我已经在Mogege主题仓库中看到Utterances相关的代码了，而且好巧不巧男孩子的Vercel帐号被风控暂时无法登录，机缘巧合下我接触了这款无追踪不保留数据的开源评论系统。</p>
+<p>虽然我自己的博客使用的是无后端的Waline评论系统，但是鉴于我已经在Mogege主题仓库中看到Utterances相关的代码了，而且好巧不巧男孩子的Vercel帐号被风控暂时无法登录，机缘巧合下我接触了这款无追踪不保留数据的开源评论系统。</p>
 <h2 id=简单的安装步骤>简单的安装步骤</h2>
 <blockquote>
 <p>似乎有一个有基于其版本开发的中文版：<a href=https://beaudar.lipk.org/>beaudar</a>，我没有用这个。</p>
