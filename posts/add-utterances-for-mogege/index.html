@@ -192,7 +192,7 @@ kimbie
 <p>似乎有一个有基于其版本开发的中文版：<a href=https://beaudar.lipk.org/>beaudar</a>，我没有用这个。</p>
 </blockquote>
 <p>在Github中新建一个公开可见的仓库专门用来存放评论，比如名叫<code>Utterances</code>，然后安装<a href=https://github.com/apps/utterances>Utterances</a>，配置它允许调用的仓库。建议只选择这个新建的<code>Utterances</code>仓库而不是全部仓库。如果想对他的调用权限进行更改，可以去github中的<a href=https://github.com/settings/installations>应用页面</a>，点击Utterances右边的Configuration就能更改权限了。</p>
-<p>安装后在新的页面中填写你的repo，格式为<code>Usernaame/Utterances</code>，然后预览并选择你喜欢的主题，系统会在下面自动为你提供一个<code>client.js</code>，里面有四个变量分别是<code>repo</code>，<code>issue-term</code>，<code>thheme</code>和·<code>crossorigin</code>，先记下来不要动。</p>
+<p>安装后在新的页面中填写你的repo，格式为<code>Username/Utterances</code>，然后预览并选择你喜欢的主题，系统会在下面自动为你提供一个<code>client.js</code>，里面有四个变量分别是<code>repo</code>，<code>issue-term</code>，<code>thheme</code>和·<code>crossorigin</code>，先记下来不要动。</p>
 <h2 id=更改配置文件>更改配置文件</h2>
 <p>根据Mogege主题的github仓库，在<a href=https://github.com/mogeko/mogege/blob/master/layouts/partials/utteranc.html>这里</a>，也就是<code>layouts/partials/utteranc.html</code>，可以发现这里已经引用了<code>{{ .Site.Params.Utteranc.repo }}</code>（以repo为例）。而在<a href=https://github.com/mogeko/mogege/blob/master/layouts/_default/single.html>这个html文件</a>的103行又引用了<code>{{ else if .Site.Params.enableUtteranc }}</code>和<code>utteranc.html</code>，所以在<code>config.toml</code>文件的最后添加：</p>
 <div class=highlight><div class=chroma>
