@@ -38,7 +38,7 @@
 <link rel=manifest href=/manifest.json>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Hugo | 更换主题后Front matter导致Build Error","datePublished":"2021-11-18T11:04:28+08:00","dateModified":"2021-11-18T11:04:28+08:00","url":"http://blog.tantalum.life/posts/fix-front-matter/","description":"博客渲染失败 #335 更换主题至meme后出现以下错误 #355 \u0026ldquo;taxonomy\u0026rdquo; failed Error: Error building site: failed to render pages: render of \u0026quot;taxonomy\u0026quot; failed 解决方案： 原因是 Front …","keywords":["Hugo"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Hugo | 更换主题后Front matter导致Build Error","datePublished":"2021-11-18T11:04:28+08:00","dateModified":"2021-11-18T11:04:28+08:00","url":"http://blog.tantalum.life/posts/fix-front-matter/","description":"\u0026ldquo;taxonomy\u0026rdquo; failed 博客渲染失败 #335 错误提示： Error: Error building site: failed to render pages: render of \u0026quot;taxonomy\u0026quot; failed 解决方案： 原因是 Front matter …","keywords":["Hugo"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -180,11 +180,11 @@ kimbie
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
-<blockquote>
-<p><a href=https://github.com/reuixiy/hugo-theme-meme/issues/335>博客渲染失败 #335</a><br>
-<a href=https://github.com/reuixiy/hugo-theme-meme/issues/355>更换主题至meme后出现以下错误 #355</a></p>
-</blockquote>
 <h2 id=taxonomy-failed>&ldquo;taxonomy&rdquo; failed</h2>
+<blockquote>
+<p><a href=https://github.com/reuixiy/hugo-theme-meme/issues/335>博客渲染失败 #335</a></p>
+</blockquote>
+<p>错误提示：</p>
 <pre tabindex=0><code>Error: Error building site: failed to render pages: render of &quot;taxonomy&quot; failed
 </code></pre><p>解决方案：<br>
 原因是 Front matter categories 的类型是数组，所以在文章中，需要写成（YAML 格式为例）</p>
@@ -199,12 +199,17 @@ categories:
 
 categories: Meta
 </code></pre><h2 id=character-u003d>Character U+003D</h2>
-<p><img src=https://user-images.githubusercontent.com/94236658/142128304-2b8e5bdf-c0e1-4b5b-b3f6-6d0c797628c0.png alt></p>
+<blockquote>
+<p><a href=https://github.com/reuixiy/hugo-theme-meme/issues/355>更换主题至meme后出现以下错误 #355</a></p>
+</blockquote>
+<p>错误提示：<br>
+<img src=https://user-images.githubusercontent.com/94236658/142128304-2b8e5bdf-c0e1-4b5b-b3f6-6d0c797628c0.png alt></p>
+<p>参考资料：<br>
+<img src="https://img-blog.csdnimg.cn/20190314191901790.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2lmZW5nZmFu,size_16,color_FFFFFF,t_70" alt></p>
 <p>解决方案：<br>
 <code>U+003D</code>是<code>=</code>号。</p>
 <p>这是你的 Front Matter 的语法问题，如果你要使用 TOML，请将<code>:</code>替换为<code>=</code></p>
 <p>或者使用 YAML 格式，将<code>+++</code>替换为<code>---</code>。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190314191901790.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2lmZW5nZmFu,size_16,color_FFFFFF,t_70" alt></p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
