@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Nov 14, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;9&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;11&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -559,10 +559,233 @@ kimbie
 <span class=p>});</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=后续魔改>后续魔改</h3>
+</div><h2 id=后续魔改>后续魔改</h2>
 <div class="notices success" data-title=参考教程>
 <a href=https://mantyke.icu/2021/comment/>Hugo | 为Blog增加评论区</a>
 </div>
+<h3 id=添加blobcat表情包>添加blobcat表情包</h3>
+<p>由于<code>waline.html</code>中未定义<code>emoji</code>项，所以不能使用自定义emoji，此时waline只能使用预设的weibo表情包。但是weibo怎么够用！长期刷毛象人士需要blobcat！！！</p>
+<p>参考<a href=https://waline.js.org/guide/client/emoji.html>官方文档</a>，找到你想要的表情包，这里以bilibili和weibo为例。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html> Waline({
+   el: &#39;#waline&#39;,
+   serverURL: &#39;<span class=p>&lt;</span><span class=nt>YOUR</span> <span class=na>SERVER</span> <span class=na>URL</span><span class=p>&gt;</span>&#39;,
+
+  // 设置 emoji 为微博与哔哩哔哩
++  emoji: [
++    &#39;https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo&#39;,
++    &#39;https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili&#39;,
++  ],
+});
+</code></pre></td></tr></table>
+</div>
+</div><p>附上blobcat表情包地址：<code>https://cdn.jsdelivr.net/gh/sowhereso/waline-blobcatemojis@1.2/blobs</code>，同样填在<code>emoji</code>项中，需要自取。</p>
+<h3 id=修改waline主题>修改waline主题</h3>
+<div class="notices success" data-title=参考教程>
+<a href=https://www.norevi.icu/2021/night-mode-for-waline/>Waline｜夜间样式修改</a>
+</div>
+<p>在<code>waline.html</code>中添加：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+<span class=p>.</span><span class=nc>waline-container</span> <span class=p>{</span>
+    <span class=k>background-color</span><span class=p>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>card</span><span class=o>-</span><span class=n>background</span><span class=p>);</span>
+    <span class=k>border-radius</span><span class=p>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>card</span><span class=o>-</span><span class=n>border</span><span class=o>-</span><span class=n>radius</span><span class=p>);</span>
+    <span class=k>box-shadow</span><span class=p>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>shadow</span><span class=o>-</span><span class=n>l1</span><span class=p>);</span>
+    <span class=k>padding</span><span class=p>:</span> <span class=mi>2</span><span class=kt>%</span><span class=p>;</span> <span class=c>/*缩小边距*/</span>
+
+<span class=p>}</span>
+<span class=p>.</span><span class=nc>waline-container</span> <span class=p>.</span><span class=nc>vcount</span> <span class=p>{</span>
+    <span class=k>color</span><span class=p>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>card</span><span class=o>-</span><span class=kc>text</span><span class=o>-</span><span class=kc>color</span><span class=o>-</span><span class=n>main</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=c>/*日间模式*/</span>
+<span class=p>:</span><span class=nd>root</span><span class=p>{</span>
+    <span class=nv>--waline-theme-color</span><span class=p>:</span> <span class=mh>#34495e</span><span class=p>;</span> <span class=c>/*主题色，提交按钮*/</span>
+    <span class=nv>--waline-active-color</span><span class=p>:</span> <span class=mh>#bababa</span><span class=p>;</span> <span class=c>/*鼠标移到提交按钮上的颜色*/</span>
+    <span class=nv>--waline-badge-color</span><span class=p>:</span> <span class=mh>#34495e</span><span class=p>;</span> <span class=c>/*博主徽章色*/</span>
+    <span class=nv>--waline-avatar-radius</span><span class=p>:</span> <span class=mi>5</span><span class=kt>px</span><span class=p>;</span>  <span class=c>/*头像圆角*/</span>
+    <span class=nv>--waline-avatar-size</span><span class=p>:</span> <span class=mi>6</span><span class=kt>rem</span><span class=p>;</span> <span class=c>/*头像大小*/</span>
+    <span class=nv>--waline-dark-grey</span><span class=p>:</span> <span class=mh>#34495e</span><span class=p>;</span> <span class=c>/*ID颜色*/</span>
+    <span class=nv>--waline-text-color</span><span class=p>:</span><span class=mh>#6a7988</span><span class=p>;</span> <span class=c>/*评论字体颜色*/</span>
+    
+
+<span class=p>}</span>
+
+<span class=c>/*夜间模式*/</span>
+<span class=p>:</span><span class=nd>root</span><span class=o>[</span><span class=nt>data-scheme</span><span class=o>=</span><span class=s2>&#34;dark&#34;</span><span class=o>]</span> <span class=p>{</span>
+    <span class=nv>--waline-theme-color</span><span class=p>:</span> <span class=mh>#acc6e0</span><span class=p>;</span>
+    <span class=nv>--waline-white</span><span class=p>:</span> <span class=mh>#34495e</span><span class=p>;</span> <span class=c>/*按键字体颜色*/</span>
+    <span class=nv>--waline-active-color</span><span class=p>:</span> <span class=mh>#8ab1d8</span><span class=p>;</span>
+    <span class=nv>--waline-light-grey</span><span class=p>:</span> <span class=mh>#666</span><span class=p>;</span>
+    <span class=nv>--waline-dark-grey</span><span class=p>:</span> <span class=mh>#acc6e0</span><span class=p>;</span> <span class=c>/*ID颜色*/</span>
+    <span class=nv>--waline-badge-color</span><span class=p>:</span> <span class=mh>#acc6e0</span><span class=p>;</span>
+
+    <span class=c>/* 布局颜色 */</span>
+    <span class=nv>--waline-text-color</span><span class=p>:</span> <span class=nb>rgba</span><span class=p>(</span><span class=mi>255</span><span class=p>,</span> <span class=mi>255</span><span class=p>,</span> <span class=mi>255</span><span class=p>,</span> <span class=mf>0.7</span><span class=p>);</span>
+    <span class=nv>--waline-bgcolor</span><span class=p>:</span> <span class=mh>#515151</span><span class=p>;</span>
+    <span class=nv>--waline-bgcolor-light</span><span class=p>:</span> <span class=mh>#66696b</span><span class=p>;</span><span class=c>/*行内代码块颜色*/</span>
+    <span class=nv>--waline-border-color</span><span class=p>:</span> <span class=mh>#9B9C9C</span><span class=p>;</span>
+    <span class=nv>--waline-disable-bgcolor</span><span class=p>:</span> <span class=mh>#444</span><span class=p>;</span>
+    <span class=nv>--waline-disable-color</span><span class=p>:</span> <span class=mh>#272727</span><span class=p>;</span>
+
+    <span class=c>/* 特殊颜色 */</span>
+    <span class=nv>--waline-bq-color</span><span class=p>:</span>  <span class=mh>#9B9C9C</span><span class=p>;</span> <span class=c>/*quote*/</span>
+
+    <span class=c>/* 其他颜色 */</span>
+    <span class=nv>--waline-info-bgcolor</span><span class=p>:</span> <span class=mh>#acc6e0</span><span class=p>;</span>
+    <span class=nv>--waline-info-color</span><span class=p>:</span> <span class=mh>#9B9C9C</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>由于Zzo主题默认为dark，我对其修改为：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+<span class=p>.</span><span class=nc>waline-container</span> <span class=p>{</span>
+    <span class=k>background-color</span><span class=p>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>card</span><span class=o>-</span><span class=n>background</span><span class=p>);</span>
+    <span class=k>border-radius</span><span class=p>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>card</span><span class=o>-</span><span class=n>border</span><span class=o>-</span><span class=n>radius</span><span class=p>);</span>
+    <span class=k>box-shadow</span><span class=p>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>shadow</span><span class=o>-</span><span class=n>l1</span><span class=p>);</span>
+    <span class=k>padding</span><span class=p>:</span> <span class=mi>2</span><span class=kt>%</span><span class=p>;</span> <span class=c>/*缩小边距*/</span>
+
+<span class=p>}</span>
+<span class=p>.</span><span class=nc>waline-container</span> <span class=p>.</span><span class=nc>vcount</span> <span class=p>{</span>
+    <span class=k>color</span><span class=p>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>card</span><span class=o>-</span><span class=kc>text</span><span class=o>-</span><span class=kc>color</span><span class=o>-</span><span class=n>main</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=c>/*默认*/</span>
+<span class=p>:</span><span class=nd>root</span><span class=p>{</span>
+    <span class=nv>--waline-theme-color</span><span class=p>:</span> <span class=mh>#acc6e0</span><span class=p>;</span>
+    <span class=nv>--waline-white</span><span class=p>:</span> <span class=mh>#34495e</span><span class=p>;</span> <span class=c>/*按键字体颜色*/</span>
+    <span class=nv>--waline-active-color</span><span class=p>:</span> <span class=mh>#8ab1d8</span><span class=p>;</span>
+    <span class=nv>--waline-light-grey</span><span class=p>:</span> <span class=mh>#666</span><span class=p>;</span>
+    <span class=nv>--waline-dark-grey</span><span class=p>:</span> <span class=mh>#acc6e0</span><span class=p>;</span> <span class=c>/*ID颜色*/</span>
+    <span class=nv>--waline-badge-color</span><span class=p>:</span> <span class=mh>#acc6e0</span><span class=p>;</span>
+
+    <span class=c>/* 布局颜色 */</span>
+    <span class=nv>--waline-text-color</span><span class=p>:</span> <span class=nb>rgba</span><span class=p>(</span><span class=mi>255</span><span class=p>,</span> <span class=mi>255</span><span class=p>,</span> <span class=mi>255</span><span class=p>,</span> <span class=mf>0.7</span><span class=p>);</span>
+    <span class=nv>--waline-bgcolor</span><span class=p>:</span> <span class=mh>#515151</span><span class=p>;</span>
+    <span class=nv>--waline-bgcolor-light</span><span class=p>:</span> <span class=mh>#66696b</span><span class=p>;</span><span class=c>/*行内代码块颜色*/</span>
+    <span class=nv>--waline-border-color</span><span class=p>:</span> <span class=mh>#9B9C9C</span><span class=p>;</span>
+    <span class=nv>--waline-disable-bgcolor</span><span class=p>:</span> <span class=mh>#444</span><span class=p>;</span>
+    <span class=nv>--waline-disable-color</span><span class=p>:</span> <span class=mh>#272727</span><span class=p>;</span>
+
+    <span class=c>/* 特殊颜色 */</span>
+    <span class=nv>--waline-bq-color</span><span class=p>:</span>  <span class=mh>#9B9C9C</span><span class=p>;</span> <span class=c>/*quote*/</span>
+
+    <span class=c>/* 其他颜色 */</span>
+    <span class=nv>--waline-info-bgcolor</span><span class=p>:</span> <span class=mh>#acc6e0</span><span class=p>;</span>
+    <span class=nv>--waline-info-color</span><span class=p>:</span> <span class=mh>#9B9C9C</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>配置好的话也就是你现在看到的waline的样子。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -733,7 +956,12 @@ See Also
 <li><a href=#管理与魔改>管理与魔改</a>
 <ul>
 <li><a href=#邮件通知>邮件通知</a></li>
-<li><a href=#后续魔改>后续魔改</a></li>
+</ul>
+</li>
+<li><a href=#后续魔改>后续魔改</a>
+<ul>
+<li><a href=#添加blobcat表情包>添加blobcat表情包</a></li>
+<li><a href=#修改waline主题>修改waline主题</a></li>
 </ul>
 </li>
 </ul>
