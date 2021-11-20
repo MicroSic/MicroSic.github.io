@@ -210,8 +210,7 @@ kimbie
 <blockquote>
 <p>题外话：有段时间Waline的快速部署链接失效，因为github仓库的主分支由master改为main，而快速部署链接还没来得及修改，因此clone project会出现错误，现在已经没问题了。</p>
 </blockquote>
-<h3 id=域名问题>域名问题</h3>
-<p>如果你购买了一个域名，推荐你为这个Vercel项目添加一个子域名。因为Vercel分配的域名很丑，而且每次更改环境变量之后都要Redeploy（重新部署）使改动生效，而每次改动生效后你的<code>ServerURL</code>都可能有变化，这个时候需要修改你的配置文件，否则会影响你的使用。</p>
+<p>你也可以为这个Vercel项目添加一个子域名。另外还要注意，每次更改环境变量之后都要Redeploy（重新部署）使改动生效。</p>
 <h2 id=开始配置吧>开始配置吧</h2>
 <h3 id=修改配置文件>修改配置文件</h3>
 <p><strong>以Zzo主题为例</strong>，回到本地的博客根目录，在<code>config/_default/params.toml</code>中，打开评论全局设置，然后找到Valine的配置，按照Valine的格式在他的下方抄一份Waline的配置，比如我的如下：</p>
@@ -447,11 +446,9 @@ kimbie
 </code></pre></td></tr></table>
 </div>
 </div><p>大功告成了。</p>
-<h3 id=总而言之>总而言之</h3>
 <p>总而言之，就按照valine的配置方法去配置waline就没问题了。</p>
-<h2 id=管理与魔改>管理与魔改</h2>
+<h2 id=管理与邮件通知>管理与邮件通知</h2>
 <p>Waline 带有简单的后台，可以实现对评论的管理。部署完成后访问<code>&lt;serverURL>/ui/register</code>进行注册，第一个注册的账户会被设定成管理员。</p>
-<h3 id=邮件通知>邮件通知</h3>
 <div class="notices success" data-title=参考教程>
 <a href=https://guanqr.com/tech/website/introduction-and-basic-setting-of-waline/#%E9%85%8D%E7%BD%AE-leancloud>Waline 评论系统的介绍与基础配置</a>
 </div>
@@ -839,10 +836,10 @@ See Also
 </h1>
 <ul class=related-ul>
 <li>
-<a href=/posts/if-you-see-404-when-deploying-blog/ class=related__link>Hugo | 菜鸟博客折腾记</a>
+<a href=/posts/adjust-meme-theme/ class=related__link>Hugo | 记录MemE主题美化过程</a>
 </li>
 <li>
-<a href=/posts/adjust-meme-theme/ class=related__link>Hugo | 记录MemE主题美化过程</a>
+<a href=/posts/if-you-see-404-when-deploying-blog/ class=related__link>Hugo | 菜鸟博客折腾记</a>
 </li>
 <li>
 <a href=/posts/after-building-a-static-blog/ class=related__link>Hugo | 静态博客搭建有感</a>
@@ -941,23 +938,14 @@ See Also
 </ul>
 </li>
 <li><a href=#waline是什么为什么说他是valine的改良版>Waline是什么，为什么说他是Valine的改良版</a></li>
-<li><a href=#部署waline>部署Waline</a>
-<ul>
-<li><a href=#域名问题>域名问题</a></li>
-</ul>
-</li>
+<li><a href=#部署waline>部署Waline</a></li>
 <li><a href=#开始配置吧>开始配置吧</a>
 <ul>
 <li><a href=#修改配置文件>修改配置文件</a></li>
 <li><a href=#valine是你的模板waline要长得和他一模一样>Valine是你的模板，Waline要长得和他一模一样</a></li>
-<li><a href=#总而言之>总而言之</a></li>
 </ul>
 </li>
-<li><a href=#管理与魔改>管理与魔改</a>
-<ul>
-<li><a href=#邮件通知>邮件通知</a></li>
-</ul>
-</li>
+<li><a href=#管理与邮件通知>管理与邮件通知</a></li>
 <li><a href=#后续魔改>后续魔改</a>
 <ul>
 <li><a href=#添加blobcat表情包>添加blobcat表情包</a></li>
