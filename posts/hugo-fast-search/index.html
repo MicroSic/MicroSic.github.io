@@ -185,12 +185,13 @@ kimbie
 <div class="notices success" data-title=参考教程>
 <a href=https://ttys3.dev/post/hugo-fast-search/>5分钟给Hugo博客增加搜索功能</a>
 </div>
-<p>这位博主对搜索功能进行了客制化魔改：</p>
-<blockquote>
-<p>允许通过点击页面空白处隐藏搜索框，而不是只能按Esc</p>
-<p>在右上角添加了一个搜索按钮，方便不想按快捷键的人</p>
-<p>默认的快捷键由于Firefox Linux默认 Super-/是 Quick Find 功能，因此我改成了 Alt-/</p>
-</blockquote>
+<div class=box><p><strong>这位博主对搜索功能进行了客制化魔改：</strong></p>
+<ul>
+<li>允许通过点击页面空白处隐藏搜索框，而不是只能按Esc</li>
+<li>在右上角添加了一个搜索按钮，方便不想按快捷键的人</li>
+<li>默认的快捷键由于Firefox Linux默认 Super-/是 Quick Find 功能，因此我改成了 Alt-/</li>
+</ul>
+</div>
 <h2 id=开始配置>开始配置</h2>
 <h3 id=添加indexjson>添加index.json</h3>
 <p>我使用的主题是已经被作者弃坑的Mogege，首先添加<code>index.json</code>文件到<code>layouts/_default</code>，内容如下：</p>
@@ -843,10 +844,10 @@ See Also
 <a href=/posts/shortcode-to-insert-video/ class=related__link>NSFW | 实现在Hugo博客中利用Shortcode嵌入视频</a>
 </li>
 <li>
-<a href=/posts/adjust-mogege-theme/ class=related__link>Hugo | 记录Mogege主题美化过程</a>
+<a href=/posts/fix-front-matter/ class=related__link>Hugo | 更换主题后Front matter导致Build Error</a>
 </li>
 <li>
-<a href=/posts/fix-front-matter/ class=related__link>Hugo | 更换主题后Front matter导致Build Error</a>
+<a href=/posts/adjust-mogege-theme/ class=related__link>Hugo | 记录Mogege主题美化过程</a>
 </li>
 <li>
 <a href=/posts/add-utterances-for-mogege/ class=related__link>Hugo | 为Mogege主题添加Utterances评论</a>
