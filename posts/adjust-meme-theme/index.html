@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Nov 11, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;8&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;9&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -519,6 +519,10 @@ kimbie
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=看板娘>看板娘</h2>
+<div class="notices success" data-title=参考教程>
+<a href=https://zahui.fan/23f4c55d/>Hugo博客添加live2d看板娘</a>
+</div>
+<h3 id=方法1-使用html模板引入js文件>方法1: 使用html模板，引入js文件</h3>
 <p>将以下代码添加到<code>/layouts/partials/footer.html</code>中<code>{{ end }}</code>的前一行。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -588,6 +592,85 @@ kimbie
 </span><span class=c1></span>        <span class=p>},</span>
     <span class=p>});</span>
 <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=方法2-直接在configtoml里面引入js文件>方法2: 直接在config.toml里面引入js文件</h3>
+<p>修改主题配置文件<code>config.toml</code>，添加：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-toml data-lang=toml>    <span class=c># 第三方库配置</span>
+    <span class=p>[</span><span class=nx>params</span><span class=p>.</span><span class=nx>page</span><span class=p>.</span><span class=nx>library</span><span class=p>]</span>
+      <span class=p>[</span><span class=nx>params</span><span class=p>.</span><span class=nx>page</span><span class=p>.</span><span class=nx>library</span><span class=p>.</span><span class=nx>css</span><span class=p>]</span>
+      <span class=p>[</span><span class=nx>params</span><span class=p>.</span><span class=nx>page</span><span class=p>.</span><span class=nx>library</span><span class=p>.</span><span class=nx>js</span><span class=p>]</span>
+        <span class=nx>live2d-widget1</span> <span class=p>=</span> <span class=s2>&#34;https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js&#34;</span>
+        <span class=nx>live2d-widget2</span> <span class=p>=</span> <span class=s2>&#34;https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.0.min.js&#34;</span>
+        <span class=nx>live2d-config</span> <span class=p>=</span> <span class=s2>&#34;/js/live2d_config.js&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后新建<code>/static/js/live2d_config.js</code>，内容如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-js data-lang=js>    <span class=nx>L2Dwidget</span><span class=p>.</span><span class=nx>init</span><span class=p>({</span>
+        <span class=nx>model</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>scale</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>
+            <span class=nx>hHeadPos</span><span class=o>:</span> <span class=mf>0.5</span><span class=p>,</span>
+            <span class=nx>vHeadPos</span><span class=o>:</span> <span class=mf>0.618</span><span class=p>,</span>
+            <span class=nx>jsonPath</span><span class=o>:</span> <span class=s1>&#39;https://cdn.jsdelivr.net/gh/DomathID/live2d-model@main/Miku/miku.model.json&#39;</span><span class=p>,</span>       <span class=c1>// xxx.model.json 的路径,换人物修改这个
+</span><span class=c1></span>        <span class=p>},</span>
+        <span class=nx>display</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>superSample</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>     <span class=c1>// 超采样等级
+</span><span class=c1></span>            <span class=nx>width</span><span class=o>:</span> <span class=mi>300</span><span class=p>,</span>         <span class=c1>// canvas的宽度
+</span><span class=c1></span>            <span class=nx>height</span><span class=o>:</span> <span class=mi>400</span><span class=p>,</span>        <span class=c1>// canvas的高度
+</span><span class=c1></span>            <span class=nx>position</span><span class=o>:</span> <span class=s1>&#39;left&#39;</span><span class=p>,</span>   <span class=c1>// 显示位置：左或右
+</span><span class=c1></span>            <span class=nx>hOffset</span><span class=o>:</span> <span class=mi>0</span><span class=p>,</span>         <span class=c1>// canvas水平偏移
+</span><span class=c1></span>            <span class=nx>vOffset</span><span class=o>:</span> <span class=mi>0</span><span class=p>,</span>         <span class=c1>// canvas垂直偏移
+</span><span class=c1></span>        <span class=p>},</span>
+        <span class=nx>mobile</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>show</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>         <span class=c1>// 是否在移动设备上显示
+</span><span class=c1></span>            <span class=nx>scale</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>           <span class=c1>// 移动设备上的缩放
+</span><span class=c1></span>            <span class=nx>motion</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>       <span class=c1>// 移动设备是否开启重力感应
+</span><span class=c1></span>        <span class=p>},</span>
+        <span class=nx>react</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>opacityDefault</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>  <span class=c1>// 默认透明度
+</span><span class=c1></span>            <span class=nx>opacityOnHover</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>  <span class=c1>// 鼠标移上透明度
+</span><span class=c1></span>        <span class=p>},</span>
+     <span class=p>});</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=配置waline评论>配置Waline评论</h2>
@@ -965,7 +1048,12 @@ See Also
 <li><a href=#爱心特效>爱心特效</a></li>
 </ul>
 </li>
-<li><a href=#看板娘>看板娘</a></li>
+<li><a href=#看板娘>看板娘</a>
+<ul>
+<li><a href=#方法1-使用html模板引入js文件>方法1: 使用html模板，引入js文件</a></li>
+<li><a href=#方法2-直接在configtoml里面引入js文件>方法2: 直接在config.toml里面引入js文件</a></li>
+</ul>
+</li>
 <li><a href=#配置waline评论>配置Waline评论</a></li>
 <li><a href=#特别鸣谢>特别鸣谢</a></li>
 </ul>
