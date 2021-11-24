@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Nov 11, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;7&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;8&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -206,8 +206,7 @@ kimbie
 <p>关于目录的位置，请看<a href=https://github.com/reuixiy/hugo-theme-meme/issues/64>这个issue</a>。</p>
 <h3 id=网络字体>网络字体</h3>
 <p>直接参考<a href=https://ztygcs.github.io/posts/meme%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%E4%BA%8C/#%E7%BD%91%E7%BB%9C%E5%AD%97%E4%BD%93%E9%93%BE%E6%8E%A5>这篇博客</a>。</p>
-<h2 id=进阶部分>进阶部分</h2>
-<h3 id=页脚添加今日诗词>页脚添加今日诗词</h3>
+<h2 id=页脚添加今日诗词>页脚添加今日诗词</h2>
 <div class="notices success" data-title=参考教程>
 <a href=https://guanqr.com/tech/website/add-jinrishici-in-meme/>在 MemE 主题页脚添加今日诗词</a>
 </div>
@@ -248,7 +247,7 @@ kimbie
 <blockquote>
 <p>需要注意我直接修改了meme主题的页脚文件而不是主题的自定义页脚文件，只适用于手动安装主题，如果是 git submodule 方式安装主题则不要直接修改主题页脚文件，否则不利于主题后续更新。</p>
 </blockquote>
-<h3 id=加载进度条>加载进度条</h3>
+<h2 id=加载进度条>加载进度条</h2>
 <div class="notices success" data-title=参考教程>
 <a href=https://zhixuan2333.github.io/posts/ac760353/#%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1>Hugo theme stack主题 正确的魔改方式</a>
 </div>
@@ -427,7 +426,171 @@ kimbie
 <p>可以直接参考：<a href=https://mogeko.me/posts/zh-cn/080/>https://mogeko.me/posts/zh-cn/080/</a></p>
 <h3 id=还有更多>还有更多&mldr;</h3>
 <p>甩<a href=https://guanqr.com/tech/website/hugo-shortcodes-customization/>链接</a>，实在肝不动了Orz</p>
-<h2 id=配置waline评论>配置Waline评论</h2>
+<h2 id=鼠标点击特效>鼠标点击特效</h2>
+<p>三选一，MemE主题将代码放置在<code>/layouts/partials/custom/script.html</code>中。</p>
+<h3 id=核心价值观>核心价值观</h3>
+<p>参考：<a href=https://zhaouncle.com/%E5%8D%9A%E5%AE%A2%E5%9B%ADthemes/#423-%E6%B7%BB%E5%8A%A0-js-%E4%BB%A3%E7%A0%81>博客园主题</a>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+<span class=cm>/* 鼠标特效，文字特效 */</span>
+<span class=kd>var</span> <span class=nx>a_idx</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+<span class=nx>jQuery</span><span class=p>(</span><span class=nb>document</span><span class=p>).</span><span class=nx>ready</span><span class=p>(</span><span class=kd>function</span><span class=p>(</span><span class=nx>$</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>$</span><span class=p>(</span><span class=s2>&#34;body&#34;</span><span class=p>).</span><span class=nx>click</span><span class=p>(</span><span class=kd>function</span><span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>{</span>
+        <span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Array</span><span class=p>(</span><span class=s2>&#34;❤富强❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤民主❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤文明❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤和谐❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤自由❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤平等❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤公正❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤法治❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤爱国❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤敬业❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤诚信❤&#34;</span><span class=p>,</span><span class=s2>&#34;❤友善❤&#34;</span><span class=p>);</span>
+        <span class=kd>var</span> <span class=nx>$i</span> <span class=o>=</span> <span class=nx>$</span><span class=p>(</span><span class=s2>&#34;&lt;span&gt;&lt;/span&gt;&#34;</span><span class=p>).</span><span class=nx>text</span><span class=p>(</span><span class=nx>a</span><span class=p>[</span><span class=nx>a_idx</span><span class=p>]);</span>
+        <span class=nx>a_idx</span> <span class=o>=</span> <span class=p>(</span><span class=nx>a_idx</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span> <span class=o>%</span> <span class=nx>a</span><span class=p>.</span><span class=nx>length</span><span class=p>;</span>
+        <span class=kd>var</span> <span class=nx>x</span> <span class=o>=</span> <span class=nx>e</span><span class=p>.</span><span class=nx>pageX</span><span class=p>,</span>
+        <span class=nx>y</span> <span class=o>=</span> <span class=nx>e</span><span class=p>.</span><span class=nx>pageY</span><span class=p>;</span>
+        <span class=nx>$i</span><span class=p>.</span><span class=nx>css</span><span class=p>({</span>
+            <span class=s2>&#34;z-index&#34;</span><span class=o>:</span> <span class=mi>999999999999999999999999999999999999999999999999999999999999999999999</span><span class=p>,</span>
+            <span class=s2>&#34;top&#34;</span><span class=o>:</span> <span class=nx>y</span> <span class=o>-</span> <span class=mi>20</span><span class=p>,</span>
+            <span class=s2>&#34;left&#34;</span><span class=o>:</span> <span class=nx>x</span><span class=p>,</span>
+            <span class=s2>&#34;position&#34;</span><span class=o>:</span> <span class=s2>&#34;absolute&#34;</span><span class=p>,</span>
+            <span class=s2>&#34;font-weight&#34;</span><span class=o>:</span> <span class=s2>&#34;bold&#34;</span><span class=p>,</span>
+            <span class=s2>&#34;color&#34;</span><span class=o>:</span> <span class=s2>&#34;rgb(&#34;</span><span class=o>+~~</span><span class=p>(</span><span class=mi>255</span><span class=o>*</span><span class=nb>Math</span><span class=p>.</span><span class=nx>random</span><span class=p>())</span><span class=o>+</span><span class=s2>&#34;,&#34;</span><span class=o>+~~</span><span class=p>(</span><span class=mi>255</span><span class=o>*</span><span class=nb>Math</span><span class=p>.</span><span class=nx>random</span><span class=p>())</span><span class=o>+</span><span class=s2>&#34;,&#34;</span><span class=o>+~~</span><span class=p>(</span><span class=mi>255</span><span class=o>*</span><span class=nb>Math</span><span class=p>.</span><span class=nx>random</span><span class=p>())</span><span class=o>+</span><span class=s2>&#34;)&#34;</span>
+        <span class=p>});</span>
+        <span class=nx>$</span><span class=p>(</span><span class=s2>&#34;body&#34;</span><span class=p>).</span><span class=nx>append</span><span class=p>(</span><span class=nx>$i</span><span class=p>);</span>
+        <span class=nx>$i</span><span class=p>.</span><span class=nx>animate</span><span class=p>({</span>
+            <span class=s2>&#34;top&#34;</span><span class=o>:</span> <span class=nx>y</span> <span class=o>-</span> <span class=mi>180</span><span class=p>,</span>
+            <span class=s2>&#34;opacity&#34;</span><span class=o>:</span> <span class=mi>0</span>
+        <span class=p>},</span>
+        <span class=mi>1500</span><span class=p>,</span>
+        <span class=kd>function</span><span class=p>()</span> <span class=p>{</span>
+            <span class=nx>$i</span><span class=p>.</span><span class=nx>remove</span><span class=p>();</span>
+        <span class=p>});</span>
+    <span class=p>});</span>
+<span class=p>});</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=烟花特效>烟花特效</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=c>&lt;!--鼠标点击特效，烟花效应--&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://cdn.jsdelivr.net/gh/ZhaoUncle/image@main/static/mouse-click.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>canvas</span> <span class=na>width</span><span class=o>=</span><span class=s>&#34;1777&#34;</span> <span class=na>height</span><span class=o>=</span><span class=s>&#34;841&#34;</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>canvas</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=爱心特效>爱心特效</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>script</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://cdn.jsdelivr.net/gh/ITJoker233/ITJoker233.github.io@latest/CDN/js/love.min.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=看板娘>看板娘</h2>
+<p>将以下代码添加到<code>/layouts/partials/footer.html</code>中<code>{{ end }}</code>的前一行。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=c>&lt;!-- Live2D，网页上的小人，可以修改live2d_config.js来修改模型，模型都在static/live2d_models里面 --&gt;</span>
+<span class=c>&lt;!-- 你也可以把js文件下载下来，放到static/js/目录下，就不依赖别人的服务了 --&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.0.min.js&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+    <span class=nx>L2Dwidget</span><span class=p>.</span><span class=nx>init</span><span class=p>({</span>
+        <span class=nx>model</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>scale</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>
+            <span class=nx>hHeadPos</span><span class=o>:</span> <span class=mf>0.5</span><span class=p>,</span>
+            <span class=nx>vHeadPos</span><span class=o>:</span> <span class=mf>0.618</span><span class=p>,</span>
+            <span class=nx>jsonPath</span><span class=o>:</span> <span class=s1>&#39;https://cdn.jsdelivr.net/gh/DomathID/live2d-model@main/Nindi/model.json&#39;</span><span class=p>,</span>       <span class=c1>// xxx.model.json 的路径,换人物修改这个
+</span><span class=c1></span>        <span class=p>},</span>
+        <span class=nx>display</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>superSample</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>     <span class=c1>// 超采样等级
+</span><span class=c1></span>            <span class=nx>width</span><span class=o>:</span> <span class=mi>200</span><span class=p>,</span>         <span class=c1>// canvas的宽度
+</span><span class=c1></span>            <span class=nx>height</span><span class=o>:</span> <span class=mi>350</span><span class=p>,</span>        <span class=c1>// canvas的高度
+</span><span class=c1></span>            <span class=nx>position</span><span class=o>:</span> <span class=s1>&#39;left&#39;</span><span class=p>,</span>   <span class=c1>// 显示位置：左或右
+</span><span class=c1></span>            <span class=nx>hOffset</span><span class=o>:</span> <span class=mi>0</span><span class=p>,</span>         <span class=c1>// canvas水平偏移
+</span><span class=c1></span>            <span class=nx>vOffset</span><span class=o>:</span> <span class=mi>0</span><span class=p>,</span>         <span class=c1>// canvas垂直偏移
+</span><span class=c1></span>        <span class=p>},</span>
+        <span class=nx>mobile</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>show</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>         <span class=c1>// 是否在移动设备上显示
+</span><span class=c1></span>            <span class=nx>scale</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>           <span class=c1>// 移动设备上的缩放
+</span><span class=c1></span>            <span class=nx>motion</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>       <span class=c1>// 移动设备是否开启重力感应
+</span><span class=c1></span>        <span class=p>},</span>
+        <span class=nx>react</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>opacityDefault</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>  <span class=c1>// 默认透明度
+</span><span class=c1></span>            <span class=nx>opacityOnHover</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>  <span class=c1>// 鼠标移上透明度
+</span><span class=c1></span>        <span class=p>},</span>
+     <span class=p>});</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=配置waline评论>配置Waline评论</h2>
 <div class="notices success" data-title=参考教程>
 <a href=https://guanqr.com/tech/website/introduction-and-basic-setting-of-waline/>Waline 评论系统的介绍与基础配置</a>
 </div>
@@ -781,12 +944,8 @@ See Also
 <li><a href=#网络字体>网络字体</a></li>
 </ul>
 </li>
-<li><a href=#进阶部分>进阶部分</a>
-<ul>
 <li><a href=#页脚添加今日诗词>页脚添加今日诗词</a></li>
 <li><a href=#加载进度条>加载进度条</a></li>
-</ul>
-</li>
 <li><a href=#短代码>短代码</a>
 <ul>
 <li><a href=#在博客中插入b站视频>在博客中插入B站视频</a>
@@ -799,6 +958,14 @@ See Also
 <li><a href=#还有更多>还有更多&mldr;</a></li>
 </ul>
 </li>
+<li><a href=#鼠标点击特效>鼠标点击特效</a>
+<ul>
+<li><a href=#核心价值观>核心价值观</a></li>
+<li><a href=#烟花特效>烟花特效</a></li>
+<li><a href=#爱心特效>爱心特效</a></li>
+</ul>
+</li>
+<li><a href=#看板娘>看板娘</a></li>
 <li><a href=#配置waline评论>配置Waline评论</a></li>
 <li><a href=#特别鸣谢>特别鸣谢</a></li>
 </ul>
