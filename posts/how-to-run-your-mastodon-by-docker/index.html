@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Jul 14, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;7&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;9&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -187,15 +187,18 @@ kimbie
 <p><strong>以下操作默认均在root用户下执行</strong>。</p>
 <p>root用户:<code>sudo -i</code></p>
 <h2 id=一些可以参考的教程>一些可以参考的教程</h2>
-<pre tabindex=0><code>https://guide.mastodon.im/
-#salt站长的长毛象（Mastodon）社区搭建详解，非docker小白向建站指南，本教程有部分参考
-
-https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html
-#pullopen站长进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示，附阻止本站嘟文流入某站点方法
-
-https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/01/Mastodon-on-Docker-2.html
-#pullopen站长如何利用Docker搭建Mastodon实例（二）：进阶魔改篇
-</code></pre><h2 id=长毛象配置文件夹>长毛象配置文件夹</h2>
+<ul>
+<li>
+<p>salt站长的<a href=https://guide.mastodon.im/>长毛象（Mastodon）社区搭建详解</a>，非docker小白向建站指南，本教程有部分参考。</p>
+</li>
+<li>
+<p>pullopen站长<a href=https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html>进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示，附阻止本站嘟文流入某站点方法</a>。</p>
+</li>
+<li>
+<p>pullopen站长<a href=https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/01/Mastodon-on-Docker-2.html>如何利用Docker搭建Mastodon实例（二）：进阶魔改篇</a>。</p>
+</li>
+</ul>
+<h2 id=长毛象配置文件夹>长毛象配置文件夹</h2>
 <p>如何确定你的长毛象配置文件夹呢？</p>
 <pre tabindex=0><code>find / -name docker-compose.yml   #寻找名为docker-compose.yml的文件所在位置
 </code></pre><p>在返回结果中找到看起来最靠谱的那个位置，然后</p>
@@ -212,10 +215,11 @@ https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/01/Masto
 简便的理解：
 </button>
 <div class=expand__content>
-把docker当作一个虚拟机，相当于你的mastodon跑在你现在vps的虚拟机里面，所以不能直接在vps的用户下执行tootctl命令。进入到这个“虚拟机”里面可以在docker-compose.yml文件所在的文件夹下（也就是长毛象配置文件夹，此文件夹相当于非docker的 <code>/home/mastodon/live</code>）。
+把docker当作一个虚拟机，相当于你的mastodon跑在你现在vps的虚拟机里面，所以不能直接在vps的用户下执行tootctl命令。进入到这个“虚拟机”里面可以在docker-compose.yml文件所在的文件夹下运行：<code>docker-compose exec web /bin/bash</code>）。
 </div>
 </div>
-<p>如果你像我一样，在长毛象配置文件夹下运行<code>docker-compose exec web /bin/bash</code>命令时出现了以下错误：</p>
+<h3 id=报错>报错？</h3>
+<p>如果在长毛象配置文件夹下运行<code>docker-compose exec web /bin/bash</code>命令时出现了以下错误：</p>
 <p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/image.png alt></p>
 <p>可能是因为Python依赖没装全，运行<code>pip install ordered_dict</code>安装依赖。</p>
 <p>如果安装python依赖也标红，返回错误结果：</p>
@@ -226,6 +230,63 @@ No matching distribution found for ordered_dict
 rm -rf /usr/bin/docker-compose  #以/usr/bin 为例，rm递归删除此文件
 </code></pre><p>然后再按照<a href=https://docs.docker.com/compose/install/>docker官网</a>的Linux安装方式重装docker-compose：</p>
 <p>之后可以正常看到，<code>docker-compose run --rm web bin/tootctl</code>能够正常运行，由于我们并没有运行<a href=https://docs.joinmastodon.org/zh-cn/admin/tootctl/>官方文档tootctl命令集</a>中的任何命令，因此<code>ctrl+c</code>退出即可。</p>
+<h2 id=想要升级怎么办>想要升级怎么办</h2>
+<h3 id=拉取镜像images>拉取镜像（images） 　</h3>
+<p>Docker是一个容器，你的mastodon运行在这个容器里的一个镜像当中。如果在搭建服务器之初你是自己来部署mastodon的话，你应该知道你拉取（pull）的是哪个镜像。</p>
+<p>如果你想要拉取（pull）一个特定的镜像（比如你想照抄一个使用docker部署站点的大佬的配置），以官方最新版镜像为例，键入：</p>
+<pre tabindex=0><code>docker pull tootsuite/mastodon:latest   #docker pull Dockerhub用户名/镜像名:tag名
+</code></pre><p>片刻后即可享受他人的劳动成果（？）</p>
+<h3 id=版本升级>版本升级</h3>
+<p>首先查看你的站点使用的是哪个镜像。</p>
+<pre tabindex=0><code> cd /opt/mastodon   #跳转至目标文件夹
+
+ nano docker-compose.yml   #修改此文件查看镜像
+</code></pre><p>留意<code>web</code>、<code>streaming</code>和<code>sidekiq</code>三项的<code>image</code>即为你使用的镜像。</p>
+<p>如果没有进行过任何魔改，而使用的是官方镜像的话，此三项应该显示如下：</p>
+<pre tabindex=0><code>web:    
+  image: tootsuite/mastodon:latest 
+streaming:    
+  image: tootsuite/mastodon:latest 
+sidekiq:    
+  image: tootsuite/mastodon:latest 
+#格式为image: Dockerhub用户名/镜像名：tag名。tag名可以是某个具体的版本号也可以是latest。如果不是使用官方镜像的话当然也可能是其他，后面会讲到。
+</code></pre><p>假设你使用的是官方镜像旧版本（官方的dockerhub用户名为tootsuite），升级只需要把web,streaming,sidekiq三项的<code>tag名</code>改为<a href="https://hub.docker.com/r/tootsuite/mastodon/tags?page=1&ordering=last_updated">这一页</a>tag中发布的最新版本/latest即可。</p>
+<p>如果你使用的不是tootsuite发布的镜像，而是别的用户发布的，或是你想照抄别人的配置，你可以选择像上面的操作一样拉官方镜像的最新版本(一般情况下站点没有被大量魔改过都可以)，也可以去<a href=https://hub.docker.com>Dockerhub官网</a>搜索你使用的<code>dockerhub用户名/镜像名</code>查看最新发布的tag，然后把docker-compose.yml中上述所说三项服务的<code>image</code>的tag名改为那个最新发布的tag名，然后保存。</p>
+<p>凡更改过docker-compose.yml文件，操作后需要重启docker-compose才能重新加载配置文件并拉取镜像。</p>
+<pre tabindex=0><code>cd /opt/mastodon   #务必确保在目标文件夹下进行重启操作，否则会影响系统内其他使用docker-compose部署的服务（如果有）
+docker-compose up -d   #重启目标文件夹下使用docker-compose部署的服务
+</code></pre><h2 id=docker的镜像问题>Docker的镜像问题</h2>
+<h3 id=虚悬镜像与镜像的删除>虚悬镜像与镜像的删除</h3>
+<p>如果本地中已经拉取了一模一样的镜像，将不会重复拉取。如果tag名相同但镜像有更新（比如<code>tootctl/mastodon:latest</code>），则会再拉取最新的镜像，并且把原镜像的tag命名为<code>&lt;none></code>，这一切你都可以使用<code>docker images -a</code>来直观地看到你拉取了哪些镜像。</p>
+<p><code>&lt;none></code>镜像被称为虚悬镜像，是不可用的，但不一定有害。虚悬镜像的产生原因有很多种，上面刚刚提到的"两次拉取镜像的tag名相同但镜像本身有更新"是产生虚悬镜像最常见的原因之一。这种方式产生的虚悬镜像只会占据存储空间，不处理并不会危害服务器安全，所以简单删除即可。运行：</p>
+<pre tabindex=0><code>docker images -a   #查看docker拉取的所有镜像并列出列表，包含虚悬镜像
+docker rmi imageid   #删除镜像id为imageid的镜像，这里填要删掉的镜像的id
+</code></pre><p>即可删除镜像。</p>
+<h3 id=清理docker镜像脚本>清理docker镜像脚本</h3>
+<p>此脚本日常运维并不常用，不是用来清理mastodon远程媒体的，而是经过升级/魔改操作后删掉旧的镜像（images）的。此脚本本身不会运行任何命令，而是提示你应该运行什么命令。如果你的服务器中没有<code>docker-clean.sh</code>脚本，那么在<code>/opt/astodon</code>文件夹中，运行<code>vim docker-clean.sh</code>，将以下内容写入其中，然后保存。</p>
+<pre tabindex=0><code>  GNU nano 2.9.3                                                                                    docker-clean.sh                                                                                              
+
+#!/bin/bash
+
+# remove exited containers:
+docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v
+
+# remove unused images:
+docker images --no-trunc | grep '&lt;none&gt;' | awk '{ print $3 }' | xargs -r docker rmi
+
+# remove unused volumes (needs to be ran as root):
+find '/var/lib/docker/volumes/' -mindepth 1 -maxdepth 1 -type d | grep -vFf &lt;(
+  docker ps -aq | xargs docker inspect | jq -r '.[]|.Mounts|.[]|.Name|select(.)'
+  ) | xargs -r rm -fr
+
+# remove all images without at least one container
+docker image prune -a
+
+
+</code></pre><p>当想要使用此脚本时，运行：</p>
+<pre tabindex=0><code>cat docker-clean.sh
+</code></pre><p>然后按照提示结果<strong>输入相应命令</strong>，清理虚悬镜像/无用镜像即可。</p>
+<h2 id=基础运维>基础运维</h2>
 <h3 id=有帮助的命令>有帮助的命令：</h3>
 <pre tabindex=0><code>docker-compose run --rm web bin/tootctl 具体命令    
 #运行mastodon tootctl命令，比如docker-compose run --rm web bin/tootctl cache clear
@@ -248,10 +309,9 @@ nano .env.production  #长毛象配置文件的修改方法
 <pre tabindex=0><code>cd /home/mastodon/live    #进入长毛象配置文件夹
 nano .env.production  #长毛象配置文件的修改方法
 </code></pre><p>那么我们现在开始吧。</p>
-<h2 id=基础运维>基础运维</h2>
-<h3 id=使用alias脚本缩写tootctl命令>使用alias脚本缩写tootctl命令</h3>
+<h2 id=使用alias脚本缩写tootctl命令>使用alias脚本缩写tootctl命令</h2>
 <p>（此脚本由兔子大佬编写）</p>
-<p>以执行help为例，需要运行<code>docker-compose run --rm web bin/tootctl help</code>,前缀非常麻烦，如果能简化为<code>tootctl help</code>似乎就简单得多。那么如何进行tootctl命令的缩写呢？</p>
+<p>使用管理命令行在服务器中进行维护需要了解<a href=https://docs.joinmastodon.org/zh-cn/admin/tootctl/>官方文档tootctl命令集</a>。以执行help为例，如果使用docker建站需要运行<code>docker-compose run --rm web bin/tootctl help</code>，前缀非常麻烦，如果能简化为<code>tootctl help</code>似乎就简单得多。那么如何进行tootctl命令的缩写呢？</p>
 <pre tabindex=0><code>cd /opt/mastodon   #跳转至目标文件夹
 vim tootctl.sh   #将以下内容写入/opt/mastodon中并命名为tootctl.sh
 </code></pre><p>以下为脚本内容：</p>
@@ -291,31 +351,7 @@ cd $lpwd
 echo &quot;alias tootctl='/opt/mastodon/tootctl.sh' &quot; &gt;&gt; ~/.bashrc 
 source ~/.bashrc
 </code></pre><p>之后就能用<code>tootctl</code>这个命令来调用tootctl而不用输入繁琐的前缀了，从而达到缩写命令的目的。</p>
-<p><em><strong>本教程此后所有tootctl命令均会缩写</strong></em></p>
-<h3 id=清理docker镜像脚本>清理docker镜像脚本</h3>
-<p>此脚本日常运维并不常用，不是用来清理mastodon远程媒体的，而是经过升级/魔改操作后删掉旧的镜像（images）的，但有总比没有强。如果你的服务器中没有<code>docker-clean.sh</code>脚本，那么在<code>/opt/astodon</code>文件夹中，运行<code>vim docker-clean.sh</code>，将以下内容写入其中，然后保存。</p>
-<pre tabindex=0><code>  GNU nano 2.9.3                                                                                    docker-clean.sh                                                                                              
-
-#!/bin/bash
-
-# remove exited containers:
-docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v
-
-# remove unused images:
-docker images --no-trunc | grep '&lt;none&gt;' | awk '{ print $3 }' | xargs -r docker rmi
-
-# remove unused volumes (needs to be ran as root):
-find '/var/lib/docker/volumes/' -mindepth 1 -maxdepth 1 -type d | grep -vFf &lt;(
-  docker ps -aq | xargs docker inspect | jq -r '.[]|.Mounts|.[]|.Name|select(.)'
-  ) | xargs -r rm -fr
-
-# remove all images without at least one container
-docker image prune -a
-
-
-</code></pre><p>当想要使用此脚本时，运行：</p>
-<pre tabindex=0><code>cat docker-clean.sh
-</code></pre><p>然后按照提示结果输入相应命令，清理虚悬镜像/无用镜像即可。</p>
+<p><em><strong>本教程此后所有tootctl命令均会缩写。</strong></em></p>
 <h2 id=部署媒体文件外部存储服务>部署媒体文件外部存储服务</h2>
 <p>由于Scaleway object storage存储空间免费限额 75 GB，我们以此为例进行设置。</p>
 <pre tabindex=0><code>cd /opt/mastodon   #进入目标文件夹
@@ -477,16 +513,28 @@ Roelxy
 <li><a href=#长毛象配置文件夹>长毛象配置文件夹</a></li>
 <li><a href=#docker-是什么>Docker 是什么？</a>
 <ul>
-<li><a href=#有帮助的命令>有帮助的命令：</a></li>
-<li><a href=#需要熟悉位置和名称的配置文件>需要熟悉位置和名称的配置文件</a></li>
+<li><a href=#报错>报错？</a></li>
+</ul>
+</li>
+<li><a href=#想要升级怎么办>想要升级怎么办</a>
+<ul>
+<li><a href=#拉取镜像images>拉取镜像（images） 　</a></li>
+<li><a href=#版本升级>版本升级</a></li>
+</ul>
+</li>
+<li><a href=#docker的镜像问题>Docker的镜像问题</a>
+<ul>
+<li><a href=#虚悬镜像与镜像的删除>虚悬镜像与镜像的删除</a></li>
+<li><a href=#清理docker镜像脚本>清理docker镜像脚本</a></li>
 </ul>
 </li>
 <li><a href=#基础运维>基础运维</a>
 <ul>
-<li><a href=#使用alias脚本缩写tootctl命令>使用alias脚本缩写tootctl命令</a></li>
-<li><a href=#清理docker镜像脚本>清理docker镜像脚本</a></li>
+<li><a href=#有帮助的命令>有帮助的命令：</a></li>
+<li><a href=#需要熟悉位置和名称的配置文件>需要熟悉位置和名称的配置文件</a></li>
 </ul>
 </li>
+<li><a href=#使用alias脚本缩写tootctl命令>使用alias脚本缩写tootctl命令</a></li>
 <li><a href=#部署媒体文件外部存储服务>部署媒体文件外部存储服务</a></li>
 <li><a href=#定期清理外站媒体文件>定期清理外站媒体文件</a></li>
 <li><a href=#落笔感悟>落笔感悟</a></li>
