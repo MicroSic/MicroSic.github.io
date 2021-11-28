@@ -250,14 +250,14 @@ streaming:
 sidekiq:    
   image: tootsuite/mastodon:latest 
 #格式为image: Dockerhub用户名/镜像名：tag名。tag名可以是某个具体的版本号也可以是latest。如果不是使用官方镜像的话当然也可能是其他，后面会讲到。
-</code></pre><p>假设你使用的是官方镜像旧版本（官方的dockerhub用户名为tootsuite），升级只需要把web,streaming,sidekiq三项的<code>tag名</code>改为<a href="https://hub.docker.com/r/tootsuite/mastodon/tags?page=1&ordering=last_updated">这一页</a>tag中发布的最新版本/latest即可。</p>
+</code></pre><p>假设你使用的是官方镜像旧版本（官方的dockerhub用户名为tootsuite），升级只需要把<code>web</code>,<code>streaming</code>,<code>sidekiq</code>三个镜像的<code>tag名</code>改为<a href="https://hub.docker.com/r/tootsuite/mastodon/tags?page=1&ordering=last_updated">这一页</a>tag中发布的最新版本/latest即可。</p>
 <p>如果你使用的不是tootsuite发布的镜像，而是别的用户发布的，或是你想照抄别人的配置，你可以选择像上面的操作一样拉官方镜像的最新版本(一般情况下站点没有被大量魔改过都可以)，也可以去<a href=https://hub.docker.com>Dockerhub官网</a>搜索你使用的<code>dockerhub用户名/镜像名</code>查看最新发布的tag，然后把docker-compose.yml中上述所说三项服务的<code>image</code>的tag名改为那个最新发布的tag名，然后保存。</p>
 <p>凡更改过docker-compose.yml文件，操作后需要重启docker-compose才能重新加载配置文件并拉取镜像。</p>
 <pre tabindex=0><code>cd /opt/mastodon   #务必确保在目标文件夹下进行重启操作，否则会影响系统内其他使用docker-compose部署的服务（如果有）
 docker-compose up -d   #重启目标文件夹下使用docker-compose部署的服务
 </code></pre><h2 id=docker的镜像问题>Docker的镜像问题</h2>
 <h3 id=虚悬镜像与镜像的删除>虚悬镜像与镜像的删除</h3>
-<p>如果本地中已经拉取了一模一样的镜像，将不会重复拉取。如果tag名相同但镜像有更新（比如<code>tootctl/mastodon:latest</code>），则会再拉取最新的镜像，并且把原镜像的tag命名为<code>&lt;none></code>，这一切你都可以使用<code>docker images -a</code>来直观地看到你拉取了哪些镜像。</p>
+<p>如果本地中已经拉取了一模一样的镜像，将不会重复拉取。如果tag名相同但镜像有更新（比如<code>tootsuite/mastodon:latest</code>），则会再拉取最新的镜像，并且把原镜像的tag命名为<code>&lt;none></code>，这一切你都可以使用<code>docker images -a</code>来直观地看到你拉取了哪些镜像。</p>
 <p><code>&lt;none></code>镜像被称为虚悬镜像，是不可用的，但不一定有害。虚悬镜像的产生原因有很多种，上面刚刚提到的"两次拉取镜像的tag名相同但镜像本身有更新"是产生虚悬镜像最常见的原因之一。这种方式产生的虚悬镜像只会占据存储空间，不处理并不会危害服务器安全，所以简单删除即可。运行：</p>
 <pre tabindex=0><code>docker images -a   #查看docker拉取的所有镜像并列出列表，包含虚悬镜像
 docker rmi imageid   #删除镜像id为imageid的镜像，这里填要删掉的镜像的id
