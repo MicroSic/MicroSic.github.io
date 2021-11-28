@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Jul 14, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;9&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;10&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -207,6 +207,35 @@ kimbie
 <p>在配置文件夹中运行：</p>
 <pre tabindex=0><code>docker-compose exec web /bin/bash
 </code></pre><p>然后再<code>docker ps</code> 你就能看到mastodon的服务了。</p>
+<h2 id=基础运维>基础运维</h2>
+<h3 id=有帮助的命令>有帮助的命令：</h3>
+<pre tabindex=0><code>docker-compose run --rm web bin/tootctl 具体命令    
+#运行mastodon tootctl命令，比如docker-compose run --rm web bin/tootctl cache clear
+
+docker-compose run --rm web bin/tootctl reload    #重启长毛象
+
+cd /opt/mastodon   #跳转至长毛象配置文件夹，此后教程均以此文件位置为例
+
+find / -name filename    #寻找名为filename的文件
+
+which filename      #寻找实际执行命令的文件
+
+ls -a filepath    #列出filepath文件夹内的所有文件
+
+apt update &amp;&amp; apt install wget rsync python git curl vim git ufw -y  #安装一些常用命令
+</code></pre><h3 id=需要熟悉位置和名称的配置文件>需要熟悉位置和名称的配置文件</h3>
+<pre tabindex=0><code>cd /opt/mastodon    #进入长毛象配置文件夹
+nano .env.production  #长毛象配置文件的修改方法
+</code></pre><p>而在非docker中，此文件的修改方法如下。</p>
+<pre tabindex=0><code>cd /home/mastodon/live    #进入长毛象配置文件夹
+nano .env.production  #长毛象配置文件的修改方法
+</code></pre><h3 id=nano编辑器>nano编辑器</h3>
+<p>为了定位一个2800行的配置文件中的第711行，我找到了快去定位行数的命令<code>nano +number filename</code>即可跳转到指定行数，例如：<code>nano +711 blabla.yml</code>。</p>
+<p>如果想持久化地在nano编辑器的最左边看到行数，可以：</p>
+<pre tabindex=0><code>nano ~/.nanorc  #nano配置文件，默认不存在
+set constantshow   #使屏幕底部的状态框永久显示
+set linenumbers  #编辑文件时行数会一直出现在屏幕左边
+</code></pre><p>然后<code>ctrl+x</code>退出保存即可。</p>
 <h2 id=docker-是什么>Docker 是什么？</h2>
 <div class=expand>
 <button type=button class=expand__button aria-label="Expand Button">
@@ -286,29 +315,6 @@ docker image prune -a
 </code></pre><p>当想要使用此脚本时，运行：</p>
 <pre tabindex=0><code>cat docker-clean.sh
 </code></pre><p>然后按照提示结果<strong>输入相应命令</strong>，清理虚悬镜像/无用镜像即可。</p>
-<h2 id=基础运维>基础运维</h2>
-<h3 id=有帮助的命令>有帮助的命令：</h3>
-<pre tabindex=0><code>docker-compose run --rm web bin/tootctl 具体命令    
-#运行mastodon tootctl命令，比如docker-compose run --rm web bin/tootctl cache clear
-
-docker-compose run --rm web bin/tootctl reload    #重启长毛象
-
-cd /opt/mastodon   #跳转至长毛象配置文件夹，此后教程均以此文件位置为例
-
-find / -name filename    #寻找名为filename的文件
-
-which filename      #寻找实际执行命令的文件
-
-ls -a filepath    #列出filepath文件夹内的所有文件
-
-apt update &amp;&amp; apt install wget rsync python git curl vim git ufw -y  #安装一些常用命令
-</code></pre><h3 id=需要熟悉位置和名称的配置文件>需要熟悉位置和名称的配置文件</h3>
-<pre tabindex=0><code>cd /opt/mastodon    #进入长毛象配置文件夹
-nano .env.production  #长毛象配置文件的修改方法
-</code></pre><p>而在非docker中，此文件的修改方法如下。</p>
-<pre tabindex=0><code>cd /home/mastodon/live    #进入长毛象配置文件夹
-nano .env.production  #长毛象配置文件的修改方法
-</code></pre><p>那么我们现在开始吧。</p>
 <h2 id=使用alias脚本缩写tootctl命令>使用alias脚本缩写tootctl命令</h2>
 <p>（此脚本由兔子大佬编写）</p>
 <p>使用管理命令行在服务器中进行维护需要了解<a href=https://docs.joinmastodon.org/zh-cn/admin/tootctl/>官方文档tootctl命令集</a>。以执行help为例，如果使用docker建站需要运行<code>docker-compose run --rm web bin/tootctl help</code>，前缀非常麻烦，如果能简化为<code>tootctl help</code>似乎就简单得多。那么如何进行tootctl命令的缩写呢？</p>
@@ -511,6 +517,13 @@ Roelxy
 <ul>
 <li><a href=#一些可以参考的教程>一些可以参考的教程</a></li>
 <li><a href=#长毛象配置文件夹>长毛象配置文件夹</a></li>
+<li><a href=#基础运维>基础运维</a>
+<ul>
+<li><a href=#有帮助的命令>有帮助的命令：</a></li>
+<li><a href=#需要熟悉位置和名称的配置文件>需要熟悉位置和名称的配置文件</a></li>
+<li><a href=#nano编辑器>nano编辑器</a></li>
+</ul>
+</li>
 <li><a href=#docker-是什么>Docker 是什么？</a>
 <ul>
 <li><a href=#报错>报错？</a></li>
@@ -526,12 +539,6 @@ Roelxy
 <ul>
 <li><a href=#虚悬镜像与镜像的删除>虚悬镜像与镜像的删除</a></li>
 <li><a href=#清理docker镜像脚本>清理docker镜像脚本</a></li>
-</ul>
-</li>
-<li><a href=#基础运维>基础运维</a>
-<ul>
-<li><a href=#有帮助的命令>有帮助的命令：</a></li>
-<li><a href=#需要熟悉位置和名称的配置文件>需要熟悉位置和名称的配置文件</a></li>
 </ul>
 </li>
 <li><a href=#使用alias脚本缩写tootctl命令>使用alias脚本缩写tootctl命令</a></li>
