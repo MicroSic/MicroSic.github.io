@@ -284,7 +284,13 @@ sidekiq:
 <p>凡更改过docker-compose.yml文件，操作后需要重启docker-compose才能重新加载配置文件并拉取镜像。</p>
 <pre tabindex=0><code>cd /opt/mastodon   #务必确保在目标文件夹下进行重启操作，否则会影响系统内其他使用docker-compose部署的服务（如果有）
 docker-compose up -d   #重启目标文件夹下使用docker-compose部署的服务
-</code></pre><h2 id=docker的镜像问题>Docker的镜像问题</h2>
+</code></pre><h2 id=数据库适应>数据库适应</h2>
+<p>站点升级后可能会遇到刷嘟时提示<code>网络错误500</code>的报错，虽然并不影响真实的使用体验。此时需要运行：</p>
+<pre tabindex=0><code>cd /opt/mastodon
+docker-compose run --rm web rails db:migrate
+</code></pre><p>每次更改镜像之后都可以运行此命令使数据库适应毛象版本。如果频繁提示此报错，可以尝试升级数据库版本，比如从Postgres 9.6升级至Postgres 12.5参考<a href=https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/12/02/upgrade-postgres-on-Docker.html>如何升级Postgres数据库</a>。</p>
+<p>为了防止运行migrate命令后翻车，请务必确认<a href=https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html#%E5%88%A9%E7%94%A8scaleway%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93>做好数据库备份</a>！</p>
+<h2 id=docker的镜像问题>Docker的镜像问题</h2>
 <h3 id=虚悬镜像与镜像的删除>虚悬镜像与镜像的删除</h3>
 <p>如果本地中已经拉取了一模一样的镜像，将不会重复拉取。如果tag名相同但镜像有更新（比如<code>tootsuite/mastodon:latest</code>），则会再拉取最新的镜像，并且把原镜像的tag命名为<code>&lt;none></code>，这一切你都可以使用<code>docker images -a</code>来直观地看到你拉取了哪些镜像。</p>
 <p><code>&lt;none></code>镜像被称为虚悬镜像，是不可用的，但不一定有害。虚悬镜像的产生原因有很多种，上面刚刚提到的"两次拉取镜像的tag名相同但镜像本身有更新"是产生虚悬镜像最常见的原因之一。这种方式产生的虚悬镜像只会占据存储空间，不处理并不会危害服务器安全，所以简单删除即可。运行：</p>
@@ -535,6 +541,7 @@ Roelxy
 <li><a href=#版本升级>版本升级</a></li>
 </ul>
 </li>
+<li><a href=#数据库适应>数据库适应</a></li>
 <li><a href=#docker的镜像问题>Docker的镜像问题</a>
 <ul>
 <li><a href=#虚悬镜像与镜像的删除>虚悬镜像与镜像的删除</a></li>
