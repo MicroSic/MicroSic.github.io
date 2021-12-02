@@ -295,11 +295,11 @@ docker-compose run --rm plume plm migration run     #数据库第一次迁移运
 
 docker-compose run --rm plume plm search init   #设置你的站点
 docker-compose run --rm plume plm instance new -d 'domain.name' -n 'instance name' -l 'default licence'
-#domain.com改为你的域名，instance name改为你的站点名（支持中文）
+#domain.com改为你的域名，instance name改为你的站点名（支持中文，可在网页上更改），default licence是默认文章许可协议（可在网页上更改）
 
 #注册管理员帐号
 docker-compose run --rm plume plm users new -n 'admin' -N 'name' -b 'bio' -e 'admin@domain.name' -p 'pass' --admin
-#参数n的值为用户名，参数N的值为你的昵称，参数b的值为你的摘要（个人资料，可以在网页上改）,参数e的值为你的邮箱，参数p的值是管理员帐号的密码
+#参数n的值为用户名，参数N的值为你的昵称，参数b的值为你的摘要（个人资料，先不用管，可以在网页上改）,参数e的值为你的邮箱，参数p的值是管理员帐号的密码
 
 docker-compose up -d  #站点启动
 </code></pre><h2 id=nginx反向代理>Nginx反向代理</h2>
