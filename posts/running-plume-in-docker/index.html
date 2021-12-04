@@ -366,6 +366,7 @@ systemctl enable nginx
 systemctl start nginx
 systemctl enable nginx
 </code></pre><h2 id=配置ssl>配置SSL</h2>
+<p>去DNS服务商添加一条指向服务器ip，内容为域名的A记录，然后回到服务器运行以下命令：</p>
 <pre tabindex=0><code>sudo apt-get update
 sudo apt-get install software-properties-common
 sudo add-apt-repository universe

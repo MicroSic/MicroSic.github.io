@@ -38,7 +38,7 @@
 <link rel=manifest href=/manifest.json>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"RSSHub | 利用Docker-compose搭建RSSHub","datePublished":"2021-12-03T17:54:22+08:00","dateModified":"2021-12-03T17:54:22+08:00","url":"http://blog.tantalum.life/posts/build-rsshub-in-docker/","description":"先说废话 正逢女权主义播客【海马星球】被墙，同为社科播客的【小声喧哗】在微博中呼吁： 播客的用户朋友们，有一句话可能你已经听到各种播客重复了无数","keywords":["RSSHub","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"RSSHub | 利用Docker-compose搭建RSSHub","datePublished":"2021-12-03T17:54:22+08:00","dateModified":"2021-12-03T17:54:22+08:00","url":"http://blog.tantalum.life/posts/build-rsshub-in-docker/","description":"前言 正逢女权主义播客【海马星球】被墙，同为社科播客的【小声喧哗】在微博中呼吁： 播客的用户朋友们，有一句话可能你已经听到各种播客重复了无数遍：","keywords":["RSSHub","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -181,7 +181,7 @@ kimbie
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
-<h2 id=先说废话>先说废话</h2>
+<h2 id=前言>前言</h2>
 <p>正逢女权主义播客【海马星球】被墙，同为社科播客的<a href=https://loudmurmursfm.typlog.io/aboutus>【小声喧哗】</a>在微博中呼吁：</p>
 <blockquote>
 <p>播客的用户朋友们，有一句话可能你已经听到各种播客重复了无数遍：</p>
@@ -193,6 +193,8 @@ kimbie
 </blockquote>
 <p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/xiaoshengxuanhua.jpeg alt></p>
 <p>意识到RSS的重要性（虽然我一直在用google podcast），我搭了这个RSSHub：<a href=https://rss.tantalum.life/>https://rss.tantalum.life/</a>。Docker-compose操作很简单，这里记录一下我的搭建过程。</p>
+<div class=box>注意：<br>
+本教程省略了一些与Docker&Docker compose相关的知识。如果没有安装，请参考[这里]安装。(<a href=https://blog.tantalum.life/posts/running-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose>https://blog.tantalum.life/posts/running-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose</a>)</div>
 <h2 id=搭建过程>搭建过程</h2>
 <p>看了一下<a href=https://github.com/DIYgod/RSSHub/blob/master/docker-compose.yml>RssHub项目</a>的<code>docker-compose.yml</code>，有那么一丢丢的不满意：</p>
 <pre tabindex=0><code>version: '3'
@@ -264,13 +266,15 @@ services:
         environment: 
             - TZ=Asia/Shanghai
         volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
+            - /var/run/docker.sock:/var/run/docker.sock
         command: rsshub_service.rsshub_1 --cleanup --interval 1200
 
 </code></pre><p>把以上内容写入<code>docker-compose.yml</code>中，保存，然后运行<code>docker-compose up -d</code>就搭好了。</p>
 <h2 id=nginx反向代理>Nginx反向代理</h2>
 <p>如果你没有域名，可以跳过这步。</p>
-<p>运行<code>nano /etc/nginx/conf.d/rsshub.conf</code>，内容如下：</p>
+<pre tabindex=0><code>sudo -i   #切换至root用户
+apt install nginx -y    #安装nginx
+</code></pre><p>运行<code>nano /etc/nginx/conf.d/rsshub.conf</code>，内容如下：</p>
 <pre tabindex=0><code>server {
     listen 80;
     server_name 你的域名;       
@@ -288,7 +292,7 @@ services:
 <pre tabindex=0><code>nginx -s reload
 systemctl start nginx
 systemctl enable nginx
-</code></pre><p>随后运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
+</code></pre><p>随后去DNS服务商添加一条指向服务器ip，内容为域名的A记录，并运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
 <h2 id=使用>使用</h2>
 <p>如果此时访问你的域名（没有域名则访问<code>https://服务器ip:1200/</code>）显示这个页面：</p>
 <p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/startrsshub.png alt></p>
@@ -366,6 +370,11 @@ See Also
 <div class=pagination-single__left-title>Plume | 利用Docker-compose搭建Plume</div>
 </a>
 <div class=grow></div>
+<a href=http://blog.tantalum.life/posts/reverse-proxy-websites/ class=pagination-single__right>
+<div class=pagination-single__right-title>Nginx | 记录反向代理过程</div>
+<div class=pagination-single__icon><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentcolor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03.0 1.42.39.39 1.02.39 1.41.0l6.59-6.59c.39-.39.39-1.02.0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41.0s-.39 1.02.0 1.41L16.17 11H5c-.55.0-1 .45-1 1s.45 1 1 1z"/></svg>
+</div>
+</a>
 </nav>
 <head>
 <script src=//cdn.jsdelivr.net/npm/@waline/client></script>
@@ -437,7 +446,7 @@ See Also
 <div class=toc data-dir=ltr data-folding=true data-ani=true>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#先说废话>先说废话</a></li>
+<li><a href=#前言>前言</a></li>
 <li><a href=#搭建过程>搭建过程</a></li>
 <li><a href=#nginx反向代理>Nginx反向代理</a></li>
 <li><a href=#使用>使用</a></li>

@@ -280,7 +280,7 @@ sidekiq:
   image: tootsuite/mastodon:latest 
 #格式为image: Dockerhub用户名/镜像名：tag名。tag名可以是某个具体的版本号也可以是latest。如果不是使用官方镜像的话当然也可能是其他，后面会讲到。
 </code></pre><p>假设你使用的是官方镜像旧版本（官方的dockerhub用户名为tootsuite），升级只需要把<code>web</code>,<code>streaming</code>,<code>sidekiq</code>三个镜像的<code>tag名</code>改为<a href="https://hub.docker.com/r/tootsuite/mastodon/tags?page=1&ordering=last_updated">这一页</a>tag中发布的最新版本/latest即可。</p>
-<p>如果你使用的不是tootsuite发布的镜像，而是别的用户发布的，或是你想照抄别人的配置，你可以选择像上面的操作一样拉官方镜像的最新版本(一般情况下站点没有被大量魔改过都可以)，也可以去<a href=https://hub.docker.com>Dockerhub官网</a>搜索你使用的<code>dockerhub用户名/镜像名</code>查看最新发布的tag，然后把docker-compose.yml中上述所说三项服务的<code>image</code>的tag名改为那个最新发布的tag名，然后保存。</p>
+<p>如果你使用的不是tootsuite发布的镜像，而是别的用户发布的，或是你想照抄别人的配置，你可以选择像上面的操作一样拉官方镜像的最新版本(一般情况下站点没有被大量魔改过都可以)，也可以去<a href=https://hub.docker.com>Dockerhub官网</a>搜索你使用的<code>dockerhub用户名/镜像名</code>查看最新发布的tag，然后把docker-compose.yml中上述所说三项服务的<code>image</code>的tag名改为那个最新发布的tag名，保存。</p>
 <p>凡更改过docker-compose.yml文件，操作后需要重启docker-compose才能重新加载配置文件并拉取镜像。</p>
 <pre tabindex=0><code>cd /opt/mastodon   #务必确保在目标文件夹下进行重启操作，否则会影响系统内其他使用docker-compose部署的服务（如果有）
 docker-compose up -d   #重启目标文件夹下使用docker-compose部署的服务
