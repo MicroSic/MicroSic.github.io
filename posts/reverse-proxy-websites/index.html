@@ -190,37 +190,38 @@ apt install nginx -y    #安装nginx
 <pre tabindex=0><code>ufw allow 443
 sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 </code></pre><h2 id=nginx配置>Nginx配置</h2>
-<p>参考<a href=https://paste.ubuntu.com/p/QcQ6DTnbMc/>这个Paste</a>，运行<code>nano /etc/nginx/conf.d/ao3.conf</code>，内容如下：</p>
+<p>参考<a href=https://luotianyi.vc/3792.html>【杂谈】如何优雅地搭建AO3的反代</a>，以反向代理ao3为例，运行<code>nano /etc/nginx/conf.d/ao3.conf</code>，内容如下：</p>
 <pre tabindex=0><code>server {
     listen 443 ssl http2;
     server_name YOUR.DOMAIN;      
  
+#proxy.conf
 location /
 {
-    proxy_pass https://ORIGIN.DOMAIN;
-    proxy_set_header Host ORIGIN.DOMAIN;
+    proxy_pass https://archiveofourown.org;
+    proxy_set_header Host archiveofourown.org;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header REMOTE-HOST $remote_addr;
-     
+    
     #避免GZIP影响文字替换
     gzip off;
     proxy_set_header Accept-Encoding &quot;&quot;;
     #无用资源替换为空值
-    sub_filter &quot; &quot;  &quot; &quot;;
-    sub_filter &quot; &quot; &quot; &quot;;
+    sub_filter &quot;twitter.com&quot;  &quot; &quot;;
+    sub_filter &quot;newrelic.com&quot; &quot; &quot;;
     #将网页原域名替换为反代域名
-    sub_filter &quot;ORIGIN.DOMAIN&quot; &quot;YOUR.DOMAIN&quot;;
+    sub_filter &quot;archiveofourown.org&quot; &quot;YOUR.DOMAIN&quot;;
     #将Jquery等引用的静态资源替换到国内CDN
-    sub_filter &quot;lib.baomitu.com/jquery/1.9.0/jquery.min.js&quot;        &quot;lib.baomitu.com/jquery/1.9.0/jquery.min.js&quot;;
-    sub_filter &quot;lib.baomitu.com/jqueryui/1.10.0/jquery-ui.min.js&quot;  &quot;lib.baomitu.com/jqueryui/1.10.0/jquery-ui.min.js&quot;;
+    sub_filter &quot;ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js&quot;        &quot;lib.baomitu.com/jquery/1.9.0/jquery.min.js&quot;;
+    sub_filter &quot;ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js&quot;  &quot;lib.baomitu.com/jqueryui/1.10.0/jquery-ui.min.js&quot;;
     #允许多文本替换 
     sub_filter_once off;
 }
     #ssl setting here
 
 }
-</code></pre><p>将<code>ORIGIN.DOMAIN</code>改为你想要反向代理的网址，<code>YOUR.DOMAIN</code>改为你的域名，保存。</p>
+</code></pre><p>将<code>archiveofourown.org</code>改为你想要反向代理的网址，<code>YOUR.DOMAIN</code>改为你的域名，保存。</p>
 <p>测试配置文件是否有错误（试运行）：</p>
 <pre tabindex=0><code>nginx -t
 </code></pre><p>若没有错误，生效新的配置文件并运行 Nginx，开机启动：</p>
