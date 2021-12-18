@@ -182,7 +182,7 @@ kimbie
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
 <div class=box>注意：<br>
-本教程省略了一些与Docker&Docker compose相关的知识。如果没有安装，请参考<a href=https://blog.tantalum.life/posts/running-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose>这里</a>安装。</div>
+本教程省略了一些与Docker&Docker compose相关的知识。如果没有安装，请参考<a href=https://blog.tantalum.life/posts/build-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose>这里</a>安装。</div>
 <p>水一篇文章。皮塔丘之前问我在用什么RSS阅读器。其实在电脑端我一直在偷懒用<a href=https://hereiszyn.com/objects/700d583e-305d-496e-9ca9-fb85e2cf3db3>zyn</a>写的无后端静态网页播客播放器<a href=https://fm.hereiszyn.com/>闭客</a>。后来和皮塔丘一起看RSS阅读器的搭建教程，食指大动就顺便搭了。</p>
 <div class="notices success" data-title=参考教程>
 <a href=https://miniflux.app/docs/installation.html#docker>Miniflux官方文档</a>
@@ -216,7 +216,7 @@ services:
     volumes:
       - ./miniflux-db:/var/lib/postgresql/data
 </code></pre><p>然后运行<code>docker-compose up -d</code>，此时用浏览器访问<code>https://服务器ip:端口号</code>就可以使用管理员帐号密码登录了。</p>
-<p>##Nginx反向代理</p>
+<h2 id=nginx反向代理>Nginx反向代理</h2>
 <p>如果你没有域名，可以跳过这步。</p>
 <pre tabindex=0><code>sudo -i   #切换至root用户
 apt install nginx -y    #安装nginx
@@ -396,6 +396,7 @@ See Also
 <nav id=TableOfContents>
 <ul>
 <li><a href=#搭建过程>搭建过程</a></li>
+<li><a href=#nginx反向代理>Nginx反向代理</a></li>
 <li><a href=#一些碎碎念>一些碎碎念</a></li>
 </ul>
 </nav>
