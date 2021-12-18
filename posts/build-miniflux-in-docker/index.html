@@ -245,12 +245,23 @@ systemctl enable nginx
 <p>最开始想搭建的RSS阅读器其实是TTRSS，但由于试用后发现反应很慢+维护不频繁等原因换成了Miniflux。关于Miniflux和其他RSS阅读器的优缺点请看<a href=http://zoomyale.com/2018/miniflux_rss/>这里</a>。</p>
 <p>搭配RSSHub食用真的很香！小众软件正好分享了显示当前网页RSS订阅地址的<a href=https://www.appinn.com/rss-plus-and-rsshelper/>油猴脚本</a>。</p>
 <p>另外，Miniflux竟然也可以自定义CSS，于是开心地把鼠标选中底色CSS样式加了上去：</p>
-<pre tabindex=0><code>/*鼠标选中底色*/
-*::selection {
-    color: #fff;   /*白色*/
-    background-color: #b85798;   /*陈玫红*/
-}
-</code></pre><p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=c>/*鼠标选中底色*/</span>
+<span class=o>*</span><span class=p>::</span><span class=nd>selection</span> <span class=p>{</span>
+    <span class=k>color</span><span class=p>:</span> <span class=mh>#fff</span><span class=p>;</span>   <span class=c>/*白色*/</span>
+    <span class=k>background-color</span><span class=p>:</span> <span class=mh>#b85798</span><span class=p>;</span>   <span class=c>/*陈玫红*/</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>
 <img src=/emoji/blobsignok.png align=left title=blobsignok alt=blobsignok width=30 height=30>
 万物皆可 RSS！</p>
 </article>
