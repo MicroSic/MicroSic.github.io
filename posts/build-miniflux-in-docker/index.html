@@ -3,7 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>Miniflux | 利用Docker-compose搭建Miniflux – Zoe's Dumpster.</title>
+<title>Miniflux | 利用Docker-compose搭建RSS阅读器 – Zoe's Dumpster.</title>
 <script defer src=/js/fuse.min.32195737929df2c8096e855a5789cbb3f1331224d9169e8705493e7008f47df8.js></script>
 <script src=/js/enquire.min.dfb99dee1e029d51d6cfb672d847929890b1585402de17f5ed092edd72a688b4.js></script>
 <script defer src=/js/lazysizes.min.fb649fcae62177dfe63e67081ddceb830b5ce1f05a4184e9bbb7d87ac4b8f4e5.js></script>
@@ -19,7 +19,7 @@
 <meta property="article:published_time" content="2021-12-18T19:22:22+0800">
 <meta name=author content="Roelxy">
 <meta property="og:site_name" content="Zoe's Dumpster.">
-<meta property="og:title" content="Miniflux | 利用Docker-compose搭建Miniflux">
+<meta property="og:title" content="Miniflux | 利用Docker-compose搭建RSS阅读器">
 <meta property="og:url" content="http://blog.tantalum.life/posts/build-miniflux-in-docker/">
 <meta property="og:type" content="article">
 <meta property="og:description" content="Roelxy's Blog">
@@ -27,7 +27,7 @@
 <meta property="og:image:url" content="http://blog.tantalum.life/images/meta/mymetaimage.jpg">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:app:name:iphone content="Zoe's Dumpster.">
-<meta property="twitter:title" content="Miniflux | 利用Docker-compose搭建Miniflux">
+<meta property="twitter:title" content="Miniflux | 利用Docker-compose搭建RSS阅读器">
 <meta property="twitter:description" content="Roelxy's Blog">
 <meta name=generator content="Hugo 0.89.1">
 <meta name=msapplication-TileColor content="#fff">
@@ -38,7 +38,7 @@
 <link rel=manifest href=/manifest.json>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Miniflux | 利用Docker-compose搭建Miniflux","datePublished":"2021-12-18T19:22:22+08:00","dateModified":"2021-12-18T19:22:22+08:00","url":"http://blog.tantalum.life/posts/build-miniflux-in-docker/","description":"注意： 本教程省略了一些与Docker\u0026amp;Docker compose相关的知识。如果没有安装，请参考这里安装。 水一篇文章。皮塔丘之前问我","keywords":["Miniflux","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Miniflux | 利用Docker-compose搭建RSS阅读器","datePublished":"2021-12-18T19:22:22+08:00","dateModified":"2021-12-18T19:22:22+08:00","url":"http://blog.tantalum.life/posts/build-miniflux-in-docker/","description":"注意： 本教程省略了一些与Docker\u0026amp;Docker compose相关的知识。如果没有安装，请参考这里安装。 水一篇文章。皮塔丘之前问我","keywords":["Miniflux","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -158,14 +158,14 @@ kimbie
 <a href=http://blog.tantalum.life/posts/ class=capitalize>Posts</a>
 </li>
 <li class=is-active>
-<span>Miniflux | 利用Docker-compose搭建Miniflux</span>
+<span>Miniflux | 利用Docker-compose搭建RSS阅读器</span>
 </li>
 </ol>
 </nav>
 <div class=single>
 <div class=single__nojs>This page looks best with JavaScript enabled</div>
 <script>document.querySelector('.single').classList.remove('hide'),document.querySelector('.single__nojs').classList.add('hide')</script>
-<h2 class=single__title data-ani=true>Miniflux | 利用Docker-compose搭建Miniflux</h2>
+<h2 class=single__title data-ani=true>Miniflux | 利用Docker-compose搭建RSS阅读器</h2>
 <h3 class=single__subtitle>简洁稳定的自建RSS阅读器</h3>
 <div class=single__meta>
 <div class=single__infos>
@@ -189,8 +189,8 @@ kimbie
 </div>
 <h2 id=搭建过程>搭建过程</h2>
 <p>在任意目录下新建<code>docker-compose.yml</code>文件：</p>
-<pre tabindex=0><code>cd /etc&amp;&amp;nano docker-compose.yml
-</code></pre><p>将以下内容填入，保存：</p>
+<pre tabindex=0><code>mkdir -p /opt/miniflux &amp;&amp; cd /opt/miniflux &amp;&amp; nano docker-compose.yml
+</code></pre><p>写入以下内容，保存：</p>
 <pre tabindex=0><code>version: '3'
 services:
   miniflux:
@@ -218,6 +218,7 @@ services:
 </code></pre><p>然后运行<code>docker-compose up -d</code>，此时用浏览器访问<code>https://服务器ip:端口号</code>就可以使用管理员帐号密码登录了。</p>
 <h2 id=nginx反向代理>Nginx反向代理</h2>
 <p>如果你没有域名，可以跳过这步。</p>
+<p>首先去DNS服务商添加一条指向服务器ip，内容为域名的A记录，然后回到服务器运行以下命令：</p>
 <pre tabindex=0><code>sudo -i   #切换至root用户
 apt install nginx -y    #安装nginx
 </code></pre><p>运行<code>nano /etc/nginx/conf.d/miniflux.conf</code>，内容如下：</p>
@@ -240,7 +241,7 @@ apt install nginx -y    #安装nginx
 <pre tabindex=0><code>nginx -s reload
 systemctl start nginx
 systemctl enable nginx
-</code></pre><p>随后去DNS服务商添加一条指向服务器ip，内容为域名的A记录，并运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
+</code></pre><p>运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
 <h2 id=一些碎碎念>一些碎碎念</h2>
 <p>最开始想搭建的RSS阅读器其实是TTRSS，但由于试用后发现反应很慢+维护不频繁等原因换成了Miniflux。关于Miniflux和其他RSS阅读器的优缺点请看<a href=http://zoomyale.com/2018/miniflux_rss/>这里</a>。</p>
 <p>搭配RSSHub食用真的很香！小众软件正好分享了显示当前网页RSS订阅地址的<a href=https://www.appinn.com/rss-plus-and-rsshelper/>油猴脚本</a>。</p>
@@ -317,10 +318,10 @@ See Also
 </h1>
 <ul class=related-ul>
 <li>
-<a href=/posts/build-rsshub-in-docker/ class=related__link>RSSHub | 利用Docker-compose搭建RSSHub</a>
+<a href=/posts/build-rsshub-in-docker/ class=related__link>RSSHub | 利用Docker-compose搭建RSS生成器</a>
 </li>
 <li>
-<a href=/posts/build-plume-in-docker/ class=related__link>Plume | 利用Docker-compose搭建Plume</a>
+<a href=/posts/build-plume-in-docker/ class=related__link>Plume | 利用Docker-compose搭建Fefi博客平台</a>
 </li>
 <li>
 <a href=/posts/how-to-run-your-mastodon-by-docker/ class=related__link>Mastodon | 采用docker建站后的使用与维护</a>
@@ -335,6 +336,11 @@ See Also
 <div class=pagination-single__left-title>Switch | 杂谈记忆里的红蓝游戏机</div>
 </a>
 <div class=grow></div>
+<a href=http://blog.tantalum.life/posts/build-piped-in-docker/ class=pagination-single__right>
+<div class=pagination-single__right-title>Piped | 利用Docker-compose搭建YouTube开源替代前端</div>
+<div class=pagination-single__icon><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentcolor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03.0 1.42.39.39 1.02.39 1.41.0l6.59-6.59c.39-.39.39-1.02.0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41.0s-.39 1.02.0 1.41L16.17 11H5c-.55.0-1 .45-1 1s.45 1 1 1z"/></svg>
+</div>
+</a>
 </nav>
 <head>
 <script src=//cdn.jsdelivr.net/npm/@waline/client></script>
