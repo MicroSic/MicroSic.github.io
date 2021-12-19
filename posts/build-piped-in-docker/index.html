@@ -312,7 +312,7 @@ systemctl start nginx
 systemctl enable nginx
 </code></pre><p>运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
 <h2 id=使用>使用</h2>
-<p>Piped支持以HTML语法嵌入视频，以PizaCG的<a href="https://piped.kavin.rocks/watch?v=P_CSdxSGfaA">Unknown Mother-Goose</a>这支影片为例<code>src</code>项为<code>https://piped.yourdomain.com/embed/r9V5gy-s2J0</code>即可嵌入视频。例如<a href=https://piped.kavin.rocks/embed/r9V5gy-s2J0>https://piped.kavin.rocks/embed/r9V5gy-s2J0</a>。</p>
+<p>Piped支持以HTML语法嵌入视频，以PizaCG的<a href="https://piped.kavin.rocks/watch?v=P_CSdxSGfaA">Unknown Mother-Goose</a>这支影片为例，将<code>src</code>项设为<code>https://piped.yourdomain.com/embed/r9V5gy-s2J0</code>即可嵌入视频。例如<a href=https://piped.kavin.rocks/embed/r9V5gy-s2J0>https://piped.kavin.rocks/embed/r9V5gy-s2J0</a>。</p>
 <p>在Hugo博客中，可以使用短代码嵌入视频。在<code>/root/layouts/shortcode/</code>下新建<code>piped.html</code>，写入内容：</p>
 <pre tabindex=0><code>&lt;div&gt;&lt;iframe id=&quot;piped-player&quot; src=&quot;https://piped.kavin.rocks/embed/{{ index .Params 0 }}&quot; scrolling=&quot;no&quot; frameborder=&quot;no&quot; allowfullscreen=&quot;true&quot; autoplay=&quot;0&quot;&gt; &lt;/iframe&gt;&lt;/div&gt;
 &lt;style&gt;
@@ -329,7 +329,7 @@ systemctl enable nginx
         }
     }
 &lt;/style&gt;
-</code></pre><p>用法：找到你喜欢的视频，复制链接中<code>embed/</code>后的内容，例如<code>P_CSdxSGfaA</code>，然后在markdown中输入：</p>
+</code></pre><p>用法：找到你喜欢的视频，复制链接中<code>embed/</code>后的内容，例如<code>r9V5gy-s2J0</code>，然后在markdown中输入：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
