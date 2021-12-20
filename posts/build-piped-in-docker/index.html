@@ -220,7 +220,7 @@ pipedproxy.yourdomain.com   #代理域名
         depends_on:
             - piped
         container_name: piped-frontend
-        entrypoint: ash -c 'sed -i s/pipedapi.kavin.rocks/pipedapi.tantalum.life/g /usr/share/nginx/html/js/* &amp;&amp; /docker-entrypoint.sh &amp;&amp; nginx -g &quot;daemon off;&quot;'
+        entrypoint: ash -c 'sed -i s/pipedapi.kavin.rocks/pipedapi.yourdomain.com/g /usr/share/nginx/html/js/* &amp;&amp; /docker-entrypoint.sh &amp;&amp; nginx -g &quot;daemon off;&quot;'
     ytproxy:
         image: 1337kavin/ytproxy:latest
         restart: unless-stopped
@@ -294,7 +294,7 @@ volumes:
 <p>首先去DNS服务商添加一条指向服务器ip，内容为域名的A记录，然后回到服务器运行以下命令：</p>
 <pre tabindex=0><code>sudo -i   #切换至root用户
 apt install nginx -y    #安装nginx
-</code></pre><p>由于服务器中已经有nginx容器，那么只需要将虚拟机内的端口映射到主机端口。运行<code>nano /etc/nginx/conf.d/miniflux.conf</code>，内容如下：</p>
+</code></pre><p>由于服务器中已经有nginx容器，那么只需要将虚拟机内的端口映射到主机端口。运行<code>nano /etc/nginx/conf.d/piped.conf</code>，内容如下：</p>
 <pre tabindex=0><code>server {
     listen 80;
     server_name piped.yourdomain.com pipedapi.yourdomain.com pipedproxy.yourdomain.com;  #填写自己设置的三个域名，以空格分开
@@ -312,7 +312,7 @@ systemctl start nginx
 systemctl enable nginx
 </code></pre><p>运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
 <h2 id=使用>使用</h2>
-<p>Piped支持以HTML语法嵌入视频，以PizaCG的<a href="https://piped.kavin.rocks/watch?v=P_CSdxSGfaA">Unknown Mother-Goose</a>这支影片为例，将<code>src</code>项设为<code>https://piped.yourdomain.com/embed/r9V5gy-s2J0</code>即可嵌入视频。例如<a href=https://piped.kavin.rocks/embed/r9V5gy-s2J0>https://piped.kavin.rocks/embed/r9V5gy-s2J0</a>。</p>
+<p>Piped支持以HTML语法嵌入视频，以PizaCG的<a href="https://piped.kavin.rocks/watch?v=r9V5gy-s2J0">Unknown Mother-Goose</a>这支影片为例，将<code>src</code>项设为<code>https://piped.yourdomain.com/embed/r9V5gy-s2J0</code>即可嵌入视频。例如<a href=https://piped.kavin.rocks/embed/r9V5gy-s2J0>https://piped.kavin.rocks/embed/r9V5gy-s2J0</a>。</p>
 <p>在Hugo博客中，可以使用短代码嵌入视频。在<code>/root/layouts/shortcode/</code>下新建<code>piped.html</code>，写入内容：</p>
 <pre tabindex=0><code>&lt;div&gt;&lt;iframe id=&quot;piped-player&quot; src=&quot;https://piped.kavin.rocks/embed/{{ index .Params 0 }}&quot; scrolling=&quot;no&quot; frameborder=&quot;no&quot; allowfullscreen=&quot;true&quot; autoplay=&quot;0&quot;&gt; &lt;/iframe&gt;&lt;/div&gt;
 &lt;style&gt;
