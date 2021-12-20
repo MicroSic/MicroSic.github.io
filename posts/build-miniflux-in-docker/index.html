@@ -38,7 +38,7 @@
 <link rel=manifest href=/manifest.json>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Miniflux | 利用Docker-compose搭建RSS阅读器","datePublished":"2021-12-18T19:22:22+08:00","dateModified":"2021-12-18T19:22:22+08:00","url":"http://blog.tantalum.life/posts/build-miniflux-in-docker/","description":"注意： 本教程省略了一些与Docker\u0026amp;Docker compose相关的知识。如果没有安装，请参考这里安装。 水一篇文章。皮塔丘之前问我","keywords":["Miniflux","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Miniflux | 利用Docker-compose搭建RSS阅读器","datePublished":"2021-12-18T19:22:22+08:00","dateModified":"2021-12-18T19:22:22+08:00","url":"http://blog.tantalum.life/posts/build-miniflux-in-docker/","description":"水一篇文章。皮塔丘之前问我在用什么RSS阅读器。其实在电脑端我一直在偷懒用zyn写的无后端静态网页播客播放器闭客。后来和皮塔丘一起看RSS阅","keywords":["Miniflux","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -181,13 +181,13 @@ kimbie
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
+<p>水一篇文章。皮塔丘之前问我在用什么RSS阅读器。其实在电脑端我一直在偷懒用<a href=https://hereiszyn.com/objects/700d583e-305d-496e-9ca9-fb85e2cf3db3>zyn</a>写的无后端静态网页播客播放器<a href=https://fm.hereiszyn.com/>闭客</a>。后来和皮塔丘一起看RSS阅读器的搭建教程，食指大动就顺便搭了。</p>
 <div class=box>注意：<br>
 本教程省略了一些与Docker&Docker compose相关的知识。如果没有安装，请参考<a href=https://blog.tantalum.life/posts/build-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose>这里</a>安装。</div>
-<p>水一篇文章。皮塔丘之前问我在用什么RSS阅读器。其实在电脑端我一直在偷懒用<a href=https://hereiszyn.com/objects/700d583e-305d-496e-9ca9-fb85e2cf3db3>zyn</a>写的无后端静态网页播客播放器<a href=https://fm.hereiszyn.com/>闭客</a>。后来和皮塔丘一起看RSS阅读器的搭建教程，食指大动就顺便搭了。</p>
+<h2 id=搭建过程>搭建过程</h2>
 <div class="notices success" data-title=参考教程>
 <a href=https://miniflux.app/docs/installation.html#docker>Miniflux官方文档</a>
 </div>
-<h2 id=搭建过程>搭建过程</h2>
 <p>在任意目录下新建<code>docker-compose.yml</code>文件：</p>
 <pre tabindex=0><code>mkdir -p /opt/miniflux &amp;&amp; cd /opt/miniflux &amp;&amp; nano docker-compose.yml
 </code></pre><p>写入以下内容，保存：</p>
