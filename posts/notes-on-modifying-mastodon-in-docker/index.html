@@ -3,7 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>Mastodon | 记录美化Mastodon过程 – Zoe's Dumpster.</title>
+<title>Mastodon | 记录大型魔改过程 – Zoe's Dumpster.</title>
 <script defer src=/js/fuse.min.32195737929df2c8096e855a5789cbb3f1331224d9169e8705493e7008f47df8.js></script>
 <script src=/js/enquire.min.dfb99dee1e029d51d6cfb672d847929890b1585402de17f5ed092edd72a688b4.js></script>
 <script defer src=/js/lazysizes.min.fb649fcae62177dfe63e67081ddceb830b5ce1f05a4184e9bbb7d87ac4b8f4e5.js></script>
@@ -19,7 +19,7 @@
 <meta property="article:published_time" content="2021-12-21T09:08:13+0800">
 <meta name=author content="Roelxy">
 <meta property="og:site_name" content="Zoe's Dumpster.">
-<meta property="og:title" content="Mastodon | 记录美化Mastodon过程">
+<meta property="og:title" content="Mastodon | 记录大型魔改过程">
 <meta property="og:url" content="http://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/">
 <meta property="og:type" content="article">
 <meta property="og:description" content="Roelxy's Blog">
@@ -27,7 +27,7 @@
 <meta property="og:image:url" content="http://blog.tantalum.life/images/meta/mymetaimage.jpg">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:app:name:iphone content="Zoe's Dumpster.">
-<meta property="twitter:title" content="Mastodon | 记录美化Mastodon过程">
+<meta property="twitter:title" content="Mastodon | 记录大型魔改过程">
 <meta property="twitter:description" content="Roelxy's Blog">
 <meta name=generator content="Hugo 0.89.1">
 <meta name=msapplication-TileColor content="#fff">
@@ -38,7 +38,7 @@
 <link rel=manifest href=/manifest.json>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Mastodon | 记录美化Mastodon过程","datePublished":"2021-12-21T09:08:13+08:00","dateModified":"2021-12-21T09:08:13+08:00","url":"http://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/","description":"一直很想让长毛象支持 Markdown语法，但我本人却因为菜得看不懂真代码而多次碰壁。这次使用了小森林站长的docker镜像，主题和特色请看这","keywords":["Mastodon","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Mastodon | 记录大型魔改过程","datePublished":"2021-12-21T09:08:13+08:00","dateModified":"2021-12-21T09:08:13+08:00","url":"http://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/","description":"一直很想让长毛象支持 Markdown语法，但我本人却因为菜得看不懂真代码而多次碰壁。这次使用了小森林站长的docker镜像，主题和特色请看这","keywords":["Mastodon","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -158,14 +158,14 @@ kimbie
 <a href=http://blog.tantalum.life/posts/ class=capitalize>Posts</a>
 </li>
 <li class=is-active>
-<span>Mastodon | 记录美化Mastodon过程</span>
+<span>Mastodon | 记录大型魔改过程</span>
 </li>
 </ol>
 </nav>
 <div class=single>
 <div class=single__nojs>This page looks best with JavaScript enabled</div>
 <script>document.querySelector('.single').classList.remove('hide'),document.querySelector('.single__nojs').classList.add('hide')</script>
-<h2 class=single__title data-ani=true>Mastodon | 记录美化Mastodon过程</h2>
+<h2 class=single__title data-ani=true>Mastodon | 记录大型魔改过程</h2>
 <h3 class=single__subtitle></h3>
 <div class=single__meta>
 <div class=single__infos>
@@ -182,8 +182,8 @@ kimbie
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
 <div class=box><p>一直很想让长毛象支持 <i class="fab fa-markdown"></i> Markdown语法，但我本人却因为菜得看不懂真代码而多次碰壁。这次使用了小森林站长的docker镜像，主题和特色请看<a href=https://hello.2heng.xin/about/more#sec>这里</a>。</p>
-<p>注：小森林站源代码按照<code>AGPL3</code>协议开源，但由于 Markdown/翻译等功能需要占用<a href=https://hello.2heng.xin/@mashiro>小森林站长 mashirozx</a>的服务器资源，因此在使用docker镜像时请寻求授权，同意后方可参考本文实践。<br>
-本文的劳动成果皆属于<a href=https://hello.2heng.xin/@mashiro>mashirozx</a>，本文仅作备忘使用，鞠躬。</p>
+<p>注：小森林站源代码按照<code>AGPL3</code>协议开源，但由于 Markdown&翻译等功能需要占用<a href=https://hello.2heng.xin/@mashiro>小森林站长 mashirozx</a>的服务器资源，因此在使用docker镜像时请寻求授权，同意后方可参考本文实践。</p>
+<p>本文的劳动成果部分属于<a href=https://hello.2heng.xin/@mashiro>mashirozx</a>，本文仅作备忘使用，鞠躬。</p>
 </div>
 <h2 id=备份配置文件>备份配置文件</h2>
 <pre tabindex=0><code>cp docker-compose.yml docker-compose.save &amp;&amp; vim docker-compose.save
@@ -378,13 +378,13 @@ ES_PORT=9200
 <pre tabindex=0><code>docker-compose run --rm web bin/tootctl cache clear
 </code></pre><p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/cache_clear.png alt></p>
 <h2 id=学到的docker命令>学到的docker命令</h2>
-<p>删除无用镜像（需要收到输入y）</p>
+<p>删除无用镜像（需要输入y）：</p>
 <pre tabindex=0><code>docker image prune -a
-</code></pre><p>强制删除镜像</p>
+</code></pre><p>强制删除镜像：</p>
 <pre tabindex=0><code>docker image prune -a -f 
-</code></pre><p>删除异常停止的docker容器</p>
+</code></pre><p>删除异常停止的docker容器：</p>
 <pre tabindex=0><code>docker rm `docker ps -a | grep Exited | awk '{print $1}'`
-</code></pre><p>删除名称或标签为none的镜像</p>
+</code></pre><p>删除名称或标签为none的镜像：</p>
 <pre tabindex=0><code>docker rmi -f  `docker images | grep '&lt;none&gt;' | awk '{print $3}'` 
 </code></pre><p>显示容器使用的系统资源（一秒刷新一次，<kbd>Ctrl</kbd>+<kbd>C</kbd>退出）：</p>
 <pre tabindex=0><code>docker stats
