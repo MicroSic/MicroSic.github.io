@@ -794,7 +794,19 @@ ES_PORT=9200
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><script src=https://kit.fontawesome.com/57c1376f6d.js crossorigin=anonymous></script>
+</div><h2 id=ssl证书续签>SSL证书续签</h2>
+<p>参考：<a href=https://www.howtoforge.com/how-to-install-mastodon-social-network-with-docker-on-ubuntu-1804/#step-install-mastodon>How to install Mastodon Social Network with Docker on Ubuntu 18.04 LTS</a></p>
+<p>Let&rsquo;s Encrypt 证书的有效期为90天。 之后需要再次更新。可以创建一个<code>cron</code>作业来自动为您完成。</p>
+<p>创建一个<code>cron</code>作业：</p>
+<pre tabindex=0><code>nano /etc/cron.daily/letsencrypt-renew
+</code></pre><p>将以下内容复制并粘贴到文件中。</p>
+<pre tabindex=0><code>#!/usr/bin/env bash
+certbot renew
+systemctl reload nginx
+</code></pre><p>使脚本可执行并重新启动<code>cron</code>守护程序，以便脚本每天运行：</p>
+<pre tabindex=0><code>chmod +x /etc/cron.daily/letsencrypt-renew
+systemctl restart cron
+</code></pre><script src=https://kit.fontawesome.com/57c1376f6d.js crossorigin=anonymous></script>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -953,6 +965,7 @@ See Also
 <li><a href=#后续工作>后续工作</a></li>
 <li><a href=#学到的docker命令>学到的docker命令</a></li>
 <li><a href=#自定义css样式>自定义CSS样式</a></li>
+<li><a href=#ssl证书续签>SSL证书续签</a></li>
 </ul>
 </nav>
 </div>
