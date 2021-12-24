@@ -3,7 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>Misskey | 利用Docker-compose搭建Fedi开源SNS平台 – Zoe's Dumpster.</title>
+<title>Misskey | 利用Docker-compose搭建Fedi开源社交平台 – Zoe's Dumpster.</title>
 <script defer src=/js/fuse.min.32195737929df2c8096e855a5789cbb3f1331224d9169e8705493e7008f47df8.js></script>
 <script src=/js/enquire.min.dfb99dee1e029d51d6cfb672d847929890b1585402de17f5ed092edd72a688b4.js></script>
 <script defer src=/js/lazysizes.min.fb649fcae62177dfe63e67081ddceb830b5ce1f05a4184e9bbb7d87ac4b8f4e5.js></script>
@@ -19,7 +19,7 @@
 <meta property="article:published_time" content="2021-12-24T17:41:39+0800">
 <meta name=author content="Roelxy">
 <meta property="og:site_name" content="Zoe's Dumpster.">
-<meta property="og:title" content="Misskey | 利用Docker-compose搭建Fedi开源SNS平台">
+<meta property="og:title" content="Misskey | 利用Docker-compose搭建Fedi开源社交平台">
 <meta property="og:url" content="http://blog.tantalum.life/posts/build-misskey-in-docker/">
 <meta property="og:type" content="article">
 <meta property="og:description" content="Roelxy's Blog">
@@ -27,7 +27,7 @@
 <meta property="og:image:url" content="http://blog.tantalum.life/images/meta/mymetaimage.jpg">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:app:name:iphone content="Zoe's Dumpster.">
-<meta property="twitter:title" content="Misskey | 利用Docker-compose搭建Fedi开源SNS平台">
+<meta property="twitter:title" content="Misskey | 利用Docker-compose搭建Fedi开源社交平台">
 <meta property="twitter:description" content="Roelxy's Blog">
 <meta name=generator content="Hugo 0.89.1">
 <meta name=msapplication-TileColor content="#fff">
@@ -38,7 +38,7 @@
 <link rel=manifest href=/manifest.json>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Misskey | 利用Docker-compose搭建Fedi开源SNS平台","datePublished":"2021-12-24T17:41:39+08:00","dateModified":"2021-12-24T17:41:39+08:00","url":"http://blog.tantalum.life/posts/build-misskey-in-docker/","description":"Error: Cannot find module '/misskey/built/tools/mark-admin' at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15) at Function.Module._load …","keywords":["Misskey","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Misskey | 利用Docker-compose搭建Fedi开源社交平台","datePublished":"2021-12-24T17:41:39+08:00","dateModified":"2021-12-24T17:41:39+08:00","url":"http://blog.tantalum.life/posts/build-misskey-in-docker/","description":"简要介绍 众所周知，简中互联网内开源Fedi社区相当小众，但即便如此，Mastodon的用户依旧是相当庞大的，而同为联邦宇宙软件一员的Miss","keywords":["Misskey","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -158,19 +158,19 @@ kimbie
 <a href=http://blog.tantalum.life/posts/ class=capitalize>Posts</a>
 </li>
 <li class=is-active>
-<span>Misskey | 利用Docker-compose搭建Fedi开源SNS平台</span>
+<span>Misskey | 利用Docker-compose搭建Fedi开源社交平台</span>
 </li>
 </ol>
 </nav>
 <div class=single>
 <div class=single__nojs>This page looks best with JavaScript enabled</div>
 <script>document.querySelector('.single').classList.remove('hide'),document.querySelector('.single__nojs').classList.add('hide')</script>
-<h2 class=single__title data-ani=true>Misskey | 利用Docker-compose搭建Fedi开源SNS平台</h2>
+<h2 class=single__title data-ani=true>Misskey | 利用Docker-compose搭建Fedi开源社交平台</h2>
 <h3 class=single__subtitle>功能复杂UI可爱的分布式SNS</h3>
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Dec 24, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;1&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;5&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -181,16 +181,173 @@ kimbie
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
-<pre tabindex=0><code>Error: Cannot find module '/misskey/built/tools/mark-admin'
-    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
-    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)
-    at node:internal/main/run_main_module:17:47 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
+<h2 id=简要介绍>简要介绍</h2>
+<p>众所周知，简中互联网内开源Fedi社区相当小众，但即便如此，Mastodon的用户依旧是相当庞大的，而同为联邦宇宙软件一员的<a href=https://misskey-hub.net/>Misskey</a>则是小众中的小众。</p>
+<p>实际上中文长毛象社区由于各种不可说原因经历了几次搬迁潮，再加上象友们的安利邀请，最终形成了现在的盛况。也有人觉得Mastodon（长毛象）UI界面比较好看，再加上几位知名站长的个性化魔改&稳定维护和Mastodon自带的搬家功能，即使长毛象目前仅支持纯文本发嘟，受众依旧相当多，很多人以为联邦宇宙指的就是Mastodon本身了。</p>
+<p>然而从站长角度来说，Mastodon可以称得上资源占用怪，相比Misskey来说Mastodon实在是heavy很多，这是因为Mastodon用的Ruby来写的，Misskey用的TypeScript(JS)来写的，运行上来说Misskey的速度和运存占用相对占优势。另外，Misskey是不需要邮件服务的，这意味着用户需要牢记自己的密码。</p>
+<p>Misskey是日本开发者<a href=https://github.com/syuilo>syuilo</a>基于Fediverse开发的一个去中心化社交平台，可以与Mastodon互通，且拥有一些Mastodon没有的复杂小玩意（毕竟源自霓虹嘛）。虽然官方文档写得真的很烂，而且是个人项目，但Misskey本身确实是个好东西，而且由于有公司资金支持，近期更新非常频繁。相比于Mastodon，Misskey更适合搭建个站。</p>
+<h2 id=搭建过程>搭建过程</h2>
+<p>2021年了<a href=https://misskey-hub.net/en/docs/install/docker.html>官方教程</a>居然在推荐自行build镜像。虽然说也不是不行但对小型服务器的压力太大了，而且Dockerhub中已经有官方推送的Misskey镜像，所以直接使用就好。</p>
+<div class=box>注意：<br>
+本教程省略了一些与Docker&Docker compose相关的知识。如果没有安装，请参考<a href=https://blog.tantalum.life/posts/build-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose>这里</a>安装。</div>
+<p>在任意目录下新建<code>docker-compose.yml</code>文件：</p>
+<pre tabindex=0><code>cd /opt &amp;&amp; mkdir misskey &amp;&amp; cd misskey
+nano docker-compose.yml
+</code></pre><p>文件内容如下：</p>
+<pre tabindex=0><code>version: &quot;3&quot;
+
+services:
+  web:
+    restart: always
+    image: misskey/misskey:latest
+    links:
+      - db
+      - redis
+    ports:
+      - &quot;127.0.0.1:3000:3000&quot;   #如果服务器端口3000已被使用，可改为其他端口，例如127.0.0.1:5210:3000
+    networks:
+      - internal_network
+      - external_network
+    volumes:
+      - ./.config:/misskey/.config
+      - ./files:/misskey/files  #用户上传到本地的文件，如果您一开始就接入外部存储（如wasabi或是AWS S3）您可以忽略这块配置
+
+
+  redis:
+    restart: always
+    image: redis:latest
+    networks:
+      - internal_network
+    volumes:
+      - ./redis:/data
+
+  db:
+    restart: always
+    image: postgres:12.2-alpine
+    networks:
+      - internal_network
+    env_file:
+      - .config/docker.env
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
+networks:
+  internal_network:
+    internal: true
+  external_network:
+</code></pre><p>新建配置文件夹<code>.config</code>：</p>
+<pre tabindex=0><code>mkdir .config
+cd .config
+</code></pre><p>运行<code>nano default.yml</code>新建<code>default.yml</code>，复制官方项目的<a href=https://github.com/misskey-dev/misskey/blob/develop/.config/example.yml>example.yml</a>内容，回到服务器中粘贴，部分改动如下：</p>
+<ul>
+<li>将<code>url</code>项改为你的域名。由于分布式属性，一旦开启站点则不可更改。</li>
+<li>文件中提到的<code>Option 1</code>和<code>Option 2</code>，我们选择<code>Option 1</code>，因此将<code>#port: 3000 # A port that your Misskey server should listen.</code>这一行取消注释，端口号不用更改。</li>
+<li>将<code>db</code>和<code>Redis</code>的<code>host</code>由<code>localhost</code>分别改为<code>db</code>和<code>redis</code>。</li>
+<li>将<code>db</code>项的<code>user</code>和<code>pass</code>改为你想设置的数据库用户和数据库密码。</li>
+</ul>
+<p>保存。</p>
+<p>运行<code>nano docker.env</code>新建<code>docker.env</code>，复制官方项目的<a href=https://github.com/misskey-dev/misskey/blob/develop/.config/docker_example.env>docker_example.env</a>内容，回到服务器中粘贴，将<code>POSTGRES_USER</code>和<code>POSTGRES_PASSWORD</code>改为刚刚自己设置的数据库用户和数据库密码。</p>
+<p>回到上级目录，初始化数据库：</p>
+<pre tabindex=0><code>cd ../
+docker-compose run --rm web yarn run init
+</code></pre><p>启动容器使站点上线：</p>
+<pre tabindex=0><code>docker-compose up -d
+</code></pre><h2 id=nginx反向代理>Nginx反向代理</h2>
+<p>首先去DNS服务商添加一条指向服务器ip，内容为域名的A记录，然后回到服务器运行以下命令：</p>
+<pre tabindex=0><code>sudo -i   #切换至root用户
+apt install nginx -y    #安装nginx
+</code></pre><p>运行<code>nano /etc/nginx/conf.d/misskey.conf</code>，内容如下：</p>
+<pre tabindex=0><code># Sample nginx configuration for Misskey
+#
+# 1. Replace example.tld to your domain
+# 2. Copy to /etc/nginx/sites-available/ and then symlink from /etc/nginx/sites-enabled/
+#    or copy to /etc/nginx/conf.d/
+
+# For WebSocket
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
 }
-ERROR: 1
-</code></pre>
+
+proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache1:16m max_size=1g inactive=720m use_temp_path=off;
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name 你的域名;
+
+    # For SSL domain validation
+    root /var/www/html;
+    location /.well-known/acme-challenge/ { allow all; }
+    location /.well-known/pki-validation/ { allow all; }
+    location / { return 301 https://$server_name$request_uri; }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name 你的域名;
+    ssl_session_cache shared:ssl_session_cache:10m;
+
+    # To use Let's Encrypt certificate
+    #ssl_certificate     /etc/letsencrypt/live/你的域名/fullchain.pem;
+    #ssl_certificate_key /etc/letsencrypt/live/你的域名/privkey.pem;
+
+    # To use Debian/Ubuntu's self-signed certificate (For testing or before issuing a certificate)
+    #ssl_certificate     /etc/ssl/certs/ssl-cert-snakeoil.pem;
+    #ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
+
+    # SSL protocol settings
+    ssl_protocols TLSv1.2;
+    ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:AES128-SHA;
+    ssl_prefer_server_ciphers on;
+
+    # Change to your upload limit
+    client_max_body_size 80m;
+
+    # Proxy to Node
+    location / {
+        proxy_pass http://127.0.0.1:3000;   #需要与docker-compose.yml中端口配置一致，例如http://127.0.0.1:5210
+        proxy_set_header Host $host;
+        proxy_http_version 1.1;
+        proxy_redirect off;
+
+        # If it's behind another reverse proxy or CDN, remove the following.
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+
+        # For WebSocket
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+
+        # Cache settings
+        proxy_cache cache1;
+        proxy_cache_lock on;
+        proxy_cache_use_stale updating;
+        add_header X-Cache $upstream_cache_status;
+    }
+}
+</code></pre><p>测试配置文件是否有错误（试运行）：</p>
+<pre tabindex=0><code>nginx -t
+</code></pre><p>若没有错误，生效新的配置文件并运行 Nginx，开机启动：</p>
+<pre tabindex=0><code>nginx -s reload
+systemctl start nginx
+systemctl enable nginx
+</code></pre><p>运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
+<h2 id=注册管理员帐号>注册管理员帐号</h2>
+<p>访问你的域名注册一个帐号，此帐号会被设置为管理员。</p>
+<p>可以将普通权限帐号升级为管理员。参考<a href=https://github.com/misskey-dev/misskey/issues/8087>这个issue</a>，在服务器中运行<code>docker-compose run --rm web node packages/backend/built/tools/mark-admin @用户名</code>即可，注意需要先注册才行。</p>
+<h2 id=开始食用>开始食用</h2>
+<ul>
+<li><a href=https://candinya.com/posts/minimal-misskey-docker-deploy/>本文部分参考：使用Docker最小化部署Misskey</a></li>
+<li><a href=https://shyamean4151.com/2021/05/01/misskey%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/>Misskey使用指南</a></li>
+<li><a href=https://shyamean4151.com/2021/05/04/misskey%e5%b8%96%e6%96%87%e5%8f%af%e8%a7%81%e8%8c%83%e5%9b%b4%e5%92%8c%e5%88%a0%e9%99%a4%e5%b8%96%e6%96%87%e8%af%b4%e6%98%8e/>Misskey帖文可见范围和删除帖文说明</a></li>
+</ul>
+<p>Misskey和Mastodon的中继是通用的，尽情探索你的站点吧！</p>
+<p>最后附上Misskey官方实例<a href=https://misskey.io/>Misskey.io</a>的介绍：</p>
+<p>Misskey.ioは、地球で生まれた分散マイクロブログSNSです。Fediverse（様々なSNSで構成される宇宙）の中に存在するため、他のSNSと相互に繋がっています。<br>
+暫し都会の喧騒から離れて、新しいインターネットにダイブしてみませんか。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -337,7 +494,15 @@ See Also
 </label>
 </div>
 <div class=toc data-dir=ltr data-folding=true data-ani=true>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#简要介绍>简要介绍</a></li>
+<li><a href=#搭建过程>搭建过程</a></li>
+<li><a href=#nginx反向代理>Nginx反向代理</a></li>
+<li><a href=#注册管理员帐号>注册管理员帐号</a></li>
+<li><a href=#开始食用>开始食用</a></li>
+</ul>
+</nav>
 </div>
 </section>
 </aside>
