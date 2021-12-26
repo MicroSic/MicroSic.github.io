@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Dec 24, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;5&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;8&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -339,6 +339,34 @@ systemctl enable nginx
 <h2 id=注册管理员帐号>注册管理员帐号</h2>
 <p>访问你的域名注册一个帐号，此帐号会被设置为管理员。</p>
 <p>可以将普通权限帐号升级为管理员。参考<a href=https://github.com/misskey-dev/misskey/issues/8087>这个issue</a>，在服务器中运行<code>docker-compose run --rm web node packages/backend/built/tools/mark-admin @用户名</code>即可，注意需要先注册才行。</p>
+<h2 id=媒体文件外部存储>媒体文件外部存储</h2>
+<p>参考salt站长<a href=https://www.notion.so/3f645c4a2ab14f34aef37703ee286d3a>部署媒体文件外部存储服务</a>。以<a href=https://console.scaleway.com/>Scaleway</a>为例进行配置，使用其他s3存储服务请查找官方文档及相似文章。</p>
+<p>注册帐号、新建Project&储存桶以及获取API key的具体步骤请看参考文章，没有难度，本文不再赘述。但需要注意的是，储存桶名要<strong>填写媒体服务子域名</strong>，例如<code>im.yourdomain.com</code>。</p>
+<h3 id=同步已有媒体>同步已有媒体</h3>
+<p>如果一开始就接入外部存储服务，则这一步跳过。此步骤参考pullopen站长的<a href=https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html>如何将Mastodon媒体上传至Scaleway云储存</a>。</p>
+<p>安装并调试Aws-Cli：</p>
+<pre tabindex=0><code>apt install python-pip
+pip install awscli
+aws configure        #调试
+</code></pre><p>按指示依次输入Access Key和Secret Key。Region部分按照你的储存桶地址填写<code>fr-par</code>（巴黎），<code>nl-ams</code>（阿姆斯特丹）或<code>pl-waw</code>（波兰）。Default output format直接回车即可。</p>
+<p>运行以下命令将本地媒体文件同步至储存桶：</p>
+<pre tabindex=0><code>cd /opt/misskey
+aws s3 sync files s3://储存桶名/ --endpoint-url=https://s3.fr-par.scw.cloud --acl public-read
+</code></pre><p>以上命令中<code>files</code>是<code>docker-compose.yml</code>中定义的本地存储媒体文件夹，位置是<code>/opt.misskey/files</code>。同时<code>https://s3.fr-par.scw.cloud</code><strong>按照储存桶地址</strong>改为<code>https://s3.nl-ams.scw.cloud</code>或<code>https://s3.pl-waw.scw.cloud</code>。</p>
+<h3 id=开启对象存储>开启对象存储</h3>
+<p>打开DNS解析商，以cloudflare为例。添加一项名称为子域名（例如<code>im.yourdomain.com</code>），目标为<code>im.yourdomain.com.s3.fr-par.scw.cloud</code>（其中<code>fr-par</code>需要<strong>按照储存桶地址</strong>更改为<code>nl-ams</code>或<code>pl-waw</code>）的<code>CNAME</code>记录，并开启cloudflare的代理。</p>
+<p>使用管理员帐号登录并打开Misskey控制面板，下拉菜单找到Object Storage (物件儲存)，打开开关开始设置：</p>
+<ul>
+<li><code>BaseURL</code>：你的子域名，带通讯协议，例如<code>https://im.yourdomain.com</code></li>
+<li><code>Bucket</code>：你的子域名，和储存桶名相同，例如<code>im.yourdomain.com</code></li>
+<li><code>Prefix</code>：留空即可</li>
+<li><code>Endpoint</code>：<code>s3.fr-par.scw.cloud</code>/<code>s3.nl-ams.scw.cloud</code>/<code>s3.pl-waw.scw.cloud</code></li>
+<li><code>Region</code>：储存桶地区，填写<code>fr-par</code>/<code>nl-ams</code>/<code>pl-waw</code></li>
+<li><code>ACCESS KEY</code>：填写在Scaleway获取的Access key</li>
+<li><code>SECRET KEY</code>：填写在Scaleway获取的Secret key</li>
+</ul>
+<p>打开SSL（声明<code>Endpoint</code>使用HTTPS），关闭媒体代理，打开public-read，打开s3ForcePathStyle，保存。上传一张图片，若发note没有出现问题且图片清晰，则部署成功。</p>
+<p>回到服务器，运行<code>docker-compose down</code>，将<code>docker-compose.yml</code>中<code>- ./files:/misskey/files</code>这一行注释掉，然后运行<code>docker-compose up -d</code>重新让站点启动。</p>
 <h2 id=开始食用>开始食用</h2>
 <ul>
 <li><a href=https://candinya.com/posts/minimal-misskey-docker-deploy/>本文部分参考：使用Docker最小化部署Misskey</a></li>
@@ -501,6 +529,12 @@ See Also
 <li><a href=#搭建过程>搭建过程</a></li>
 <li><a href=#nginx反向代理>Nginx反向代理</a></li>
 <li><a href=#注册管理员帐号>注册管理员帐号</a></li>
+<li><a href=#媒体文件外部存储>媒体文件外部存储</a>
+<ul>
+<li><a href=#同步已有媒体>同步已有媒体</a></li>
+<li><a href=#开启对象存储>开启对象存储</a></li>
+</ul>
+</li>
 <li><a href=#开始食用>开始食用</a></li>
 </ul>
 </nav>
