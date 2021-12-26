@@ -244,6 +244,7 @@ cd .config
 <li>文件中提到的<code>Option 1</code>和<code>Option 2</code>，我们选择<code>Option 1</code>，因此将<code>#port: 3000 # A port that your Misskey server should listen.</code>这一行取消注释，端口号不用更改。</li>
 <li>将<code>db</code>和<code>Redis</code>的<code>host</code>由<code>localhost</code>分别改为<code>db</code>和<code>redis</code>。</li>
 <li>将<code>db</code>项的<code>user</code>和<code>pass</code>改为你想设置的数据库用户和数据库密码。</li>
+<li>如有ActivityPub协议连通性需求（例如与Mastodon站点互动）需要开启<code>signToActivityPubGet: true</code>选项（默认关闭），位置在文件末尾部分。</li>
 </ul>
 <p>保存。</p>
 <p>运行<code>nano docker.env</code>新建<code>docker.env</code>，复制官方项目的<a href=https://github.com/misskey-dev/misskey/blob/develop/.config/docker_example.env>docker_example.env</a>内容，回到服务器中粘贴，将<code>POSTGRES_USER</code>和<code>POSTGRES_PASSWORD</code>改为刚刚自己设置的数据库用户和数据库密码。</p>
