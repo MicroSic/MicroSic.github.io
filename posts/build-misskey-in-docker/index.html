@@ -352,7 +352,7 @@ aws configure        #调试
 <p>运行以下命令将本地媒体文件同步至储存桶：</p>
 <pre tabindex=0><code>cd /opt/misskey
 aws s3 sync files s3://储存桶名/ --endpoint-url=https://s3.fr-par.scw.cloud --acl public-read
-</code></pre><p>以上命令中<code>files</code>是<code>docker-compose.yml</code>中定义的本地存储媒体文件夹，位置是<code>/opt.misskey/files</code>。同时<code>https://s3.fr-par.scw.cloud</code><strong>按照储存桶地址</strong>改为<code>https://s3.nl-ams.scw.cloud</code>或<code>https://s3.pl-waw.scw.cloud</code>。</p>
+</code></pre><p>以上命令中<code>files</code>是<code>docker-compose.yml</code>中定义的本地存储媒体文件夹，位置是<code>/opt/misskey/files</code>。同时<code>https://s3.fr-par.scw.cloud</code><strong>按照储存桶地址</strong>改为<code>https://s3.nl-ams.scw.cloud</code>或<code>https://s3.pl-waw.scw.cloud</code>。</p>
 <h3 id=开启对象存储>开启对象存储</h3>
 <p>打开DNS解析商，以cloudflare为例。添加一项名称为子域名（例如<code>im.yourdomain.com</code>），目标为<code>im.yourdomain.com.s3.fr-par.scw.cloud</code>（其中<code>fr-par</code>需要<strong>按照储存桶地址</strong>更改为<code>nl-ams</code>或<code>pl-waw</code>）的<code>CNAME</code>记录，并开启cloudflare的代理。</p>
 <p>使用管理员帐号登录并打开Misskey控制面板，下拉菜单找到Object Storage (物件儲存)，打开开关开始设置：</p>
