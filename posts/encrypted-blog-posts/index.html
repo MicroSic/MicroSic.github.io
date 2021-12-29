@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Dec 29, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;1&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;2&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -243,6 +243,9 @@ password: test
 </code></pre></td></tr></table>
 </div>
 </div><p>示例：<a href=https://tantalum.life/posts/test-for-password/>test</a></p>
+<h2 id=报错解决方式>报错解决方式</h2>
+<p>在渲染文章页面时报错，请根据报错内容进行修改，也有可能是上面代码粘贴的位置有问题，需要放在文件中间位置。</p>
+<p>如果本地渲染无问题，Github仓库推送无问题，但是推送到自动部署后无法显示新文章：首先查看博客根目录<code>.gitignore</code>文件中是否有提及相关文件。若没有，以Vercel自动部署为例，查看博客project是否同步github仓库最新更新记录。如果卡在一个旧的更新推送上，新建一个新Project命名为<code>test</code>以防翻车，直接clone你的博客github仓库，然后部署。成功后即可使用Vercel给你分配的域名访问博客，如果成功显示加密文章，在Vercel删除旧的project即可。如果你绑定了自己的域名，记得将域名添加到新的project中。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -302,10 +305,10 @@ See Also
 <a href=/posts/shortcode-to-insert-video/ class=related__link>NSFW | 实现在Hugo博客中利用Shortcode嵌入视频</a>
 </li>
 <li>
-<a href=/posts/mogege-theme-modify/ class=related__link>Hugo | 记录Mogege主题美化过程</a>
+<a href=/posts/fix-front-matter/ class=related__link>Hugo | 更换主题后Front matter导致Build Error</a>
 </li>
 <li>
-<a href=/posts/fix-front-matter/ class=related__link>Hugo | 更换主题后Front matter导致Build Error</a>
+<a href=/posts/mogege-theme-modify/ class=related__link>Hugo | 记录Mogege主题美化过程</a>
 </li>
 <li>
 <a href=/posts/add-utterances-for-mogege/ class=related__link>Hugo | 为Mogege主题添加Utterances评论</a>
@@ -393,6 +396,7 @@ See Also
 <ul>
 <li><a href=#前言>前言</a></li>
 <li><a href=#步骤>步骤</a></li>
+<li><a href=#报错解决方式>报错解决方式</a></li>
 </ul>
 </nav>
 </div>
