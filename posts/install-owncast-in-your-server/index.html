@@ -231,7 +231,7 @@ systemctl start nginx
 systemctl enable nginx
 </code></pre><p>运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
 <h2 id=配置为系统服务>配置为系统服务</h2>
-<p>在配置之前，先访问<code>https://你的域名/admin</code>/<code>http://服务器ip:端口号/admin</code>使用管理员帐号<code>admin</code>和密码<code>abc123</code>进入管理员页面。登录后立刻更改默认密码（<code>Configuration</code>><code>Server Setup</code>><code>Stream Key</code>）。该密码兼作您的流媒体密钥，以避免对您的流媒体服务器进行随机攻击。</p>
+<p>在配置之前，先访问<code>https://你的域名/admin</code>/<code>http://服务器ip:端口号/admin</code>使用管理员帐号<code>admin</code>和密码<code>abc123</code>进入管理员页面。登录后立刻更改默认密码（<code>Configuration</code>><code>Server Setup</code>><code>Stream Key</code>）。该密码兼作流媒体密钥，以避免对流媒体服务器进行随机攻击。</p>
 <p>运行<code>nano /etc/systemd/system/owncast.service</code>，填入以下内容：</p>
 <pre tabindex=0><code>[Unit]
 Description=Owncast Service
@@ -256,7 +256,7 @@ WantedBy=multi-user.target
 </code></pre><h2 id=obs推流>OBS推流</h2>
 <p>在<a href=https://obsproject.com/>OBS官网</a>安装OBS，在设置>服务中选择自定义（Custom），在管理员页面获取RTMP服务器链接和流密钥并填入OBS中，点击Start Streaming测试链接，开始推流。</p>
 <h2 id=后续更新>后续更新</h2>
-<p>请至[releases页面]https://github.com/owncast/owncast/releases)查看步骤。</p>
+<p>请至<a href=https://github.com/owncast/owncast/releases>releases页面</a>查看步骤。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
