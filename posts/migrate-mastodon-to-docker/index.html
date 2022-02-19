@@ -210,7 +210,7 @@ rsync -azv ./postgres root@新服务器IP:/opt/mastodon/
 </code></pre><p>将<code>.env.production</code>、<code>docker-compose.yml</code>文件与<code>postgres</code>文件夹直接复制到新服务器的<code>/opt/mastodon</code>文件夹下。</p>
 <h3 id=如果旧服务器无法复制文件到新服务器>如果旧服务器无法复制文件到新服务器</h3>
 <p>在旧服务器中手动复制粘贴将Mastodon的配置文件<code>.env.production</code>内容备份到你的本地电脑。同时也备份好你的<code>docker-compose.yml</code>文件，然后运行<code>docker-compose down</code>将站点下线，此时你的旧服务器已经可以寿终正寝了，你可以选择在另一家VPS服务商里开新机器，或是使用原服务器ip重装系统。我自己是从Ubuntu18.04重装系统换成了Debian10。</p>
-<p>下面借用Scaleway恢复你的数据库。登录<a href=https://console.scaleway.com/>Scaleway</a>账号找到备份数据库用的存储桶（Bucket），找到最后一次备份的zip文件，点击右侧···选择<code>Get public link</code>得到一串长链接，有效期只有一小时。<br>
+<p>下面借用Scaleway恢复你的数据库。登录<a href=https://console.scaleway.com/>Scaleway</a>账号找到备份数据库用的存储桶（Bucket），找到最后一次备份的zip文件，点击右侧<code>···</code>选择<code>Get public link</code>得到一串长链接，有效期只有一小时。<br>
 <img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/Scalewaybackup.png alt></p>
 <p>回到新服务器，运行<code>mkdir -p /opt/mastodon</code>新建Mastodon目录，随后运行<code>wget "刚刚复制的长链接"</code>下载zip文件至新服务器。</p>
 <p>运行<code>apt install unzip</code>安装unzip，然后<code>ls -a</code>查看刚刚下载的zip文件的文件名（可能有长后缀）。<code>mv 文件名 backup.zip</code>将其改名之后运行<code>unzip backup.zip</code>来解压zip文件（提示输入密码）。解压成功后不出意外的话你会在<code>/opt/mastodon</code>文件夹下找到<code>backup.dump</code>文件。</p>
@@ -219,28 +219,37 @@ rsync -azv ./postgres root@新服务器IP:/opt/mastodon/
 </code></pre><div class=box><p>解释名词：</p>
 <p><code>postgres12</code>是新容器的容器名，<code>/opt/mastodon/postgres</code>是数据卷挂载位置的绝对地址，<code>/var/lib/postgresql/data</code>是数据卷在容器内的映射，<code>postgres:12.5-alpine</code>是容器所用的镜像，同时也是数据库版本。</p>
 </div>
-<p>查看<code>.env.production</code>文件，确认数据库名（<code>DB_NAME</code>）、数据库用户（<code>DB_USER</code>）和数据库密码（<code>DB_PASS</code>）。</p>
-<p>然后运行<code>docker exec -it postgres12 psql -U postgres</code>进入容器内的数据库。</p>
-<p>运行<code>CREATE USER mastodon WITH PASSWORD '数据库密码（最好和数据库管理员密码不一样）' CREATEDB;</code>创建用户（其中将<code>mastodon</code>改为<code>.env.production</code>文件中的数据库用户，数据库密码也要与<code>.env.production</code>文件相一致），然后<code>\q</code>回车退出容器。</p>
-<p>最后<code>docker stop postgres12</code>停止容器，此时初始化数据库步骤结束。</p>
-<p>运行<code>docker-compose up -d db</code>启动Mastodon的数据库容器，然后运行<code>docker ps | grep mastodon_db | awk '{print $1}'</code>查询数据库容器的容器ID，将其复制。随后<code>docker cp ./backup.dump 数据库容器ID:/tmp/backup.dump</code>将之前所得的数据库备份文件<code>backup.dump</code>写入docker容器中的临时文件夹下。</p>
+<p>查看<code>.env.production</code>文件，确认你的数据库名（<code>DB_NAME</code>）、数据库用户（<code>DB_USER</code>）和数据库密码（<code>DB_PASS</code>）。</p>
+<p>然后运行<code>docker exec -it postgres12 psql -U postgres</code>进入容器内的数据库：</p>
+<pre tabindex=0><code>CREATE USER mastodon WITH PASSWORD '数据库密码（最好和数据库管理员密码不一样）' CREATEDB;
+#其中将mastodon改为数据库用户，数据库密码也要与.env.production文件相一致
+
+\q   #回车退出容器
+</code></pre><p>最后<code>docker stop postgres12</code>停止容器，此时初始化数据库步骤结束。</p>
+<hr>
+<p>启动Mastodon的数据库容器：</p>
+<pre tabindex=0><code>docker-compose up -d db
+</code></pre><p>然后<code>docker ps | grep mastodon_db | awk '{print $1}'</code>查询数据库容器的容器ID，将其复制。随后<code>docker cp ./backup.dump 数据库容器ID:/tmp/backup.dump</code>将之前所得的数据库备份文件<code>backup.dump</code>写入docker容器中的临时文件夹下。</p>
 <p>进入数据库容器中创建空白数据库：</p>
 <pre tabindex=0><code>docker exec -it  mastodon_db_1 /bin/bash
 su - postgres
 createdb -T template0 mastodon_production
 </code></pre><p>其中将<code>mastodon_production</code>改为<code>.env.production</code>文件中的数据库名。</p>
-<p>运行<code>psql</code>进入数据库，然后<code>GRANT ALL PRIVILEGES ON DATABASE 数据库名 TO 数据库用户;</code>（与<code>.env.production</code>文件相一致），然后<code>\q</code>回车退出数据库。</p>
-<p>继续执行：</p>
+<p>运行<code>psql</code>进入数据库：</p>
+<pre tabindex=0><code>GRANT ALL PRIVILEGES ON DATABASE 数据库名 TO 数据库用户;
+#与.env.production文件相一致
+
+\q   #回车退出数据库
+</code></pre><p>继续执行：</p>
 <pre tabindex=0><code>pg_restore -U 数据库用户 -n public --no-owner --role=数据库用户 \
 -d 数据库名 /tmp/backup.dump
 </code></pre><p>然后两次<code>exit</code>退出docker容器。此时数据库迁移完毕，运行<code>docker-compose down</code>关闭数据库容器。</p>
-<h2 id=配置mastodon>配置Mastodon</h2>
+<h2 id=一些赋权行为>一些赋权行为</h2>
 <p>在新服务器中，运行<code>docker-compose run --rm web bin/tootctl feeds build</code>构建用户首页时间流，然后<code>docker-compose up -d</code>将站点上线，随后对文件夹进行赋权：</p>
 <pre tabindex=0><code>chown -R 70:70 ./postgres
 chown 991:991 -R ./public
 </code></pre><p>如果你开启了全文搜索：</p>
-<pre tabindex=0><code>mkdir elasticsearch
-chown 1000:1000 -R elasticsearch
+<pre tabindex=0><code>chown 1000:1000 -R elasticsearch
 docker-compose run --rm web bin/tootctl search deploy  #建立旧嘟文索引
 </code></pre><p>重启容器：</p>
 <pre tabindex=0><code>docker-compose down
@@ -411,7 +420,7 @@ See Also
 <li><a href=#如果旧服务器无法复制文件到新服务器>如果旧服务器无法复制文件到新服务器</a></li>
 </ul>
 </li>
-<li><a href=#配置mastodon>配置Mastodon</a></li>
+<li><a href=#一些赋权行为>一些赋权行为</a></li>
 <li><a href=#nginx-反向代理>Nginx 反向代理</a></li>
 </ul>
 </nav>
