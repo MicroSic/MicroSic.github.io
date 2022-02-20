@@ -188,9 +188,11 @@ kimbie
 <h2 id=前期准备>前期准备</h2>
 <p>在新服务器中安装一些常用软件：</p>
 <pre tabindex=0><code>apt update &amp;&amp; apt install wget rsync python git curl vim git ufw -y
-</code></pre><p>安装Docker&Docker Compose（使用一键脚本安装即可）：</p>
+</code></pre><p>安装Docker&Docker-Compose（使用一键脚本安装即可）。首先至<a href=https://github.com/docker/compose/releases>docker-compose release</a>界面找到最新的版本号（例如<code>v2.2.3</code>），随后回到服务器执行：</p>
 <pre tabindex=0><code>bash &lt;(curl -L https://get.docker.com/)
-curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+curl -L &quot;https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+#以v2.2.3为例，替换为最新版本
+
 chmod +x /usr/local/bin/docker-compose
 </code></pre><p>安装Nginx与Certbot：</p>
 <pre tabindex=0><code>apt install nginx -y
@@ -200,6 +202,7 @@ snap install core   #安装snap
 snap install certbot --classic  #使用snap安装certbot
 </code></pre><h2 id=迁移数据>迁移数据</h2>
 <p>因为我删除了整个<code>/etc</code>目录导致旧服务器全废，报错<code>uid=0 gid=0 groups=0</code>，无法使用<code>rsync</code>命令将旧服务器文件复制到新服务器中。好在我之前参考了<a href=https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html#%E5%88%A9%E7%94%A8scaleway%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93>利用Scaleway备份数据库</a>这个教程备份了数据库，解压文件夹之后获得的数据库备份文件是<code>backup.dump</code>。当然如果你的旧服务器能够运行<code>rsync</code>命令更好，而且步骤简单许多。</p>
+<p>数据库迁移分为两个方案：<strong><a href=https://blog.tantalum.life/posts/migrate-mastodon-to-docker/#%E5%A6%82%E6%9E%9C%E6%97%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%AF%E4%BB%A5%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%B0%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8>旧服务器可以复制文件到新服务器</a><strong>和</strong><a href=https://blog.tantalum.life/posts/migrate-mastodon-to-docker/#%E5%A6%82%E6%9E%9C%E6%97%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%A0%E6%B3%95%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%B0%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8>旧服务器无法复制文件到新服务器</a></strong>，后者指的是服务器完全损坏无法修复的情况，需要用S3中的数据库备份来恢复数据。两个方案之后的步骤相同。</p>
 <h3 id=如果旧服务器可以复制文件到新服务器>如果旧服务器可以复制文件到新服务器</h3>
 <p>在新服务器中：<code>mkdir -p /opt/mastodon</code>新建Mastodon目录。</p>
 <p>在旧服务器中：</p>
@@ -210,34 +213,35 @@ rsync -azv ./postgres root@新服务器IP:/opt/mastodon/
 </code></pre><p>将<code>.env.production</code>、<code>docker-compose.yml</code>文件与<code>postgres</code>文件夹直接复制到新服务器的<code>/opt/mastodon</code>文件夹下。</p>
 <h3 id=如果旧服务器无法复制文件到新服务器>如果旧服务器无法复制文件到新服务器</h3>
 <p>在旧服务器中手动复制粘贴将Mastodon的配置文件<code>.env.production</code>内容备份到你的本地电脑。同时也备份好你的<code>docker-compose.yml</code>文件，然后运行<code>docker-compose down</code>将站点下线，此时你的旧服务器已经可以寿终正寝了，你可以选择在另一家VPS服务商里开新机器，或是使用原服务器ip重装系统。我自己是从Ubuntu18.04重装系统换成了Debian10。</p>
-<p>下面借用Scaleway恢复你的数据库。登录<a href=https://console.scaleway.com/>Scaleway</a>账号找到备份数据库用的存储桶（Bucket），找到最后一次备份的zip文件，点击右侧<code>···</code>选择<code>Get public link</code>得到一串长链接，有效期只有一小时。<br>
-<img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/Scalewaybackup.png alt></p>
+<p>下面借用Scaleway恢复你的数据库。登录<a href=https://console.scaleway.com/>Scaleway</a>账号找到备份数据库用的存储桶（Bucket），找到最后一次备份的zip文件，点击右侧<code>···</code>选择<code>Get public link</code>得到一串长链接，有效期只有一小时。</p>
+<p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/Scalewaybackup.png alt></p>
 <p>回到新服务器，运行<code>mkdir -p /opt/mastodon</code>新建Mastodon目录，随后运行<code>wget "刚刚复制的长链接"</code>下载zip文件至新服务器。</p>
-<p>运行<code>apt install unzip</code>安装unzip，然后<code>ls -a</code>查看刚刚下载的zip文件的文件名（可能有长后缀）。<code>mv 文件名 backup.zip</code>将其改名之后运行<code>unzip backup.zip</code>来解压zip文件（提示输入密码）。解压成功后不出意外的话你会在<code>/opt/mastodon</code>文件夹下找到<code>backup.dump</code>文件。</p>
+<p>运行<code>apt install unzip</code>安装unzip，然后<code>ls -a</code>查看刚刚下载的zip文件的文件名（可能有长后缀）。<code>mv "文件名" backup.zip</code>将其改名之后运行<code>unzip backup.zip</code>来解压zip文件（提示输入密码）。解压成功后不出意外的话你会在<code>/opt/mastodon</code>文件夹下找到<code>backup.dump</code>文件。</p>
 <p>将<code>.env.production</code>和<code>docker-compose.yml</code>内容粘贴到新服务器的<code>/opt/mastodon</code>文件夹中。查看<code>docker-compose.yml</code>的<code>db</code>项确认你的数据卷（<code>volume</code>）挂载地址和数据库版本（<code>image</code>）。以<code>./postgres:/var/lib/postgresql/data</code>和<code>postgres:12.5-alpine</code>为例，运行以下命令创建新容器：</p>
 <pre tabindex=0><code>docker run --name postgres12 -v /opt/mastodon/postgres:/var/lib/postgresql/data -e   POSTGRES_PASSWORD=设置数据库管理员密码 --rm -d postgres:12.5-alpine
 </code></pre><div class=box><p>解释名词：</p>
 <p><code>postgres12</code>是新容器的容器名，<code>/opt/mastodon/postgres</code>是数据卷挂载位置的绝对地址，<code>/var/lib/postgresql/data</code>是数据卷在容器内的映射，<code>postgres:12.5-alpine</code>是容器所用的镜像，同时也是数据库版本。</p>
 </div>
-<p>查看<code>.env.production</code>文件，确认你的数据库名（<code>DB_NAME</code>）、数据库用户（<code>DB_USER</code>）和数据库密码（<code>DB_PASS</code>）。</p>
-<p>然后运行<code>docker exec -it postgres12 psql -U postgres</code>进入容器内的数据库：</p>
-<pre tabindex=0><code>CREATE USER mastodon WITH PASSWORD '数据库密码（最好和数据库管理员密码不一样）' CREATEDB;
-#其中将mastodon改为数据库用户，数据库密码也要与.env.production文件相一致
+<hr>
+<p>
+<img src=/emoji/ablobcouncil.gif align=left title=ablobcouncil alt=ablobcouncil width=30 height=30>
+查看<code>.env.production</code>文件，确认你的数据库名（<code>DB_NAME</code>）、数据库用户（<code>DB_USER</code>）和数据库密码（<code>DB_PASS</code>）这三项。本文之后出现的数据库名/用户/密码都要与<code>.env.production</code>文件一致，敬请注意。</p>
+<hr>
+<p>运行<code>docker exec -it postgres12 psql -U postgres</code>进入容器内的数据库：</p>
+<pre tabindex=0><code>CREATE USER mastodon WITH PASSWORD '数据库密码' CREATEDB;
 
 \q   #回车退出容器
-</code></pre><p>最后<code>docker stop postgres12</code>停止容器，此时初始化数据库步骤结束。</p>
+</code></pre><p>最后运行<code>docker stop postgres12</code>停止容器，此时初始化数据库步骤结束。</p>
 <hr>
-<p>启动Mastodon的数据库容器：</p>
+<p>首先启动Mastodon的数据库容器：</p>
 <pre tabindex=0><code>docker-compose up -d db
-</code></pre><p>然后<code>docker ps | grep mastodon_db | awk '{print $1}'</code>查询数据库容器的容器ID，将其复制。随后<code>docker cp ./backup.dump 数据库容器ID:/tmp/backup.dump</code>将之前所得的数据库备份文件<code>backup.dump</code>写入docker容器中的临时文件夹下。</p>
+</code></pre><p>运行<code>docker ps | grep mastodon_db | awk '{print $1}'</code>查询数据库容器ID，将其复制，随后运行<code>docker cp ./backup.dump 数据库容器ID:/tmp/backup.dump</code>将之前所得的数据库备份文件<code>backup.dump</code>写入docker容器中的临时文件夹下。</p>
 <p>进入数据库容器中创建空白数据库：</p>
 <pre tabindex=0><code>docker exec -it  mastodon_db_1 /bin/bash
 su - postgres
-createdb -T template0 mastodon_production
-</code></pre><p>其中将<code>mastodon_production</code>改为<code>.env.production</code>文件中的数据库名。</p>
-<p>运行<code>psql</code>进入数据库：</p>
+createdb -T template0 数据库名
+</code></pre><p>运行<code>psql</code>命令进入数据库，执行：</p>
 <pre tabindex=0><code>GRANT ALL PRIVILEGES ON DATABASE 数据库名 TO 数据库用户;
-#与.env.production文件相一致
 
 \q   #回车退出数据库
 </code></pre><p>继续执行：</p>
@@ -263,7 +267,7 @@ docker-compose up -d
 <pre tabindex=0><code>nginx -s reload
 systemctl start nginx
 systemctl enable nginx
-</code></pre><p>运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
+</code></pre><p>运行<code>certbot --nginx</code>获取SSL证书。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
