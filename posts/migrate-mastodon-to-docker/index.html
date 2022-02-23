@@ -183,7 +183,7 @@ kimbie
 <article class=single__contents data-dir=ltr data-ani=true>
 <h2 id=前言>前言</h2>
 <p>因为手残不小心把服务器的<code>/etc</code>目录全部删除（这是系统关键文件），导致服务器就此废掉救不回来了。之前查资料发现root用户甚至可以运行<code>rm -rf /</code>命令，结果这次就轮到我了&mldr;</p>
-<p>好在我备份了Mastodon的数据库，这里简单记录一下迁移过程，文章参考了<a href=https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/10/21/migrate-Mastodon-to-Docker.html>将Mastodon站点从非Docker迁移至Docker：兼谈其他平台迁移</a>，稍微补充了一下细节。因为使用了S3外部媒体存储，所以不考虑复制媒体文件的步骤。</p>
+<p>好在我备份了Mastodon的数据库，这里简单记录一下迁移过程，文章参考了<a href=https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/10/21/migrate-Mastodon-to-Docker.html>将Mastodon站点从非Docker迁移至Docker：兼谈其他平台迁移</a>，稍微补充了一下细节。升级数据库、如何使用数据库备份恢复数据库的操作也可参考本文。因为使用了S3外部媒体存储，所以不考虑复制媒体文件的步骤。</p>
 <p>朋友们，数据无价。道路千万条，备份第一条；数据不备份，迁移两行泪。</p>
 <h2 id=前期准备>前期准备</h2>
 <p>在新服务器中安装一些常用软件：</p>
@@ -203,6 +203,7 @@ snap install certbot --classic  #使用snap安装certbot
 </code></pre><h2 id=迁移数据>迁移数据</h2>
 <p>因为我删除了整个<code>/etc</code>目录导致旧服务器全废，报错<code>uid=0 gid=0 groups=0</code>，无法使用<code>rsync</code>命令将旧服务器文件复制到新服务器中。好在我之前参考了<a href=https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html#%E5%88%A9%E7%94%A8scaleway%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93>利用Scaleway备份数据库</a>这个教程备份了数据库，解压文件夹之后获得的数据库备份文件是<code>backup.dump</code>。当然如果你的旧服务器能够运行<code>rsync</code>命令更好，而且步骤简单许多。</p>
 <p>数据库迁移分为两个方案：<strong><a href=https://blog.tantalum.life/posts/migrate-mastodon-to-docker/#%E5%A6%82%E6%9E%9C%E6%97%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%AF%E4%BB%A5%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%B0%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8>旧服务器可以复制文件到新服务器</a><strong>和</strong><a href=https://blog.tantalum.life/posts/migrate-mastodon-to-docker/#%E5%A6%82%E6%9E%9C%E6%97%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%A0%E6%B3%95%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%B0%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8>旧服务器无法复制文件到新服务器</a></strong>，后者指的是服务器完全损坏无法修复的情况，需要用S3中的数据库备份来恢复数据。两个方案之后的步骤相同。</p>
+<p>我的数据库备份脚本<code>backup.sh</code>中，<code>origin</code>路径为<code>/opt/mastodon</code>，请替换成你自己的路径。</p>
 <h3 id=如果旧服务器可以复制文件到新服务器>如果旧服务器可以复制文件到新服务器</h3>
 <p>在新服务器中：<code>mkdir -p /opt/mastodon</code>新建Mastodon目录。</p>
 <p>在旧服务器中：</p>
@@ -220,7 +221,7 @@ rsync -azv ./postgres root@新服务器IP:/opt/mastodon/
 <p>将<code>.env.production</code>和<code>docker-compose.yml</code>内容粘贴到新服务器的<code>/opt/mastodon</code>文件夹中。查看<code>docker-compose.yml</code>的<code>db</code>项确认你的数据卷（<code>volume</code>）挂载地址和数据库版本（<code>image</code>）。以<code>./postgres:/var/lib/postgresql/data</code>和<code>postgres:12.5-alpine</code>为例，运行以下命令创建新容器：</p>
 <pre tabindex=0><code>docker run --name postgres12 -v /opt/mastodon/postgres:/var/lib/postgresql/data -e   POSTGRES_PASSWORD=设置数据库管理员密码 --rm -d postgres:12.5-alpine
 </code></pre><div class=box><p>解释名词：</p>
-<p><code>postgres12</code>是新容器的容器名，<code>/opt/mastodon/postgres</code>是数据卷挂载位置的绝对地址，<code>/var/lib/postgresql/data</code>是数据卷在容器内的映射，<code>postgres:12.5-alpine</code>是容器所用的镜像，同时也是数据库版本。</p>
+<p><code>postgres12</code>是新容器的容器名（不与其他容器重名即可，随意设置），<code>/opt/mastodon/postgres</code>是数据卷挂载位置的绝对地址，<code>/var/lib/postgresql/data</code>是数据卷在容器内的映射，<code>postgres:12.5-alpine</code>是容器所用的镜像，同时也是数据库版本。</p>
 </div>
 <hr>
 <p>
@@ -233,11 +234,11 @@ rsync -azv ./postgres root@新服务器IP:/opt/mastodon/
 \q   #回车退出容器
 </code></pre><p>最后运行<code>docker stop postgres12</code>停止容器，此时初始化数据库步骤结束。</p>
 <hr>
-<p>首先启动Mastodon的数据库容器：</p>
+<p>下面将数据库备份导入数据库中。先启动Mastodon的数据库容器：</p>
 <pre tabindex=0><code>docker-compose up -d db
-</code></pre><p>运行<code>docker ps | grep mastodon_db | awk '{print $1}'</code>查询数据库容器ID，将其复制，随后运行<code>docker cp ./backup.dump 数据库容器ID:/tmp/backup.dump</code>将之前所得的数据库备份文件<code>backup.dump</code>写入docker容器中的临时文件夹下。</p>
+</code></pre><p>运行<code>docker ps | grep mastodon-db | awk '{print $1}'</code>查询数据库容器ID，将其复制，随后运行<code>docker cp ./backup.dump 数据库容器ID:/tmp/backup.dump</code>将之前所得的数据库备份文件<code>backup.dump</code>写入docker容器中的临时文件夹下。</p>
 <p>进入数据库容器中创建空白数据库：</p>
-<pre tabindex=0><code>docker exec -it  mastodon_db_1 /bin/bash
+<pre tabindex=0><code>docker exec -it  mastodon-db-1 /bin/bash
 su - postgres
 createdb -T template0 数据库名
 </code></pre><p>运行<code>psql</code>命令进入数据库，执行：</p>
@@ -255,9 +256,14 @@ chown 991:991 -R ./public
 </code></pre><p>如果你开启了全文搜索：</p>
 <pre tabindex=0><code>chown 1000:1000 -R elasticsearch
 docker-compose run --rm web bin/tootctl search deploy  #建立旧嘟文索引
+</code></pre><p>构建用户首页时间流：</p>
+<pre tabindex=0><code>docker-compose run --rm web bin/tootctl feeds build
 </code></pre><p>重启容器：</p>
 <pre tabindex=0><code>docker-compose down
 docker-compose up -d
+</code></pre><p>如果迁移操作涉及到升级：</p>
+<pre tabindex=0><code>docker-compose run --rm web rails db:migrate
+docker-compose run --rm web bin/tootctl cache clear
 </code></pre><h2 id=nginx-反向代理>Nginx 反向代理</h2>
 <p>打开官方的<a href=https://github.com/tootsuite/mastodon/blob/master/dist/nginx.conf>Nginx配置文件模板</a>，将两处<code>root /home/mastodon/live/public;</code>改为<code>root /opt/mastodon/public;</code>，两处<code>example.com</code>改为你的域名。</p>
 <p>运行<code>nano /etc/nginx/conf.d/mastodon.conf</code>，粘贴内容并保存。</p>
