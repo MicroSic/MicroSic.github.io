@@ -377,7 +377,10 @@ ES_PORT=9200
 </code></pre><p>另外，在两次升级时跨版本号太多，或是经过大型魔改后还需要运行<code>tootctl cache clear</code>命令，否则可能会出现与外站通信延迟高的问题：</p>
 <pre tabindex=0><code>docker-compose run --rm web bin/tootctl cache clear
 </code></pre><p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/cache_clear.png alt></p>
-<h2 id=学到的docker命令>学到的docker命令</h2>
+<p>重启长毛象载入改动，否则数据库迁移命令不会生效：</p>
+<pre tabindex=0><code>docker-compose down
+docker-compose up -d
+</code></pre><h2 id=学到的docker命令>学到的docker命令</h2>
 <p>删除无用镜像（需要输入y）：</p>
 <pre tabindex=0><code>docker image prune -a
 </code></pre><p>强制删除镜像：</p>
