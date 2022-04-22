@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Dec 21, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;5&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;8&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -810,6 +810,50 @@ systemctl reload nginx
 <pre tabindex=0><code>chmod +x /etc/cron.daily/letsencrypt-renew
 systemctl restart cron
 </code></pre><script src=https://kit.fontawesome.com/57c1376f6d.js crossorigin=anonymous></script>
+<h2 id=从他站爬取自定义表情包>从他站爬取自定义表情包</h2>
+<div class=box>2022/04/22更新：<br>
+爬取自定义表情包</div>
+<p>一般情况下，作为站长当发现其他站点有好看的表情包想拥有的时候，最简单粗暴的方式是去网页端的管理后台将他站表情包复制到自家站点的数据库中。但是这样需要一个一个勾选表情包并复制，非常低效，只适用于一次性复制少量表情包。那么如何一次性将他站的一整个表情分类（甚至全部分类）全都偷过来呢？</p>
+<p>偷表情神器应运而生啦！下面介绍<a href=https://github.com/Starainrt/emojidownloader>emojidownloader</a>的使用方法。此工具由兔酱编写，感谢ta！</p>
+<p>以2022年3月更新的emojidownloader v0.1.0版本为例：</p>
+<p>打开项目最新版本的<a href=https://github.com/Starainrt/emojidownloader/releases>Releases</a>页面，找到<code>emoji_downloader_linux_x86_64</code>，右击复制其网址。</p>
+<p>回到服务器进入<code>/opt/mastodon</code>目录，运行：</p>
+<pre tabindex=0><code>wget 你复制的网址
+chmod +x ./emoji_downloader_linux_x86_64
+./emoji_downloader_linux_x86_64
+</code></pre><p>就可以开始偷表情了！</p>
+<p>选择<code>从url下载mastodon emoji</code>，输入想要爬取表情包的站点域名。</p>
+<pre tabindex=0><code>是否使用代理？(y/N)  #直接回车
+是否设置Mastodon Cookie？(y/N)  #直接回车
+</code></pre><p>当出现以下错误时，说明站点开启了<code>authorized_fetch</code>（安全模式），需要拥有对方站帐号才能继续爬取表情。如果顺利解析到表情分类，可以直接将本文划到最末尾。</p>
+<pre tabindex=0><code>2022-04-22 02:01:06.105254 prompt.go:84 &lt;plParseJson&gt; |MAN| [INFO] 解析中......
+2022-04-22 02:01:06.557876 prompt.go:87 &lt;plParseJson&gt; |MAN| [ERROR] 解析失败！请检查 http code not correct! got 401,resp text is {&quot;error&quot;:&quot;This method requires an authenticated user&quot;}
+出现错误，按任意键结束
+</code></pre><p>如果你拥有对方站的帐号，请在浏览器中登录。随后打开浏览器的网页开发者工具（以Firefox为例： <i class="fa-solid fa-bars"></i> -> 更多工具 -> 网页开发者工具）</p>
+<p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/web_devtools.png alt></p>
+<p>刷新页面，找到最后一个<code>GET</code>方法的条目，点开就可以在右侧看到<code>cookie</code>了：</p>
+<p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/morescicookie.png alt></p>
+<p>将得到的<code>cookie</code>复制下来备用。回到服务器重新运行偷表情神器：</p>
+<pre tabindex=0><code>./emoji_downloader_linux_x86_64
+</code></pre><p>来到<code>是否设置Mastodon Cookie？(y/N)</code>这一步，这次我们选择<code>y</code>，然后输入刚刚得到的<code>cookie</code>的值（<code>_mastodon_session</code>开头），稍等一下就可以成功解析出表情包了。根据脚本提示选择表情包分类，随后：</p>
+<pre tabindex=0><code>是否开启白名单emoji名称？(y/N)
+是否替换emoji名称？(y/N)
+请输入保存文件夹(默认：./myEmojis)：
+是否忽略下载中的单个emoji下载错误？(Y/n)
+是否打包为压缩文件？(Y/n)
+是否在打包为压缩文件后删除原始的下载文件(Y/n)
+并发下载量(默认：16)：
+是否显示下载日志？(Y/n)
+</code></pre><p>以上全部一路回车。脚本运行的最后会有导入表情包的提示：</p>
+<pre tabindex=0><code>非docker：
+RAILS_ENV=production bin/tootctl emoji import --category=自定义表情分类名 表情tar.gz文件地址
+
+docker：
+docker cp ./表情地址 web服务docker名:/tmp/表情名.tar.gz
+docker-compose exec web bin/tootctl emoji import --category=自定义表情分类名 /tmp/表情名.tar.gz
+</code></pre><p>表情包的默认下载地址是<code>./myEmojis</code>，<code>web服务docker名</code>可以运行<code>docker ps</code>查看，一般是<code>mastodon-web-1</code>，表情分类命名随意设置。</p>
+<p>最后一步的过程比较慢，需要把表情包写入数据库中。成功之后就可以使用新鲜出炉的表情包啦~</p>
+<script src=https://kit.fontawesome.com/57c1376f6d.js crossorigin=anonymous></script>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -969,6 +1013,7 @@ See Also
 <li><a href=#学到的docker命令>学到的docker命令</a></li>
 <li><a href=#自定义css样式>自定义CSS样式</a></li>
 <li><a href=#ssl证书续签>SSL证书续签</a></li>
+<li><a href=#从他站爬取自定义表情包>从他站爬取自定义表情包</a></li>
 </ul>
 </nav>
 </div>
