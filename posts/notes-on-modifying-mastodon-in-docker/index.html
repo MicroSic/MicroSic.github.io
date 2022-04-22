@@ -809,8 +809,7 @@ systemctl reload nginx
 </code></pre><p>使脚本可执行并重新启动<code>cron</code>守护程序，以便脚本每天运行：</p>
 <pre tabindex=0><code>chmod +x /etc/cron.daily/letsencrypt-renew
 systemctl restart cron
-</code></pre><script src=https://kit.fontawesome.com/57c1376f6d.js crossorigin=anonymous></script>
-<h2 id=从他站爬取自定义表情包>从他站爬取自定义表情包</h2>
+</code></pre><h2 id=从他站爬取自定义表情包>从他站爬取自定义表情包</h2>
 <div class=box>2022/04/22更新：<br>
 爬取自定义表情包</div>
 <p>一般情况下，作为站长当发现其他站点有好看的表情包想拥有的时候，最简单粗暴的方式是去网页端的管理后台将他站表情包复制到自家站点的数据库中。但是这样需要一个一个勾选表情包并复制，非常低效，只适用于一次性复制少量表情包。那么如何一次性将他站的一整个表情分类（甚至全部分类）全都偷过来呢？</p>
@@ -829,7 +828,7 @@ chmod +x ./emoji_downloader_linux_x86_64
 <pre tabindex=0><code>2022-04-22 02:01:06.105254 prompt.go:84 &lt;plParseJson&gt; |MAN| [INFO] 解析中......
 2022-04-22 02:01:06.557876 prompt.go:87 &lt;plParseJson&gt; |MAN| [ERROR] 解析失败！请检查 http code not correct! got 401,resp text is {&quot;error&quot;:&quot;This method requires an authenticated user&quot;}
 出现错误，按任意键结束
-</code></pre><p>如果你拥有对方站的帐号，请在浏览器中登录。随后打开浏览器的网页开发者工具（以Firefox为例： <i class="fa-solid fa-bars"></i> -> 更多工具 -> 网页开发者工具）</p>
+</code></pre><p>如果你拥有对方站的帐号，请在浏览器中登录。随后打开浏览器的网页开发者工具（以Firefox为例：右上角Burger Menus -> 更多工具 -> 网页开发者工具）</p>
 <p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/web_devtools.png alt></p>
 <p>刷新页面，找到最后一个<code>GET</code>方法的条目，点开就可以在右侧看到<code>cookie</code>了：</p>
 <p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/morescicookie.png alt></p>
