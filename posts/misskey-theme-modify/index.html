@@ -3,7 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>Misskey | 0基础制作简单的Misskey前端主题 – Zoe's Dumpster.</title>
+<title>Misskey | 简明制作Misskey前端主题 – Zoe's Dumpster.</title>
 <script defer src=/js/fuse.min.32195737929df2c8096e855a5789cbb3f1331224d9169e8705493e7008f47df8.js></script>
 <script src=/js/enquire.min.dfb99dee1e029d51d6cfb672d847929890b1585402de17f5ed092edd72a688b4.js></script>
 <script defer src=/js/lazysizes.min.fb649fcae62177dfe63e67081ddceb830b5ce1f05a4184e9bbb7d87ac4b8f4e5.js></script>
@@ -19,7 +19,7 @@
 <meta property="article:published_time" content="2022-08-13T10:53:28+0800">
 <meta name=author content="Roelxy">
 <meta property="og:site_name" content="Zoe's Dumpster.">
-<meta property="og:title" content="Misskey | 0基础制作简单的Misskey前端主题">
+<meta property="og:title" content="Misskey | 简明制作Misskey前端主题">
 <meta property="og:url" content="http://blog.tantalum.life/posts/misskey-theme-modify/">
 <meta property="og:type" content="article">
 <meta property="og:description" content="Roelxy's Blog">
@@ -27,7 +27,7 @@
 <meta property="og:image:url" content="http://blog.tantalum.life/images/meta/mymetaimage.jpg">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:app:name:iphone content="Zoe's Dumpster.">
-<meta property="twitter:title" content="Misskey | 0基础制作简单的Misskey前端主题">
+<meta property="twitter:title" content="Misskey | 简明制作Misskey前端主题">
 <meta property="twitter:description" content="Roelxy's Blog">
 <meta name=generator content="Hugo 0.89.1">
 <meta name=msapplication-TileColor content="#fff">
@@ -38,7 +38,7 @@
 <link rel=manifest href=/manifest.json>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Misskey | 0基础制作简单的Misskey前端主题","datePublished":"2022-08-13T10:53:28+08:00","dateModified":"2022-08-13T10:53:28+08:00","url":"http://blog.tantalum.life/posts/misskey-theme-modify/","description":"介绍 本文基于Misskey写就，搭建方式是利用现有docker镜像进行最小化部署。 与Mastodon不同的是，Mastodon只能使用管理员","keywords":["Misskey"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Misskey | 简明制作Misskey前端主题","datePublished":"2022-08-13T10:53:28+08:00","dateModified":"2022-08-13T10:53:28+08:00","url":"http://blog.tantalum.life/posts/misskey-theme-modify/","description":"介绍 本文基于Misskey写就，搭建方式是利用现有docker镜像进行最小化部署。 与Mastodon不同的是，Mastodon只能使用管理员","keywords":["Misskey"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -158,19 +158,19 @@ kimbie
 <a href=http://blog.tantalum.life/posts/ class=capitalize>Posts</a>
 </li>
 <li class=is-active>
-<span>Misskey | 0基础制作简单的Misskey前端主题</span>
+<span>Misskey | 简明制作Misskey前端主题</span>
 </li>
 </ol>
 </nav>
 <div class=single>
 <div class=single__nojs>This page looks best with JavaScript enabled</div>
 <script>document.querySelector('.single').classList.remove('hide'),document.querySelector('.single__nojs').classList.add('hide')</script>
-<h2 class=single__title data-ani=true>Misskey | 0基础制作简单的Misskey前端主题</h2>
+<h2 class=single__title data-ani=true>Misskey | 简明制作Misskey前端主题</h2>
 <h3 class=single__subtitle>几行js代码就搞定的事，真的不来试试嘛</h3>
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Aug 13, 2022 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;2&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;3&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -183,13 +183,26 @@ kimbie
 <h2 id=介绍>介绍</h2>
 <p>本文基于<a href=https://misskey-hub.net/>Misskey</a>写就，搭建方式是<a href=https://blog.tantalum.life/posts/build-misskey-in-docker/>利用现有docker镜像进行最小化部署</a>。<br>
 与Mastodon不同的是，Mastodon只能使用管理员添加的主题，要想添加外部主题需由管理员修改源码，而Misskey不仅仅满足于自带主题，任何人都可以制作主题并安装。也就是说就算普通用户不喜欢所在实例的默认主题（由管理员设置），也大可不必将就凑合，本文简单介绍如何自己制作喜欢的主题并使用。</p>
-<p>另一方面，由于Mastodon用户主要需求就是UI好看。随着越来越多的Mastodon站长开始魔改透明背景主题，中文用户总量也日益增多。但其实Misskey的主题魔改本身就足够简单，而且Misskey的web端自带了一个桌布功能，只要将主题本身的背景色设置成半透明即可。而Mastodon的主题魔改工作需要有前端经验的人来设计。</p>
+<p>另一方面，Mastodon用户主要需求就是UI好看。随着越来越多的Mastodon站长开始魔改透明背景主题，中文用户总量也日益增多。但其实Misskey的主题魔改本身就足够简单，而且Misskey的web端自带了一个桌布功能，只要将主题本身的背景色设置成半透明即可。而Mastodon的主题魔改工作需要有前端经验的人来设计。</p>
 <h2 id=开始魔改>开始魔改</h2>
-<p>test</p>
+<p>由于我自己比较喜欢暗色主题，所以下面我皆以暗色主题为例，浅色主题的修改方式类似。</p>
+<p>
+<img src=/emoji/ablobcouncil.gif align=left title=ablobcouncil alt=ablobcouncil width=30 height=30>
+注意Misskey的外观设置都是存在本地缓存而不是同步到服务器，所以同一个账号在不同设备可以使用不同主题，每个设备中的外观设置都互相独立。所以如果你非常喜欢某个主题，而你有多个设备/多个登录会话，则需要设置多次。</p>
+<h3 id=挑选>挑选</h3>
+<p>准备一只可以登录的Misskey帐号。登录后打开设置-外观主题-<a href=https://assets.misskey.io/theme/list>取得主题</a>，随意挑选一个主题，复制代码后回到Misskey中预览效果，这一步重复多次，直到某个主题的背景色你非常喜欢，将其安装。或者你觉得某个自带主题的背景色很好看也可以。</p>
+<p>回到Misskey的主题管理员，记录那个主题代码中的<code>bg</code>字段，这个是背景色的色值。</p>
+<p>在挑选主题的过程中，顺便留意各个主题的主题色你是否喜欢，若喜欢则将其安装，并把主题代码中的<code>accent</code>字段记录下来，这个是主题色的色值。</p>
+<p>举个例子，我觉得自带主题中<code>Mi Future Dark</code>的纯黑背景色很好看，但同时又很喜欢<code>Mi Cherry Dark</code>的玫红主题色，那么我将前者的<code>bg</code>字段和后者的<code>accent</code>字段记录下来，也就是<code>bg: '#101014',</code>和<code>accent: 'rgb(255, 89, 117)',</code>。</p>
+<p>如果你实在挑不出喜欢的主题色，可以上这个<a href=https://encycolorpedia.cn/b85798>颜色码对照表</a>网站碰碰运气。</p>
+<h3 id=融合魔改>融合魔改</h3>
+<p>在刚刚安装好的所有候选主题中挑选一个作为模板，将他的主题代码复制下来，回到Misskey选择主题编辑器，接下来由你自己将他魔改成你喜欢的样子。</p>
+<p>下滑找到编辑代码的地方，把代码粘贴上去，随后将代码中的<code>id</code>字段，<code>author</code>字段和<code>desc</code>字段（若有）删除，并将之前记录下来的<code>bg</code>字段和<code>accent</code>字段替换进去，注意需要保留代码原有的格式。</p>
+<p>至此魔改步骤就大致完成。但如你所见，还有相当一部分字段没有改动，例如<code>hashing</code>，<code>link</code>，<code>mention</code>,<code>fg</code>等等等。只要是<code>props</code>参数内的内容都是可以修改的，当然也可以自行增减。所有参数请见<a href=https://github.com/misskey-dev/misskey/blob/develop/packages/client/src/themes/_dark.json5>Dark模板</a>中11-98行。如果不会修改，直接删掉即可，注意<code>base</code>和<code>fg</code>字段不要动。</p>
 <h2 id=成品>成品</h2>
 <h3 id=纯黑背景>纯黑背景</h3>
 <p>Down Town(Black)，纯黑色背景+玫红色主题。</p>
-<pre tabindex=0><code class=language-json5 data-lang=json5>{
+<pre tabindex=0><code>{
 	id: '6e6676fd-afbd-43ee-a3ef-2c5a82fd3f48',
 	base: 'dark',
 	name: 'Down Town(Black)',
@@ -204,7 +217,7 @@ kimbie
 	author: 'MicroSic',
 }
 </code></pre><p>Silence City(Black)，纯黑色背景+灰蓝色主题。</p>
-<pre tabindex=0><code class=language-json5 data-lang=json5>{
+<pre tabindex=0><code>{
 	id: '5cc9556c-bee7-4e73-85a5-f2cc95f8043e',
 	base: 'dark',
 	name: 'Silence City(Black)',
@@ -220,10 +233,10 @@ kimbie
 }
 </code></pre><h3 id=透明背景>透明背景</h3>
 <p>Down Town，透明背景+玫红色主题。</p>
-<pre tabindex=0><code class=language-json5 data-lang=json5>{
-	id: '081b02e6-9f76-4c20-8a8a-efe67f803e73',
+<pre tabindex=0><code>{
+	id: '4c571e7b-c266-47ee-b463-1f84996d5efe',
 	base: 'dark',
-	desc: '透明背景主题，建议设定桌布后使用。'
+	desc: '透明背景主题，建议设定桌布后使用。',
 	name: 'Down Town',
 	props: {
 		bg: 'rgba(16,16,20,0.3)',
@@ -236,7 +249,7 @@ kimbie
 	author: 'MicroSic',
 }
 </code></pre><p>Silence City，透明背景+灰蓝色主题。</p>
-<pre tabindex=0><code class=language-json5 data-lang=json5>{
+<pre tabindex=0><code>{
 	id: '1aee8b57-1b42-4063-a8d4-427c06a944b6',
 	base: 'dark',
 	desc: '透明背景主题，建议设定桌布后使用。',
@@ -389,7 +402,12 @@ See Also
 <nav id=TableOfContents>
 <ul>
 <li><a href=#介绍>介绍</a></li>
-<li><a href=#开始魔改>开始魔改</a></li>
+<li><a href=#开始魔改>开始魔改</a>
+<ul>
+<li><a href=#挑选>挑选</a></li>
+<li><a href=#融合魔改>融合魔改</a></li>
+</ul>
+</li>
 <li><a href=#成品>成品</a>
 <ul>
 <li><a href=#纯黑背景>纯黑背景</a></li>
