@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Dec 1, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;6&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;7&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -201,11 +201,16 @@ One杂物馆
 <pre tabindex=0><code>uname -a
 dpkg --print-architecture
 </code></pre><p>然后按照<a href=https://docs.docker.com/engine/install/>docker官方文档</a>选择自己的服务器系统进行安装，再<a href=https://docs.docker.com/compose/install/>安装docker compose</a>。</p>
-<p>或者是直接使用官方提供的一键脚本安装：</p>
-<pre tabindex=0><code>bash &lt;(curl -L https://get.docker.com/)
-sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-</code></pre><h2 id=拉取plume配置文件与docker文件>拉取plume配置文件与docker文件</h2>
+<p>或者是使用一键脚本安装即可。首先至<a href=https://github.com/docker/compose/releases>docker-compose release</a>界面找到最新的版本号（例如<code>v2.2.3</code>），随后回到服务器执行：</p>
+<pre tabindex=0><code>#安装docker
+bash &lt;(curl -L https://get.docker.com/)
+#安装特定版本的docker-compose
+curl -L &quot;https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+#以v2.2.3为例，这里替换为最新版本
+
+chmod +x /usr/local/bin/docker-compose #赋权
+</code></pre><p>如果想要更新<code>docker-compose</code>版本，先运行<code>which docker-compose</code>找到安装位置（例如<code>/usr/local/bin/docker-compose</code>），随后<code>rm -rf /usr/local/bin/docker-compose</code>删去旧版本，然后运行一键脚本命令直接安装新版本<code>docker-compose</code>并赋权即可。</p>
+<h2 id=拉取plume配置文件与docker文件>拉取plume配置文件与docker文件</h2>
 <p>参考<a href=https://docs.joinplu.me/installation/with/docker/>plume官方文档</a>，如果将plume的配置文件存放在<code>/opt/plume</code>文件夹下，则运行：</p>
 <pre tabindex=0><code>cd /opt     #跳转到/opt文件夹下
 mkdir plume     #新建plume文件夹
