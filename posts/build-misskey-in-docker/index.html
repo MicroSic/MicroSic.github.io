@@ -329,7 +329,10 @@ server {
         add_header X-Cache $upstream_cache_status;
     }
 }
-</code></pre><p>测试配置文件是否有错误（试运行）：</p>
+</code></pre><p>
+<img src=/emoji/ablobcouncil.gif align=left title=ablobcouncil alt=ablobcouncil width=30 height=30>
+**注意：**本文中<code>misskey.conf</code>文件已过时，请至<a href=https://misskey-hub.net/en/docs/admin/nginx.html>官方文档</a>查看最新版本。</p>
+<p>测试配置文件是否有错误（试运行）：</p>
 <pre tabindex=0><code>nginx -t
 </code></pre><p>若没有错误，生效新的配置文件并运行 Nginx，开机启动：</p>
 <pre tabindex=0><code>nginx -s reload
