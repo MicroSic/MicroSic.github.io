@@ -380,19 +380,6 @@ ES_PORT=9200
 <p>重启长毛象载入改动，否则数据库迁移命令不会生效：</p>
 <pre tabindex=0><code>docker-compose down
 docker-compose up -d
-</code></pre><h2 id=学到的docker命令>学到的docker命令</h2>
-<p>删除无用镜像（需要输入y）：</p>
-<pre tabindex=0><code>docker image prune -a
-</code></pre><p>强制删除镜像：</p>
-<pre tabindex=0><code>docker image prune -a -f 
-</code></pre><p>删除异常停止的docker容器：</p>
-<pre tabindex=0><code>docker rm `docker ps -a | grep Exited | awk '{print $1}'`
-</code></pre><p>删除名称或标签为none的镜像：</p>
-<pre tabindex=0><code>docker rmi -f  `docker images | grep '&lt;none&gt;' | awk '{print $3}'` 
-</code></pre><p>显示容器使用的系统资源（一秒刷新一次，<kbd>Ctrl</kbd>+<kbd>C</kbd>退出）：</p>
-<pre tabindex=0><code>docker stats
-</code></pre><p>不想持续的监控容器使用资源的情况，可以通过<code>--no-stream</code>选项只输出当前的状态：</p>
-<pre tabindex=0><code>docker stats --no-stream
 </code></pre><h2 id=自定义css样式>自定义CSS样式</h2>
 <p>自定义CSS：</p>
 <div class=highlight><div class=chroma>
@@ -1009,7 +996,6 @@ See Also
 <li><a href=#备份配置文件>备份配置文件</a></li>
 <li><a href=#加入魔改配置>加入魔改配置</a></li>
 <li><a href=#后续工作>后续工作</a></li>
-<li><a href=#学到的docker命令>学到的docker命令</a></li>
 <li><a href=#自定义css样式>自定义CSS样式</a></li>
 <li><a href=#ssl证书续签>SSL证书续签</a></li>
 <li><a href=#从他站爬取自定义表情包>从他站爬取自定义表情包</a></li>

@@ -380,7 +380,7 @@ sudo apt-get install certbot python3-certbot-nginx -y
 sudo certbot --nginx
 </code></pre><p>Let‘s encrypt的证书90天到期后需要续期，届时只需运行<code>sudo certbot --nginx</code>按提示操作即可。</p>
 <h2 id=补充中文支持>补充中文支持</h2>
-<p>经<code>pullopen</code>建议，补充两点中文支持内容：</p>
+<p>经pullopen站长建议，补充两点中文支持内容：</p>
 <ul>
 <li>
 <p>建议在.env中设置<code>SEARCH_CONTENT_TOKENIZER=ngram</code>，并且可选<code>SEARCH_TAG_TOKENIZER=ngram</code>，<code>docker-compose down</code>随后清空search_index文件夹，<code>docker-compose up -d</code>重启之后运行<code>docker-compose run --rm plume plm search init</code>重建索引。这样如果是官方repo，则会以2-8个字符的词组作为搜索关键词，而非默认的空格为分界。<a href=https://github.com/Plume-org/Plume/issues/829>具体参考</a>。</p>
