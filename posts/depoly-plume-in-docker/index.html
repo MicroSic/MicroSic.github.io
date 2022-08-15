@@ -3,42 +3,42 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>RSSHub | 利用Docker-compose搭建RSS生成器 – Zoe's Dumpster.</title>
+<title>Plume | 利用Docker-compose搭建Fedi开源博客平台 – Zoe's Dumpster.</title>
 <script defer src=/js/fuse.min.32195737929df2c8096e855a5789cbb3f1331224d9169e8705493e7008f47df8.js></script>
 <script src=/js/enquire.min.dfb99dee1e029d51d6cfb672d847929890b1585402de17f5ed092edd72a688b4.js></script>
 <script defer src=/js/lazysizes.min.fb649fcae62177dfe63e67081ddceb830b5ce1f05a4184e9bbb7d87ac4b8f4e5.js></script>
 <script defer src=/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js></script>
 <script defer src=/js/helper/fadeinout.min.1d13d3e810c3940e80cbba6216a1c76fbf42b5431fc83537ea6997863802362b.js></script>
 <script defer src=/js/helper/closest.min.js></script>
-<script>"use strict";window.NodeList&&!NodeList.prototype.forEach&&(NodeList.prototype.forEach=Array.prototype.forEach),String.prototype.includes||(String.prototype.includes=function(b,a){'use strict';if(b instanceof RegExp)throw TypeError('first argument must not be a RegExp');return a===void 0&&(a=0),this.indexOf(b,a)!==-1}),Document.prototype.append=Element.prototype.append=function(){this.appendChild(_mutation(arguments))};function _mutation(a){if(!a.length)throw new Error('DOM Exception 8');if(a.length===1)return typeof a[0]=='string'?document.createTextNode(a[0]):a[0];for(var c=document.createDocumentFragment(),e=a.length,d=-1,b;++d<e;)b=a[d],c.appendChild(typeof b=='string'?document.createTextNode(b):b);return c}String.prototype.startsWith||(String.prototype.startsWith=function(b,a){return a=a||0,this.indexOf(b,a)===a}),document.addEventListener('DOMContentLoaded',function(){var z=document.querySelector('.navbar__burger'),J,F,G,N,U,f,d,V,r,ae,Z,Q,o,g,y,k,b,s,t,P,O,e,C,h,D,B,ai,A,aj,at,ar,ab,aq,E,ap,ao,ah,an,i,j,c,am,S,T,ak,w,W,X,ag,x,n,Y,q,av,au,a,aw,R,m,L,K,I,v,p,u;z?z.addEventListener('click',function(c){var a=document.querySelector('.navbarm__collapse'),b;a&&(b=a.getAttribute('data-open'),b==='true'?(a.setAttribute('data-open','false'),a.style.maxHeight=0,z.classList.remove('is-active')):(a.setAttribute('data-open','true'),a.style.maxHeight=a.scrollHeight+"px",z.classList.add('is-active')))}):null,J=document.querySelectorAll('.single__contents > table');for(let a=0;a<J.length;a++)F=J[a],G=document.createElement('div'),G.className='table-wrapper',F.parentElement.replaceChild(G,F),G.appendChild(F);N=document.querySelectorAll('.footnote-ref'),U=document.querySelectorAll('.footnote-backref'),N?N.forEach(function(a,c){a.onmouseenter=function(){b.classList.contains('scrolling')&&b.classList.remove('scrolling')},a.onmouseleave=function(){b.classList.contains('scrolling')||setTimeout(function(){b.classList.add('scrolling')},100)},a.onclick=function(){b.classList.contains('scrolling')||(b.classList.remove('navbar--show'),b.classList.remove('navbar--hide'),b.classList.add('navbar--hide'))}}):null,U?U.forEach(function(a,c){a.onmouseenter=function(){b.classList.contains('scrolling')&&b.classList.remove('scrolling')},a.onmouseleave=function(){b.classList.contains('scrolling')||setTimeout(function(){b.classList.add('scrolling')},100)},a.onclick=function(){b.classList.contains('scrolling')||(b.classList.remove('navbar--show'),b.classList.remove('navbar--hide'),b.classList.add('navbar--hide'))}}):null,f=document.querySelector('.summary__container'),d=document.querySelector('.search-result'),V=document.querySelector('.search-result__close'),V?V.addEventListener('click',function(a){d.setAttribute('data-display','none'),f.setAttribute('data-display','block')}):null,document.querySelectorAll('.tab')?document.querySelectorAll('.tab').forEach(function(a,d){var e=a.getAttribute('id'),f=a,b=a.querySelectorAll('.tab__link'),c=a.querySelectorAll('.tab__content'),g=[];b&&b.length>0?b.forEach(function(b,d,a){b.onclick=function(e){for(var b=0;b<a.length;b++)d===parseInt(b,10)?a[b].classList.contains('active')||(a[b].classList.add('active'),c[b].style.display='block'):(a[b].classList.remove('active'),c[b].style.display='none')}}):null}):null,document.querySelectorAll('.codetab')?document.querySelectorAll('.codetab').forEach(function(a,d){var e=a.getAttribute('id'),f=a,b=a.querySelectorAll('.codetab__link'),c=a.querySelectorAll('.codetab__content'),g=[];b&&b.length>0?b.forEach(function(b,d,a){b.onclick=function(e){for(var b=0;b<a.length;b++)d===parseInt(b,10)?a[b].classList.contains('active')||(a[b].classList.add('active'),c[b].style.display='block'):(a[b].classList.remove('active'),c[b].style.display='none')}}):null}):null,r=document.getElementById("gtt"),r.style.display="none",r.addEventListener('click',function(){window.document.documentMode?document.documentElement.scrollTop=0:af(250)});function af(a){var b=-window.scrollY/(a/15),c=setInterval(function(){window.scrollY!=0?window.scrollBy(0,b):clearInterval(c)},15)}ae=function(){document.body.scrollTop>250||document.documentElement.scrollTop>250?r.style.display="block":r.style.display="none"},Z=document.querySelectorAll('.expand__button');for(let a=0;a<Z.length;a++)Z[a].addEventListener("click",function(){var a=this.nextElementSibling;a.style.maxHeight?(a.style.maxHeight=null,this.querySelector('svg').classList.add('expand-icon__right'),this.querySelector('svg').classList.remove('expand-icon__down')):(a.style.maxHeight=a.scrollHeight+"px",this.querySelector('svg').classList.remove('expand-icon__right'),this.querySelector('svg').classList.add('expand-icon__down'))});Q=window.pageYOffset||document.documentElement.scrollTop,o=document.querySelector('.toc'),g=o?o.querySelector('#TableOfContents'):null,y=document.getElementById('toggle-toc'),k=document.querySelector('.single__contents'),b=document.querySelector('.navbar'),s=document.querySelector('.toc__flexbox'),t=document.querySelector('.toc__flexbox--outer'),P=document.querySelectorAll('.expand__content'),O=document.querySelectorAll('.box'),e=null,C=JSON.parse("true"),h=JSON.parse('["h2","h3","h4"]'),h?h=h.toString():h="h1, h2, h3, h4, h5, h6",k&&k.querySelectorAll(".tab")?k.querySelectorAll(".tab").forEach(function(a){a.querySelectorAll(h).forEach(function(a){e=Array.isArray(e)?e.concat(a.getAttribute('id')):[a.getAttribute('id')]})}):null,P?P.forEach(function(a){a.querySelectorAll(h).forEach(function(a){e=Array.isArray(e)?e.concat(a.getAttribute('id')):[a.getAttribute('id')]})}):null,O?O.forEach(function(a){a.querySelectorAll(h).forEach(function(a){e=Array.isArray(e)?e.concat(a.getAttribute('id')):[a.getAttribute('id')]})}):null,window.onscroll=function(){ae();var a=window.pageYOffset||document.documentElement.scrollTop;if(a>Q){if(a<250?r.style.display="none":r.style.display="block",a<45)return null;b.classList.contains('scrolling')&&(b.classList.contains('navbar--hide')?b.classList.contains('navbar--show')&&b.classList.remove('navbar--show'):b.classList.add('navbar--hide')),k&&(k.querySelectorAll(h).length>0?k.querySelectorAll(h).forEach(function(c){var b,a;if(y&&!y.checked)return null;if(e&&e.includes(c.getAttribute('id')))return null;document.documentElement.scrollTop>=c.offsetTop&&g&&(b=c.getAttribute('id'),o.querySelectorAll('a').forEach(function(a){a.classList.remove('active')}),o.querySelector('a[href="#'+b+'"]')?o.querySelector('a[href="#'+b+'"]').classList.add('active'):null,!1===C||(g.querySelectorAll('ul')?g.querySelectorAll('ul').forEach(function(a){a.querySelectorAll('li').forEach(function(a){a.querySelectorAll('ul').forEach(function(a){a.style.display='none'})})}):null),a=g.querySelector("[href='#"+b+"']"),a&&a.nextElementSibling&&(a.nextElementSibling.style.display='block'),getParents(a,'ul')?getParents(a,'ul').forEach(function(a){a.style.display='block'}):null)}):(s&&(s.setAttribute('data-position',''),s.classList.contains('hide')||s.classList.add('hide')),t&&(t.setAttribute('data-position',''),t.classList.contains('hide')||t.classList.add('hide'))))}else a<250&&(r.style.display="none"),b.classList.contains('scrolling')&&(b.classList.contains('navbar--hide')?b.classList.remove('navbar--hide'):b.classList.contains('navbar--show')||b.classList.add('navbar--show')),k&&(k.querySelectorAll(h).length>0?k.querySelectorAll(h).forEach(function(c){var b,a;if(y&&!y.checked)return null;if(e&&e.includes(c.getAttribute('id')))return null;document.documentElement.scrollTop>=c.offsetTop&&g&&(b=c.getAttribute('id'),o.querySelectorAll('a').forEach(function(a){a.classList.remove('active')}),o.querySelector('a[href="#'+b+'"]')?o.querySelector('a[href="#'+b+'"]').classList.add('active'):null,!1===C||(g.querySelectorAll('ul')?g.querySelectorAll('ul').forEach(function(a){a.querySelectorAll('li').forEach(function(a){a.querySelectorAll('ul').forEach(function(a){a.style.display='none'})})}):null),a=g.querySelector("[href='#"+b+"']"),a&&a.nextElementSibling&&(a.nextElementSibling.style.display='block'),getParents(a,'ul')?getParents(a,'ul').forEach(function(a){a.style.display='block'}):null)}):(s&&!s.classList.contains('hide')&&s.classList.add('hide'),t&&!t.classList.contains('hide')&&t.classList.add('hide'))),g&&document.documentElement.scrollTop<250&&(!1===C||(g.querySelector('ul')?g.querySelector('ul').querySelectorAll('li').forEach(function(a){a.querySelectorAll('ul').forEach(function(a){a.style.display='none'})}):null));Q=a<=0?0:a},D=localStorage.getItem('theme'),B=document.getElementById('root'),ai=document.querySelectorAll('.select-theme'),A=document.querySelectorAll('.select-theme__item'),aj=JSON.parse('"dark"'),at=JSON.parse('"light"'),ar=JSON.parse('"hacker"'),ab=JSON.parse('"solarized"'),aq=JSON.parse('"kimbie"'),E=function(a){var b=document.getElementsByName('msapplication-TileColor')[0],c=document.getElementsByName('theme-color')[0],d=document.getElementsByName('msapplication-navbutton-color')[0],e=document.getElementsByName('apple-mobile-web-app-status-bar-style')[0];a.includes('dark')?(b.setAttribute('content','#fcfcfa'),c.setAttribute('content','#403E41'),d.setAttribute('content','#403E41'),e.setAttribute('content','#403E41')):a.includes('light')?(b.setAttribute('content','#555'),c.setAttribute('content','#eee'),d.setAttribute('content','#eee'),e.setAttribute('content','#eee')):a.includes('hacker')?(b.setAttribute('content','#e3cd26'),c.setAttribute('content','#252526'),d.setAttribute('content','#252526'),e.setAttribute('content','#252526')):a.includes('solarized')?(b.setAttribute('content','#d3af86'),c.setAttribute('content','#51412c'),d.setAttribute('content','#51412c'),e.setAttribute('content','#51412c')):a.includes('kimbie')&&(b.setAttribute('content','#586e75'),c.setAttribute('content','#eee8d5'),d.setAttribute('content','#eee8d5'),e.setAttribute('content','#eee8d5'))},ap=function(a){if(a===aj)return'dark';if(a===at)return'light';if(a===ar)return'hacker';if(a===ab)return'solarized';if(a===aq)return'kimbie'},D?(A?A.forEach(function(a){a.text.trim()===D?a.classList.add('is-active'):a.classList.remove('is-active')}):null,E(D)):E(B.className),A?A.forEach(function(a,b){a.addEventListener('click',function(c){var a=ap(c.target.text.trim()),b,d;localStorage.setItem('theme',a),E(a),B.removeAttribute('class'),B.classList.add('theme__'+a),ai.forEach(function(b){b.querySelectorAll('a').forEach(function(b){b.classList&&(b.text.trim()===a?b.classList.contains('is-active')||b.classList.add('is-active'):b.classList.contains('is-active')&&b.classList.remove('is-active'))})}),window.mermaid&&(a==="dark"||a==="hacker"?(mermaid.initialize({theme:'dark'}),location.reload()):(mermaid.initialize({theme:'default'}),location.reload())),b=document.getElementById('utterances'),b&&b.querySelector('iframe').contentWindow.postMessage({type:'set-theme',theme:a==="dark"||a==="hacker"?'photon-dark':a==='kimbie'?'github-dark-orange':'github-light'},'https://utteranc.es'),d=document.querySelectorAll('.twitter-timeline'),d&&window.postMessage({type:'set-twitter-theme',theme:a==='light'||a==='solarized'?'light':'dark'})})}):null,ao=JSON.parse('"http://blog.tantalum.life"'),ah=JSON.parse('"http://blog.tantalum.life/posts/build-rsshub-in-docker/"'),an=JSON.parse('""'),i=null,j=null,c=null,am=JSON.parse("true"),S=JSON.parse("100"),T=JSON.parse("0.4"),ak=JSON.parse("true"),w=JSON.parse("true"),W=JSON.parse('"main"'),X=JSON.parse('"posts"'),ag=JSON.parse('"page"'),x=null,am&&function(){var a=new XMLHttpRequest;X==="publication"&&ag!=="page"?a.open('GET',ah+"index.json"):a.open('GET',ao+an+"/index.json"),a.setRequestHeader('Content-Type','application/json; charset=utf-8'),a.onload=function(){a.status===200?(x=new Fuse(JSON.parse(a.response.toString('utf-8')),{keys:X.includes('publication')?['title','abstract']:ak?['title','description','content']:['title','description'],includeMatches:w,shouldSort:!0,threshold:T||.4,location:0,distance:S||100,maxPatternLength:32,minMatchCharLength:1,isCaseSensitive:!1,findAllMatches:!1,useExtendedSearch:!1}),window.fuse=x):console.error('['+a.status+']Error:',a.statusText)},a.send()}();function ac(e,a){var b=document.createElement('li'),c,d;b.className='search-result__item',c=document.createElement('a'),c.innerHTML=a.item.title,c.setAttribute('class','search-result__item--title'),c.setAttribute('href',a.item.uri),d=document.createElement('div'),d.setAttribute('class','search-result__item--desc'),a.item.description?d.innerHTML=a.item.description:a.item.content&&(d.innerHTML=a.item.content.substring(0,225)),b.appendChild(c),b.appendChild(d),e.appendChild(b)}function al(f,a){var e=document.createElement('li'),b,d,c;if(e.className='search-result__item',b=null,d=document.createElement('a'),d.innerHTML=a.item.title,d.setAttribute('class','search-result__item--title'),d.setAttribute('href',a.item.uri),a.matches&&a.matches.length){for(c=0;c<a.matches.length;c++)'title'===a.matches[c].key&&(d=document.createElement('a'),d.innerHTML=l(a.matches[c].value,a.matches[c].indices),d.setAttribute('class','search-result__item--title'),d.setAttribute('href',a.item.uri)),'description'===a.matches[c].key?(b=document.createElement('div'),b.setAttribute('class','search-result__item--desc'),b.innerHTML=l(a.item.description,a.matches[c].indices)):'content'===a.matches[c].key?b||(b=document.createElement('div'),b.setAttribute('class','search-result__item--desc'),b.innerHTML=l(a.item.content.substring(0,150),a.matches[c].indices)):a.item.description?(b=document.createElement('div'),b.setAttribute('class','search-result__item--desc'),b.innerHTML=a.item.description):(b=document.createElement('div'),b.setAttribute('class','search-result__item--desc'),b.innerHTML=a.item.content.substring(0,150));e.appendChild(d),b&&e.appendChild(b),e&&f.appendChild(e)}}function H(d,c){var a,b;for(i=document.getElementById('search-results'),j=document.getElementById('search-menu'),i.setAttribute('class','dropdown is-active'),a=document.createElement('ul'),a.setAttribute('class','dropdown-content search-content'),c.length?c.forEach(function(b){var e=document.createElement('li'),c=document.createElement('a'),f,d;c.setAttribute('href',b.uri),c.setAttribute('class','dropdown-item'),c.appendChild(e),f=document.createElement('div'),f.innerHTML=b.title,f.setAttribute('class','menu-item__title'),d=document.createElement('div'),d.setAttribute('class','menu-item__desc'),b.description?d.innerHTML=b.description:b.content&&(d.innerHTML=b.content.substring(0,150)),e.appendChild(f),e.appendChild(d),a.appendChild(c)}):(b=document.createElement('li'),b.setAttribute('class','dropdown-item'),b.innerText='No results found',a.appendChild(b));j.hasChildNodes();)j.removeChild(j.lastChild);j.appendChild(a)}function $(d,c){var a,b;for(i=document.getElementById('search-results'),j=document.getElementById('search-menu'),i.setAttribute('class','dropdown is-active'),a=document.createElement('ul'),a.setAttribute('class','dropdown-content search-content'),c.length?c.forEach(function(b){var g=document.createElement('li'),e=document.createElement('a'),c=null,f,d;if(e.setAttribute('href',b.item.uri),e.setAttribute('class','dropdown-item'),e.appendChild(g),f=document.createElement('div'),f.innerHTML=b.item.title,f.setAttribute('class','menu-item__title'),b.matches&&b.matches.length){for(d=0;d<b.matches.length;d++)'title'===b.matches[d].key&&(f.innerHTML=l(b.matches[d].value,b.matches[d].indices)),'description'===b.matches[d].key?(c=document.createElement('div'),c.setAttribute('class','menu-item__desc'),c.innerHTML=l(b.item.description,b.matches[d].indices)):'content'===b.matches[d].key?c||(c=document.createElement('div'),c.setAttribute('class','menu-item__desc'),c.innerHTML=l(b.item.content.substring(0,150),b.matches[d].indices)):b.item.description?(c=document.createElement('div'),c.setAttribute('class','menu-item__desc'),c.innerHTML=b.item.description):(c=document.createElement('div'),c.setAttribute('class','menu-item__desc'),c.innerHTML=b.item.content.substring(0,150));g.appendChild(f),c&&g.appendChild(c),a.appendChild(e)}}):(b=document.createElement('li'),b.setAttribute('class','dropdown-item'),b.innerText='No results found',a.appendChild(b));j.hasChildNodes();)j.removeChild(j.lastChild);j.appendChild(a)}function _(e,c){var a,d;i=document.getElementById('search-mobile-results'),a=document.createElement('div'),a.setAttribute('class','mobile-search__content'),c.length>0?c.forEach(function(b){var c=document.createElement('a');c.setAttribute('href',b.uri),c.innerHTML='<div class="mobile-search__item"><div class="mobile-search__item--title">📄 '+b.title+'</div><div class="mobile-search__item--desc">'+(b.description?b.description:b.content)+'</div></div>',a.appendChild(c)}):(d=document.createElement('span'),a.appendChild(d));let b=document.getElementById('search-mobile-results');while(b.firstChild)b.removeChild(b.firstChild);i.appendChild(a)}function ad(e,c){var a,d;i=document.getElementById('search-mobile-results'),a=document.createElement('div'),a.setAttribute('class','mobile-search__content'),c.length?c.forEach(function(b){var e=document.createElement('li'),g=document.createElement('a'),c=null,f,d;if(g.setAttribute('href',b.item.uri),g.appendChild(e),e.setAttribute('class','mobile-search__item'),f=document.createElement('div'),f.innerHTML=b.item.title,f.setAttribute('class','mobile-search__item--title'),b.matches&&b.matches.length){for(d=0;d<b.matches.length;d++)'title'===b.matches[d].key&&(f.innerHTML=l(b.matches[d].value,b.matches[d].indices)),'description'===b.matches[d].key?(c=document.createElement('div'),c.setAttribute('class','mobile-search__item--desc'),c.innerHTML=l(b.item.description,b.matches[d].indices)):'content'===b.matches[d].key?c||(c=document.createElement('div'),c.setAttribute('class','mobile-search__item--desc'),c.innerHTML=l(b.item.content.substring(0,150),b.matches[d].indices)):b.item.description?(c=document.createElement('div'),c.setAttribute('class','mobile-search__item--desc'),c.innerHTML=b.item.description):(c=document.createElement('div'),c.setAttribute('class','mobile-search__item--desc'),c.innerHTML=b.item.content.substring(0,150));e.appendChild(f),c&&e.appendChild(c),a.appendChild(g)}}):(d=document.createElement('span'),a.appendChild(d));let b=document.getElementById('search-mobile-results');while(b.firstChild)b.removeChild(b.firstChild);i.appendChild(a)}function l(a,d){if(!d)return a;var b='',c=0;return d.forEach(function(d){if(d[0]===d[1])return null;b+=''+a.substring(c,d[0])+'<span class="search__highlight">'+a.substring(d[0],d[1]+1)+'</span>'+'',c=d[1]+1}),b+=a.substring(c),b}n=document.getElementById('search'),Y=document.getElementById('search-mobile'),q=document.getElementById('search-results'),n?n.addEventListener('input',function(b){var a,e;if(!b.target.value|window.innerWidth<770)return q?q.setAttribute('class','dropdown'):null,d?d.setAttribute('data-display','none'):null,f?f.setAttribute('data-display','block'):null,null;c=b.target.value,a=x.search(b.target.value),W==="main"?w?aa(c,a):M(c,a):(w?$(c,a):H(c,a),e=q.querySelectorAll('.dropdown-item'),e?e.forEach(function(a){a.addEventListener('mousedown',function(a){a.target.click()})}):null)}):null,n?n.addEventListener('blur',function(){if(window.innerWidth<770)return null;q?q.setAttribute('class','dropdown'):null}):null,n?n.addEventListener('click',function(b){var a,d;if(window.innerWidth<770)return null;if(!b.target.value)return q?q.setAttribute('class','dropdown'):null,null;c=b.target.value,a=x.search(b.target.value),W==="main"?w?aa(c,a):M(c,a):(w?$(c,a):H(c,a),d=q.querySelectorAll('.dropdown-item'),d?d.forEach(function(a){a.addEventListener('mousedown',function(a){a.target.click()})}):null)}):null,av=document.getElementById("search-menu"),au=document.querySelector('#search-menu .dropdown-item.is-active'),a=null,aw=null,R=350,n?n.addEventListener('keydown',function(c){var b,e;if(window.innerWidth<770)return null;if(c.key==='Escape'&&(d?d.setAttribute('data-display','none'):null,f?f.setAttribute('data-display','block'):null),b=document.querySelectorAll('#search-menu .dropdown-item'),e=c.which||c.keyCode,!b||!b.length)return null;if(c.key==='ArrowDown'||e===40){a===null?(a=0,b[a].classList.remove('is-active')):(b[a].classList.remove('is-active'),a=a===b.length-1?0:a+1),b[a].classList.add('is-active');let c=b[a].offsetTop+b[a].clientHeight-R;c>0?document.querySelector(".search-content").scrollTop+=b[a].getBoundingClientRect().height:a===0&&(document.querySelector(".search-content").scrollTop=0)}else if(c.key==='ArrowUp'||e===38){a===null?(a=b.length-1,b[a].classList.remove('is-active')):(b[a].classList.remove('is-active'),a=a===0?b.length-1:a-1),b[a].classList.add('is-active');let c=b[a].offsetTop+b[a].clientHeight-R;c<0?document.querySelector(".search-content").scrollTop-=b[a].getBoundingClientRect().height:document.querySelector(".search-content").scrollTop=c+b[a].getBoundingClientRect().height}else c.key==='Enter'||e===13?b[a]&&b[a].getAttribute('href')&&(location.href=b[a].getAttribute('href')):(c.key==='Escape'||e===27)&&(c.target.value=null,i&&i.classList.remove('is-active'))}):null,Y?Y.addEventListener('input',function(a){if(!a.target.value){let a=document.getElementById('search-mobile-results');while(a.firstChild)a.removeChild(a.firstChild);return null}c=a.target.value;var b=x.search(a.target.value);_(c,b),w?ad(c,b):_(c,b)}):null,m=document.querySelector('#search-mobile'),L=document.querySelector('.mobile-search'),K=document.querySelectorAll('.navbar-search'),I=document.querySelector('#search-mobile-close'),v=document.querySelector('#search-mobile-container'),p=document.querySelector('#search-mobile-results'),u=document.querySelector('html'),L&&(L.style.display='none'),K?K.forEach(function(a,b){a.addEventListener('click',function(){v&&(v.style.display='block'),m&&m.focus(),u&&(u.style.overflowY='hidden')})}):null,I?I.addEventListener('click',function(){if(v&&(v.style.display='none'),m&&(m.value=''),p)while(p.firstChild)p.removeChild(p.firstChild);u&&(u.style.overflowY='visible')}):null,m?m.addEventListener('keydown',function(a){var b=a.which||a.keyCode;if(a.key==='Escape'||b===27){if(v&&(v.style.display='none'),m&&(m.value=''),p)while(p.firstChild)p.removeChild(p.firstChild);u&&(u.style.overflowY='visible')}}):null;function M(e,a){var g=document.querySelector('.search-result__body'),b=g.querySelector('ul'),c=document.createElement('ul');e?a&&a&&a.length&&(a.forEach(function(a){ac(c,a)}),d?d.setAttribute('data-display','block'):null,f?f.setAttribute('data-display','none'):null):(d?d.setAttribute('data-display','none'):null,f?f.setAttribute('data-display','block'):null),b.parentNode.replaceChild(c,b)}function aa(e,a){var g=document.querySelector('.search-result__body'),b=g.querySelector('ul'),c=document.createElement('ul');e?a&&a&&a.length&&(a.forEach(function(a){al(c,a)}),d?d.setAttribute('data-display','block'):null,f?f.setAttribute('data-display','none'):null):(d?d.setAttribute('data-display','none'):null,f?f.setAttribute('data-display','block'):null),b.parentNode.replaceChild(c,b)}})</script>
+<script>"use strict";window.NodeList&&!NodeList.prototype.forEach&&(NodeList.prototype.forEach=Array.prototype.forEach),String.prototype.includes||(String.prototype.includes=function(b,a){'use strict';if(b instanceof RegExp)throw TypeError('first argument must not be a RegExp');return a===void 0&&(a=0),this.indexOf(b,a)!==-1}),Document.prototype.append=Element.prototype.append=function(){this.appendChild(_mutation(arguments))};function _mutation(a){if(!a.length)throw new Error('DOM Exception 8');if(a.length===1)return typeof a[0]=='string'?document.createTextNode(a[0]):a[0];for(var c=document.createDocumentFragment(),e=a.length,d=-1,b;++d<e;)b=a[d],c.appendChild(typeof b=='string'?document.createTextNode(b):b);return c}String.prototype.startsWith||(String.prototype.startsWith=function(b,a){return a=a||0,this.indexOf(b,a)===a}),document.addEventListener('DOMContentLoaded',function(){var z=document.querySelector('.navbar__burger'),J,F,G,N,U,f,d,V,r,ae,Z,Q,o,g,y,k,b,s,t,P,O,e,C,h,D,B,ai,A,aj,at,ar,ab,aq,E,ap,ao,ah,an,i,j,c,am,S,T,ak,w,W,X,ag,x,n,Y,q,av,au,a,aw,R,m,L,K,I,v,p,u;z?z.addEventListener('click',function(c){var a=document.querySelector('.navbarm__collapse'),b;a&&(b=a.getAttribute('data-open'),b==='true'?(a.setAttribute('data-open','false'),a.style.maxHeight=0,z.classList.remove('is-active')):(a.setAttribute('data-open','true'),a.style.maxHeight=a.scrollHeight+"px",z.classList.add('is-active')))}):null,J=document.querySelectorAll('.single__contents > table');for(let a=0;a<J.length;a++)F=J[a],G=document.createElement('div'),G.className='table-wrapper',F.parentElement.replaceChild(G,F),G.appendChild(F);N=document.querySelectorAll('.footnote-ref'),U=document.querySelectorAll('.footnote-backref'),N?N.forEach(function(a,c){a.onmouseenter=function(){b.classList.contains('scrolling')&&b.classList.remove('scrolling')},a.onmouseleave=function(){b.classList.contains('scrolling')||setTimeout(function(){b.classList.add('scrolling')},100)},a.onclick=function(){b.classList.contains('scrolling')||(b.classList.remove('navbar--show'),b.classList.remove('navbar--hide'),b.classList.add('navbar--hide'))}}):null,U?U.forEach(function(a,c){a.onmouseenter=function(){b.classList.contains('scrolling')&&b.classList.remove('scrolling')},a.onmouseleave=function(){b.classList.contains('scrolling')||setTimeout(function(){b.classList.add('scrolling')},100)},a.onclick=function(){b.classList.contains('scrolling')||(b.classList.remove('navbar--show'),b.classList.remove('navbar--hide'),b.classList.add('navbar--hide'))}}):null,f=document.querySelector('.summary__container'),d=document.querySelector('.search-result'),V=document.querySelector('.search-result__close'),V?V.addEventListener('click',function(a){d.setAttribute('data-display','none'),f.setAttribute('data-display','block')}):null,document.querySelectorAll('.tab')?document.querySelectorAll('.tab').forEach(function(a,d){var e=a.getAttribute('id'),f=a,b=a.querySelectorAll('.tab__link'),c=a.querySelectorAll('.tab__content'),g=[];b&&b.length>0?b.forEach(function(b,d,a){b.onclick=function(e){for(var b=0;b<a.length;b++)d===parseInt(b,10)?a[b].classList.contains('active')||(a[b].classList.add('active'),c[b].style.display='block'):(a[b].classList.remove('active'),c[b].style.display='none')}}):null}):null,document.querySelectorAll('.codetab')?document.querySelectorAll('.codetab').forEach(function(a,d){var e=a.getAttribute('id'),f=a,b=a.querySelectorAll('.codetab__link'),c=a.querySelectorAll('.codetab__content'),g=[];b&&b.length>0?b.forEach(function(b,d,a){b.onclick=function(e){for(var b=0;b<a.length;b++)d===parseInt(b,10)?a[b].classList.contains('active')||(a[b].classList.add('active'),c[b].style.display='block'):(a[b].classList.remove('active'),c[b].style.display='none')}}):null}):null,r=document.getElementById("gtt"),r.style.display="none",r.addEventListener('click',function(){window.document.documentMode?document.documentElement.scrollTop=0:af(250)});function af(a){var b=-window.scrollY/(a/15),c=setInterval(function(){window.scrollY!=0?window.scrollBy(0,b):clearInterval(c)},15)}ae=function(){document.body.scrollTop>250||document.documentElement.scrollTop>250?r.style.display="block":r.style.display="none"},Z=document.querySelectorAll('.expand__button');for(let a=0;a<Z.length;a++)Z[a].addEventListener("click",function(){var a=this.nextElementSibling;a.style.maxHeight?(a.style.maxHeight=null,this.querySelector('svg').classList.add('expand-icon__right'),this.querySelector('svg').classList.remove('expand-icon__down')):(a.style.maxHeight=a.scrollHeight+"px",this.querySelector('svg').classList.remove('expand-icon__right'),this.querySelector('svg').classList.add('expand-icon__down'))});Q=window.pageYOffset||document.documentElement.scrollTop,o=document.querySelector('.toc'),g=o?o.querySelector('#TableOfContents'):null,y=document.getElementById('toggle-toc'),k=document.querySelector('.single__contents'),b=document.querySelector('.navbar'),s=document.querySelector('.toc__flexbox'),t=document.querySelector('.toc__flexbox--outer'),P=document.querySelectorAll('.expand__content'),O=document.querySelectorAll('.box'),e=null,C=JSON.parse("true"),h=JSON.parse('["h2","h3","h4"]'),h?h=h.toString():h="h1, h2, h3, h4, h5, h6",k&&k.querySelectorAll(".tab")?k.querySelectorAll(".tab").forEach(function(a){a.querySelectorAll(h).forEach(function(a){e=Array.isArray(e)?e.concat(a.getAttribute('id')):[a.getAttribute('id')]})}):null,P?P.forEach(function(a){a.querySelectorAll(h).forEach(function(a){e=Array.isArray(e)?e.concat(a.getAttribute('id')):[a.getAttribute('id')]})}):null,O?O.forEach(function(a){a.querySelectorAll(h).forEach(function(a){e=Array.isArray(e)?e.concat(a.getAttribute('id')):[a.getAttribute('id')]})}):null,window.onscroll=function(){ae();var a=window.pageYOffset||document.documentElement.scrollTop;if(a>Q){if(a<250?r.style.display="none":r.style.display="block",a<45)return null;b.classList.contains('scrolling')&&(b.classList.contains('navbar--hide')?b.classList.contains('navbar--show')&&b.classList.remove('navbar--show'):b.classList.add('navbar--hide')),k&&(k.querySelectorAll(h).length>0?k.querySelectorAll(h).forEach(function(c){var b,a;if(y&&!y.checked)return null;if(e&&e.includes(c.getAttribute('id')))return null;document.documentElement.scrollTop>=c.offsetTop&&g&&(b=c.getAttribute('id'),o.querySelectorAll('a').forEach(function(a){a.classList.remove('active')}),o.querySelector('a[href="#'+b+'"]')?o.querySelector('a[href="#'+b+'"]').classList.add('active'):null,!1===C||(g.querySelectorAll('ul')?g.querySelectorAll('ul').forEach(function(a){a.querySelectorAll('li').forEach(function(a){a.querySelectorAll('ul').forEach(function(a){a.style.display='none'})})}):null),a=g.querySelector("[href='#"+b+"']"),a&&a.nextElementSibling&&(a.nextElementSibling.style.display='block'),getParents(a,'ul')?getParents(a,'ul').forEach(function(a){a.style.display='block'}):null)}):(s&&(s.setAttribute('data-position',''),s.classList.contains('hide')||s.classList.add('hide')),t&&(t.setAttribute('data-position',''),t.classList.contains('hide')||t.classList.add('hide'))))}else a<250&&(r.style.display="none"),b.classList.contains('scrolling')&&(b.classList.contains('navbar--hide')?b.classList.remove('navbar--hide'):b.classList.contains('navbar--show')||b.classList.add('navbar--show')),k&&(k.querySelectorAll(h).length>0?k.querySelectorAll(h).forEach(function(c){var b,a;if(y&&!y.checked)return null;if(e&&e.includes(c.getAttribute('id')))return null;document.documentElement.scrollTop>=c.offsetTop&&g&&(b=c.getAttribute('id'),o.querySelectorAll('a').forEach(function(a){a.classList.remove('active')}),o.querySelector('a[href="#'+b+'"]')?o.querySelector('a[href="#'+b+'"]').classList.add('active'):null,!1===C||(g.querySelectorAll('ul')?g.querySelectorAll('ul').forEach(function(a){a.querySelectorAll('li').forEach(function(a){a.querySelectorAll('ul').forEach(function(a){a.style.display='none'})})}):null),a=g.querySelector("[href='#"+b+"']"),a&&a.nextElementSibling&&(a.nextElementSibling.style.display='block'),getParents(a,'ul')?getParents(a,'ul').forEach(function(a){a.style.display='block'}):null)}):(s&&!s.classList.contains('hide')&&s.classList.add('hide'),t&&!t.classList.contains('hide')&&t.classList.add('hide'))),g&&document.documentElement.scrollTop<250&&(!1===C||(g.querySelector('ul')?g.querySelector('ul').querySelectorAll('li').forEach(function(a){a.querySelectorAll('ul').forEach(function(a){a.style.display='none'})}):null));Q=a<=0?0:a},D=localStorage.getItem('theme'),B=document.getElementById('root'),ai=document.querySelectorAll('.select-theme'),A=document.querySelectorAll('.select-theme__item'),aj=JSON.parse('"dark"'),at=JSON.parse('"light"'),ar=JSON.parse('"hacker"'),ab=JSON.parse('"solarized"'),aq=JSON.parse('"kimbie"'),E=function(a){var b=document.getElementsByName('msapplication-TileColor')[0],c=document.getElementsByName('theme-color')[0],d=document.getElementsByName('msapplication-navbutton-color')[0],e=document.getElementsByName('apple-mobile-web-app-status-bar-style')[0];a.includes('dark')?(b.setAttribute('content','#fcfcfa'),c.setAttribute('content','#403E41'),d.setAttribute('content','#403E41'),e.setAttribute('content','#403E41')):a.includes('light')?(b.setAttribute('content','#555'),c.setAttribute('content','#eee'),d.setAttribute('content','#eee'),e.setAttribute('content','#eee')):a.includes('hacker')?(b.setAttribute('content','#e3cd26'),c.setAttribute('content','#252526'),d.setAttribute('content','#252526'),e.setAttribute('content','#252526')):a.includes('solarized')?(b.setAttribute('content','#d3af86'),c.setAttribute('content','#51412c'),d.setAttribute('content','#51412c'),e.setAttribute('content','#51412c')):a.includes('kimbie')&&(b.setAttribute('content','#586e75'),c.setAttribute('content','#eee8d5'),d.setAttribute('content','#eee8d5'),e.setAttribute('content','#eee8d5'))},ap=function(a){if(a===aj)return'dark';if(a===at)return'light';if(a===ar)return'hacker';if(a===ab)return'solarized';if(a===aq)return'kimbie'},D?(A?A.forEach(function(a){a.text.trim()===D?a.classList.add('is-active'):a.classList.remove('is-active')}):null,E(D)):E(B.className),A?A.forEach(function(a,b){a.addEventListener('click',function(c){var a=ap(c.target.text.trim()),b,d;localStorage.setItem('theme',a),E(a),B.removeAttribute('class'),B.classList.add('theme__'+a),ai.forEach(function(b){b.querySelectorAll('a').forEach(function(b){b.classList&&(b.text.trim()===a?b.classList.contains('is-active')||b.classList.add('is-active'):b.classList.contains('is-active')&&b.classList.remove('is-active'))})}),window.mermaid&&(a==="dark"||a==="hacker"?(mermaid.initialize({theme:'dark'}),location.reload()):(mermaid.initialize({theme:'default'}),location.reload())),b=document.getElementById('utterances'),b&&b.querySelector('iframe').contentWindow.postMessage({type:'set-theme',theme:a==="dark"||a==="hacker"?'photon-dark':a==='kimbie'?'github-dark-orange':'github-light'},'https://utteranc.es'),d=document.querySelectorAll('.twitter-timeline'),d&&window.postMessage({type:'set-twitter-theme',theme:a==='light'||a==='solarized'?'light':'dark'})})}):null,ao=JSON.parse('"http://blog.tantalum.life"'),ah=JSON.parse('"http://blog.tantalum.life/posts/depoly-plume-in-docker/"'),an=JSON.parse('""'),i=null,j=null,c=null,am=JSON.parse("true"),S=JSON.parse("100"),T=JSON.parse("0.4"),ak=JSON.parse("true"),w=JSON.parse("true"),W=JSON.parse('"main"'),X=JSON.parse('"posts"'),ag=JSON.parse('"page"'),x=null,am&&function(){var a=new XMLHttpRequest;X==="publication"&&ag!=="page"?a.open('GET',ah+"index.json"):a.open('GET',ao+an+"/index.json"),a.setRequestHeader('Content-Type','application/json; charset=utf-8'),a.onload=function(){a.status===200?(x=new Fuse(JSON.parse(a.response.toString('utf-8')),{keys:X.includes('publication')?['title','abstract']:ak?['title','description','content']:['title','description'],includeMatches:w,shouldSort:!0,threshold:T||.4,location:0,distance:S||100,maxPatternLength:32,minMatchCharLength:1,isCaseSensitive:!1,findAllMatches:!1,useExtendedSearch:!1}),window.fuse=x):console.error('['+a.status+']Error:',a.statusText)},a.send()}();function ac(e,a){var b=document.createElement('li'),c,d;b.className='search-result__item',c=document.createElement('a'),c.innerHTML=a.item.title,c.setAttribute('class','search-result__item--title'),c.setAttribute('href',a.item.uri),d=document.createElement('div'),d.setAttribute('class','search-result__item--desc'),a.item.description?d.innerHTML=a.item.description:a.item.content&&(d.innerHTML=a.item.content.substring(0,225)),b.appendChild(c),b.appendChild(d),e.appendChild(b)}function al(f,a){var e=document.createElement('li'),b,d,c;if(e.className='search-result__item',b=null,d=document.createElement('a'),d.innerHTML=a.item.title,d.setAttribute('class','search-result__item--title'),d.setAttribute('href',a.item.uri),a.matches&&a.matches.length){for(c=0;c<a.matches.length;c++)'title'===a.matches[c].key&&(d=document.createElement('a'),d.innerHTML=l(a.matches[c].value,a.matches[c].indices),d.setAttribute('class','search-result__item--title'),d.setAttribute('href',a.item.uri)),'description'===a.matches[c].key?(b=document.createElement('div'),b.setAttribute('class','search-result__item--desc'),b.innerHTML=l(a.item.description,a.matches[c].indices)):'content'===a.matches[c].key?b||(b=document.createElement('div'),b.setAttribute('class','search-result__item--desc'),b.innerHTML=l(a.item.content.substring(0,150),a.matches[c].indices)):a.item.description?(b=document.createElement('div'),b.setAttribute('class','search-result__item--desc'),b.innerHTML=a.item.description):(b=document.createElement('div'),b.setAttribute('class','search-result__item--desc'),b.innerHTML=a.item.content.substring(0,150));e.appendChild(d),b&&e.appendChild(b),e&&f.appendChild(e)}}function H(d,c){var a,b;for(i=document.getElementById('search-results'),j=document.getElementById('search-menu'),i.setAttribute('class','dropdown is-active'),a=document.createElement('ul'),a.setAttribute('class','dropdown-content search-content'),c.length?c.forEach(function(b){var e=document.createElement('li'),c=document.createElement('a'),f,d;c.setAttribute('href',b.uri),c.setAttribute('class','dropdown-item'),c.appendChild(e),f=document.createElement('div'),f.innerHTML=b.title,f.setAttribute('class','menu-item__title'),d=document.createElement('div'),d.setAttribute('class','menu-item__desc'),b.description?d.innerHTML=b.description:b.content&&(d.innerHTML=b.content.substring(0,150)),e.appendChild(f),e.appendChild(d),a.appendChild(c)}):(b=document.createElement('li'),b.setAttribute('class','dropdown-item'),b.innerText='No results found',a.appendChild(b));j.hasChildNodes();)j.removeChild(j.lastChild);j.appendChild(a)}function $(d,c){var a,b;for(i=document.getElementById('search-results'),j=document.getElementById('search-menu'),i.setAttribute('class','dropdown is-active'),a=document.createElement('ul'),a.setAttribute('class','dropdown-content search-content'),c.length?c.forEach(function(b){var g=document.createElement('li'),e=document.createElement('a'),c=null,f,d;if(e.setAttribute('href',b.item.uri),e.setAttribute('class','dropdown-item'),e.appendChild(g),f=document.createElement('div'),f.innerHTML=b.item.title,f.setAttribute('class','menu-item__title'),b.matches&&b.matches.length){for(d=0;d<b.matches.length;d++)'title'===b.matches[d].key&&(f.innerHTML=l(b.matches[d].value,b.matches[d].indices)),'description'===b.matches[d].key?(c=document.createElement('div'),c.setAttribute('class','menu-item__desc'),c.innerHTML=l(b.item.description,b.matches[d].indices)):'content'===b.matches[d].key?c||(c=document.createElement('div'),c.setAttribute('class','menu-item__desc'),c.innerHTML=l(b.item.content.substring(0,150),b.matches[d].indices)):b.item.description?(c=document.createElement('div'),c.setAttribute('class','menu-item__desc'),c.innerHTML=b.item.description):(c=document.createElement('div'),c.setAttribute('class','menu-item__desc'),c.innerHTML=b.item.content.substring(0,150));g.appendChild(f),c&&g.appendChild(c),a.appendChild(e)}}):(b=document.createElement('li'),b.setAttribute('class','dropdown-item'),b.innerText='No results found',a.appendChild(b));j.hasChildNodes();)j.removeChild(j.lastChild);j.appendChild(a)}function _(e,c){var a,d;i=document.getElementById('search-mobile-results'),a=document.createElement('div'),a.setAttribute('class','mobile-search__content'),c.length>0?c.forEach(function(b){var c=document.createElement('a');c.setAttribute('href',b.uri),c.innerHTML='<div class="mobile-search__item"><div class="mobile-search__item--title">📄 '+b.title+'</div><div class="mobile-search__item--desc">'+(b.description?b.description:b.content)+'</div></div>',a.appendChild(c)}):(d=document.createElement('span'),a.appendChild(d));let b=document.getElementById('search-mobile-results');while(b.firstChild)b.removeChild(b.firstChild);i.appendChild(a)}function ad(e,c){var a,d;i=document.getElementById('search-mobile-results'),a=document.createElement('div'),a.setAttribute('class','mobile-search__content'),c.length?c.forEach(function(b){var e=document.createElement('li'),g=document.createElement('a'),c=null,f,d;if(g.setAttribute('href',b.item.uri),g.appendChild(e),e.setAttribute('class','mobile-search__item'),f=document.createElement('div'),f.innerHTML=b.item.title,f.setAttribute('class','mobile-search__item--title'),b.matches&&b.matches.length){for(d=0;d<b.matches.length;d++)'title'===b.matches[d].key&&(f.innerHTML=l(b.matches[d].value,b.matches[d].indices)),'description'===b.matches[d].key?(c=document.createElement('div'),c.setAttribute('class','mobile-search__item--desc'),c.innerHTML=l(b.item.description,b.matches[d].indices)):'content'===b.matches[d].key?c||(c=document.createElement('div'),c.setAttribute('class','mobile-search__item--desc'),c.innerHTML=l(b.item.content.substring(0,150),b.matches[d].indices)):b.item.description?(c=document.createElement('div'),c.setAttribute('class','mobile-search__item--desc'),c.innerHTML=b.item.description):(c=document.createElement('div'),c.setAttribute('class','mobile-search__item--desc'),c.innerHTML=b.item.content.substring(0,150));e.appendChild(f),c&&e.appendChild(c),a.appendChild(g)}}):(d=document.createElement('span'),a.appendChild(d));let b=document.getElementById('search-mobile-results');while(b.firstChild)b.removeChild(b.firstChild);i.appendChild(a)}function l(a,d){if(!d)return a;var b='',c=0;return d.forEach(function(d){if(d[0]===d[1])return null;b+=''+a.substring(c,d[0])+'<span class="search__highlight">'+a.substring(d[0],d[1]+1)+'</span>'+'',c=d[1]+1}),b+=a.substring(c),b}n=document.getElementById('search'),Y=document.getElementById('search-mobile'),q=document.getElementById('search-results'),n?n.addEventListener('input',function(b){var a,e;if(!b.target.value|window.innerWidth<770)return q?q.setAttribute('class','dropdown'):null,d?d.setAttribute('data-display','none'):null,f?f.setAttribute('data-display','block'):null,null;c=b.target.value,a=x.search(b.target.value),W==="main"?w?aa(c,a):M(c,a):(w?$(c,a):H(c,a),e=q.querySelectorAll('.dropdown-item'),e?e.forEach(function(a){a.addEventListener('mousedown',function(a){a.target.click()})}):null)}):null,n?n.addEventListener('blur',function(){if(window.innerWidth<770)return null;q?q.setAttribute('class','dropdown'):null}):null,n?n.addEventListener('click',function(b){var a,d;if(window.innerWidth<770)return null;if(!b.target.value)return q?q.setAttribute('class','dropdown'):null,null;c=b.target.value,a=x.search(b.target.value),W==="main"?w?aa(c,a):M(c,a):(w?$(c,a):H(c,a),d=q.querySelectorAll('.dropdown-item'),d?d.forEach(function(a){a.addEventListener('mousedown',function(a){a.target.click()})}):null)}):null,av=document.getElementById("search-menu"),au=document.querySelector('#search-menu .dropdown-item.is-active'),a=null,aw=null,R=350,n?n.addEventListener('keydown',function(c){var b,e;if(window.innerWidth<770)return null;if(c.key==='Escape'&&(d?d.setAttribute('data-display','none'):null,f?f.setAttribute('data-display','block'):null),b=document.querySelectorAll('#search-menu .dropdown-item'),e=c.which||c.keyCode,!b||!b.length)return null;if(c.key==='ArrowDown'||e===40){a===null?(a=0,b[a].classList.remove('is-active')):(b[a].classList.remove('is-active'),a=a===b.length-1?0:a+1),b[a].classList.add('is-active');let c=b[a].offsetTop+b[a].clientHeight-R;c>0?document.querySelector(".search-content").scrollTop+=b[a].getBoundingClientRect().height:a===0&&(document.querySelector(".search-content").scrollTop=0)}else if(c.key==='ArrowUp'||e===38){a===null?(a=b.length-1,b[a].classList.remove('is-active')):(b[a].classList.remove('is-active'),a=a===0?b.length-1:a-1),b[a].classList.add('is-active');let c=b[a].offsetTop+b[a].clientHeight-R;c<0?document.querySelector(".search-content").scrollTop-=b[a].getBoundingClientRect().height:document.querySelector(".search-content").scrollTop=c+b[a].getBoundingClientRect().height}else c.key==='Enter'||e===13?b[a]&&b[a].getAttribute('href')&&(location.href=b[a].getAttribute('href')):(c.key==='Escape'||e===27)&&(c.target.value=null,i&&i.classList.remove('is-active'))}):null,Y?Y.addEventListener('input',function(a){if(!a.target.value){let a=document.getElementById('search-mobile-results');while(a.firstChild)a.removeChild(a.firstChild);return null}c=a.target.value;var b=x.search(a.target.value);_(c,b),w?ad(c,b):_(c,b)}):null,m=document.querySelector('#search-mobile'),L=document.querySelector('.mobile-search'),K=document.querySelectorAll('.navbar-search'),I=document.querySelector('#search-mobile-close'),v=document.querySelector('#search-mobile-container'),p=document.querySelector('#search-mobile-results'),u=document.querySelector('html'),L&&(L.style.display='none'),K?K.forEach(function(a,b){a.addEventListener('click',function(){v&&(v.style.display='block'),m&&m.focus(),u&&(u.style.overflowY='hidden')})}):null,I?I.addEventListener('click',function(){if(v&&(v.style.display='none'),m&&(m.value=''),p)while(p.firstChild)p.removeChild(p.firstChild);u&&(u.style.overflowY='visible')}):null,m?m.addEventListener('keydown',function(a){var b=a.which||a.keyCode;if(a.key==='Escape'||b===27){if(v&&(v.style.display='none'),m&&(m.value=''),p)while(p.firstChild)p.removeChild(p.firstChild);u&&(u.style.overflowY='visible')}}):null;function M(e,a){var g=document.querySelector('.search-result__body'),b=g.querySelector('ul'),c=document.createElement('ul');e?a&&a&&a.length&&(a.forEach(function(a){ac(c,a)}),d?d.setAttribute('data-display','block'):null,f?f.setAttribute('data-display','none'):null):(d?d.setAttribute('data-display','none'):null,f?f.setAttribute('data-display','block'):null),b.parentNode.replaceChild(c,b)}function aa(e,a){var g=document.querySelector('.search-result__body'),b=g.querySelector('ul'),c=document.createElement('ul');e?a&&a&&a.length&&(a.forEach(function(a){al(c,a)}),d?d.setAttribute('data-display','block'):null,f?f.setAttribute('data-display','none'):null):(d?d.setAttribute('data-display','none'):null,f?f.setAttribute('data-display','block'):null),b.parentNode.replaceChild(c,b)}})</script>
 <link rel=stylesheet href=/css/main.min.css>
 <meta name=description content="Roelxy's Blog">
-<meta name=keywords content="RSSHub,Docker">
-<meta name=created content="2021-12-03T17:54:22+0800">
-<meta name=modified content="2021-12-03T17:54:22+0800">
-<meta property="article:published_time" content="2021-12-03T17:54:22+0800">
+<meta name=keywords content="Plume,Docker">
+<meta name=created content="2021-12-01T16:23:56+0800">
+<meta name=modified content="2021-12-01T16:23:56+0800">
+<meta property="article:published_time" content="2021-12-01T16:23:56+0800">
 <meta name=author content="Roelxy">
 <meta property="og:site_name" content="Zoe's Dumpster.">
-<meta property="og:title" content="RSSHub | 利用Docker-compose搭建RSS生成器">
-<meta property="og:url" content="http://blog.tantalum.life/posts/build-rsshub-in-docker/">
+<meta property="og:title" content="Plume | 利用Docker-compose搭建Fedi开源博客平台">
+<meta property="og:url" content="http://blog.tantalum.life/posts/depoly-plume-in-docker/">
 <meta property="og:type" content="article">
 <meta property="og:description" content="Roelxy's Blog">
 <meta property="og:image" content="http://blog.tantalum.life/images/meta/mymetaimage.jpg">
 <meta property="og:image:url" content="http://blog.tantalum.life/images/meta/mymetaimage.jpg">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:app:name:iphone content="Zoe's Dumpster.">
-<meta property="twitter:title" content="RSSHub | 利用Docker-compose搭建RSS生成器">
+<meta property="twitter:title" content="Plume | 利用Docker-compose搭建Fedi开源博客平台">
 <meta property="twitter:description" content="Roelxy's Blog">
 <meta name=generator content="Hugo 0.89.1">
 <meta name=msapplication-TileColor content="#fff">
 <meta name=theme-color content="#fff">
 <meta name=msapplication-navbutton-color content="#fff">
 <meta name=apple-mobile-web-app-status-bar-style content="#fff">
-<link rel=canonical href=http://blog.tantalum.life/posts/build-rsshub-in-docker/>
+<link rel=canonical href=http://blog.tantalum.life/posts/depoly-plume-in-docker/>
 <link rel=manifest href=/manifest.json>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
 <link rel=icon href=/favicon.png sizes=any type=image/png>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"RSSHub | 利用Docker-compose搭建RSS生成器","datePublished":"2021-12-03T17:54:22+08:00","dateModified":"2021-12-03T17:54:22+08:00","url":"http://blog.tantalum.life/posts/build-rsshub-in-docker/","description":"前言 正逢女权主义播客【海马星球】被墙，同为社科播客的【小声喧哗】在微博中呼吁： 播客的用户朋友们，有一句话可能你已经听到各种播客重复了无数遍：","keywords":["RSSHub","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Plume | 利用Docker-compose搭建Fedi开源博客平台","datePublished":"2021-12-01T16:23:56+08:00","dateModified":"2021-12-01T16:23:56+08:00","url":"http://blog.tantalum.life/posts/depoly-plume-in-docker/","description":"对不起我又来了，这次因为帮皮塔丘搭毛象所以启用了我尘封已久（明明天天都在运行）的服务器！因为看到了pullopen站长写的博客：有了一个VP","keywords":["Plume","Docker"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.tantalum.life"},"publisher":{"@type":"Organization","name":"Zoe's Dumpster.","url":"http://blog.tantalum.life"}}</script>
 </head>
 <body id=root class=theme__dark>
 <script>var localTheme=localStorage.getItem('theme');localTheme&&(document.getElementById('root').className='theme__'+localTheme)</script>
@@ -158,134 +158,200 @@ kimbie
 <a href=http://blog.tantalum.life/posts/ class=capitalize>Posts</a>
 </li>
 <li class=is-active>
-<span>RSSHub | 利用Docker-compose搭建RSS生成器</span>
+<span>Plume | 利用Docker-compose搭建Fedi开源博客平台</span>
 </li>
 </ol>
 </nav>
 <div class=single>
 <div class=single__nojs>This page looks best with JavaScript enabled</div>
 <script>document.querySelector('.single').classList.remove('hide'),document.querySelector('.single__nojs').classList.add('hide')</script>
-<h2 class=single__title data-ani=true>RSSHub | 利用Docker-compose搭建RSS生成器</h2>
-<h3 class=single__subtitle>开源、简单易用、易于扩展，可以给任何奇奇怪怪的内容生成RSS订阅源。</h3>
+<h2 class=single__title data-ani=true>Plume | 利用Docker-compose搭建Fedi开源博客平台</h2>
+<h3 class=single__subtitle>有潜力代替Lofter的同人写作平台</h3>
 <div class=single__meta>
 <div class=single__infos>
-<time class=single__info title="Written At">📅&nbsp;Dec 3, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;3&nbsp;min read </span>
+<time class=single__info title="Written At">📅&nbsp;Dec 1, 2021 </time>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;7&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
 <ul class="single__tags caption">
 🏷️
-<li><a href=http://blog.tantalum.life/tags/rsshub/ class=single__tag title=RSSHub>#RSSHub</a></li>
+<li><a href=http://blog.tantalum.life/tags/plume/ class=single__tag title=Plume>#Plume</a></li>
 <li><a href=http://blog.tantalum.life/tags/docker/ class=single__tag title=Docker>#Docker</a></li>
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
-<h2 id=前言>前言</h2>
-<p>正逢女权主义播客【海马星球】被墙，同为社科播客的<a href=https://loudmurmursfm.typlog.io/aboutus>【小声喧哗】</a>在微博中呼吁：</p>
+<p>对不起我又来了，这次因为帮皮塔丘搭毛象所以启用了我尘封已久（明明天天都在运行）的服务器！因为看到了pullopen站长写的博客：<a href=https://blog.pullopen.xyz/2021/01/05/what-can-vps-do-for-you/>有了一个VPS能做什么</a>，对plume非常眼馋：</p>
 <blockquote>
-<p>播客的用户朋友们，有一句话可能你已经听到各种播客重复了无数遍：</p>
-<p><strong>请使用泛用性播客客户端定阅播客</strong></p>
-<p>RSS feed是一个有一些古老的互联网技术；在没有智能手机、没有app、没有微信和社交媒体的时候，RSS feed是一条简单的电子流，将我们手里的麦克风和你们耳朵里的震动连起来。</p>
-<p>你们喜欢的播客大多会在shownotes中提供RSS feed；拷贝这个feed就可以在你喜欢的泛用性客户端（比如overcast，google podcast，pocketcast或者苹果自带的客户端）找到通过RSS订阅的入口。</p>
-<p>在我们手里的数字空间已经被各种app、🧱占地为王的情况下，越多人使用泛用性客户端订阅，播客主的表达就能越勇敢。拜托大家了。</p>
-<p>@小声喧哗Loud_Murmurs</p>
+<p>tag系统和搜索功能完善，可高级搜索，可以传图，与Mastodon的同步优于其他平台，可以直接从mastodon等平台评论，而不像WordPress插件或者Writefreely一样只是博客平台套了个自动发布的壳。最近更新更是增加了对中文界面的支持。</p>
 </blockquote>
-<p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/xiaoshengxuanhua.jpeg alt></p>
-<p>意识到RSS的重要性（虽然我一直在用google podcast），我搭了这个RSSHub：<a href=https://rss.tantalum.life/>https://rss.tantalum.life/</a>。Docker-compose操作很简单，这里记录一下我的搭建过程。</p>
-<div class=box>注意：<br>
-本教程省略了一些与Docker&Docker compose相关的知识。如果没有安装，请参考<a href=https://blog.tantalum.life/posts/build-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose>这里</a>安装。</div>
-<h2 id=搭建过程>搭建过程</h2>
-<p>看了一下<a href=https://github.com/DIYgod/RSSHub/blob/master/docker-compose.yml>RSSHub项目</a>的<code>docker-compose.yml</code>，有那么一丢丢的不满意：</p>
+<p>对，writefreely现在对fedi的支持还在开发阶段，启用fedi互联功能之后在毛象上看，就是个套着发布链接的壳&mldr;</p>
+<p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/writefreelyfedi.png alt></p>
+<p>因为不满足writefreely的套壳发布，就心血来潮搭了plume，见下图。</p>
+<figure>
+<img data-src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/plume-start.png alt="image alt" data-caption=One杂物馆 src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 d=%22M0 0h24v24H0V0z%22/%3E%3Cpath fill=%22%23aaa%22 d=%22M19 3H5c-1.1.0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1.0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55.0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55.0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41.0.65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79.0z%22/%3E%3C/svg%3E" class=lazyload style=width:700px;height:>
+<figcaption style=text-align:center>
+<strong>刚搭建的Plume站点</strong>:
+One杂物馆
+</figcaption>
+</figure>
+<p>不过plume似乎是用二进制文件搭建更高效，参考<a href=https://snowcode.ovh/plume/>Installing Plume (fediverse blog platform)</a>。这篇文章与salt站长写的<a href=https://writee.org/salt/qu-zhong-xin-hua-bo-ke-writefreely-da-jian-zhi-nan>去中心化博客 WriteFreely 搭建指南</a>非常像，因为都是二进制文件搭建。这两篇文章均有部分参考。</p>
+<h2 id=安装dockerdocker-compose>安装docker&docker-compose</h2>
+<p>首先判断自己的VPS架构：</p>
+<pre tabindex=0><code>uname -a
+dpkg --print-architecture
+</code></pre><p>然后按照<a href=https://docs.docker.com/engine/install/>docker官方文档</a>选择自己的服务器系统进行安装，再<a href=https://docs.docker.com/compose/install/>安装docker compose</a>。</p>
+<p>或者是使用一键脚本安装即可。首先至<a href=https://github.com/docker/compose/releases>docker-compose release</a>界面找到最新的版本号（例如<code>v2.2.3</code>），随后回到服务器执行：</p>
+<pre tabindex=0><code>#安装docker
+bash &lt;(curl -L https://get.docker.com/)
+#安装特定版本的docker-compose
+curl -L &quot;https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+#以v2.2.3为例，这里替换为最新版本
+
+chmod +x /usr/local/bin/docker-compose #赋权
+</code></pre><p>如果想要更新<code>docker-compose</code>版本，先运行<code>which docker-compose</code>找到安装位置（例如<code>/usr/local/bin/docker-compose</code>），随后<code>rm -rf /usr/local/bin/docker-compose</code>删去旧版本，然后运行一键脚本命令直接安装新版本<code>docker-compose</code>并赋权即可。</p>
+<h2 id=拉取plume配置文件与docker文件>拉取plume配置文件与docker文件</h2>
+<p>参考<a href=https://docs.joinplu.me/installation/with/docker/>plume官方文档</a>，如果将plume的配置文件存放在<code>/opt/plume</code>文件夹下，则运行：</p>
+<pre tabindex=0><code>cd /opt     #跳转到/opt文件夹下
+mkdir plume     #新建plume文件夹
+cd plume    #跳转到/opt/plume，这将是你的plume配置文件夹
+
+# 根据自己的服务器架构拉取相应的docker-compose.yml，默认amd64架构拉取第一个
+curl https://docs.joinplu.me/docker-compose.sample.yml &gt; docker-compose.yml
+
+# 如果你的服务器架构是arm32v7则拉取这个
+curl https://docs.joinplu.me/docker-compose.sample.arm32v7.yml &gt; docker-compose.yml
+
+# 如果你的服务器架构是arm64v8则拉取这个
+curl https://docs.joinplu.me/docker-compose.sample.arm64v8.yml &gt; docker-compose.yml
+
+
+curl https://docs.joinplu.me/docker.sample.env &gt; .env  #拉取plume的环境变量文件并命名为.env
+</code></pre><p>运行<code>openssl rand -base64 32</code>，复制获取的32位随机字符，然后参考plume官方文档<a href=https://docs.joinplu.me/environment/>有用的环境变量</a>编辑新创建的<code>.env</code>文件：</p>
+<pre tabindex=0><code>BASE_URL=plume.tantalum.life  #你的域名
+  # generate one with openssl rand -base64 32
+ROCKET_SECRET_KEY=把刚刚获得的随机字符粘贴到这里
+ 
+  # Mail settings
+MAIL_SERVER=smtp.zoho.com   #邮箱服务的smtp
+MAIL_USER=你的邮件服务邮箱
+MAIL_PASSWORD=邮箱密码，或是需要手动获取的应用密码
+MAIL_HELO_NAME=填写你的域名就行，这是古早的smtp设置参数
+
+ # DATABASE SETUP
+POSTGRES_PASSWORD=填写数据库密码，自己设置，默认passw0rd
+POSTGRES_USER=plume
+POSTGRES_DB=plume
+
+ # you can safely leave those defaults
+DATABASE_URL=postgres://plume:数据库密码@postgres:5432/plume      #如果数据库密码为默认的passw0rd,则可以使用默认值
+MIGRATION_DIRECTORY=migrations/postgres
+USE_HTTPS=1
+ROCKET_ADDRESS=0.0.0.0
+ROCKET_PORT=7878
+</code></pre><div class=box>注意：目前，Plume 仅在您需要重置密码时发送邮件（并且仅从 Web 界面，<code>plm users reset-password</code>不发送任何东西）。 如果您不打算使用此功能，您可以简单地删除（或注释）用于配置邮件服务器的参数。</div>
+<p>保存退出。</p>
+<h2 id=配置数据库>配置数据库</h2>
+<p>首先查看一下<code>docker-compose.yml</code>文件，运行<code>nano docker-compose.yml</code>，文件内容如下：</p>
 <pre tabindex=0><code>version: '3'
-
-services:
-    rsshub:
-        image: diygod/rsshub
-        restart: always
-        ports:
-            - '1200:1200'
-        environment:
-            NODE_ENV: production
-            CACHE_TYPE: redis
-            REDIS_URL: 'redis://redis:6379/'
-            PUPPETEER_WS_ENDPOINT: 'ws://browserless:3000'
-        depends_on:
-            - redis
-            - browserless
-
-    browserless:
-        # See issue 6680
-        image: browserless/chrome:1.43-chrome-stable
-        restart: always
-        ulimits:
-          core:
-            hard: 0
-            soft: 0
-
-    redis:
-        image: redis:alpine
-        restart: always
-        volumes:
-            - redis-data:/data
-
-volumes:
-    redis-data:
-</code></pre><p>emmm，这样的话需要额外创建<code>volume</code>持久化<code>Redis</code>缓存，后续不好维护，可以直接把<code>volume</code>固定以文件形式存在。又参考了<a href=https://sleele.com/2019/06/14/%e5%9c%a8%e8%87%aa%e5%b7%b1%e7%9a%84%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%b8%8a%e5%bf%ab%e9%80%9f%e9%83%a8%e7%bd%b2rsshub/>sleele的博客</a>使用watchtower更新容器和镜像，最后内容如下：</p>
-<pre tabindex=0><code>version: '3'
  
-services:
-    rsshub:
-        image: diygod/rsshub
-        restart: always
-        ports:
-            - '1200:1200'
-        environment:
-            NODE_ENV: production
-            CACHE_TYPE: redis
-            REDIS_URL: 'redis://redis:6379/'
-            PUPPETEER_WS_ENDPOINT: 'ws://browserless:3000'
-        depends_on:
-            - redis
-            - browserless
- 
-    browserless:
-        image: browserless/chrome:1.43-chrome-stable
-        restart: always
- 
-    redis:
-        image: redis:alpine
-        restart: always
-        volumes:
-            - ./redis:/data
- 
-    watchtower:
-        image: containrrr/watchtower
-        container_name: watchtower
-        restart: always
-        environment: 
-            - TZ=Asia/Shanghai
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-        command: rsshub_service.rsshub_1 --cleanup --interval 1200
+ services:
+   postgres:
+     image: postgres:10.5
+     env_file: .env
+     restart: unless-stopped
+     volumes:
+        - &quot;./data/postgres:/var/lib/postgresql/data&quot;
+   plume:
+     image: plumeorg/plume:latest
+     env_file: .env
+     restart: unless-stopped
+     volumes:
+       - &quot;./data/plume/static/media:/app/static/media&quot;
+       - &quot;./.env:/app/.env&quot;
+       - &quot;./search_index:/app/search_index&quot;
+     ports:
+       - &quot;127.0.0.1:7878:7878&quot;
+</code></pre><p>观察此文件，可以发现plume的数据库使用了<code>postgres10.5</code>版本，持久化数据<code>volumes</code>位于<code>./data/postgres</code>（相对地址），也就是<code>/opt/plume/data/postgres</code>（绝对地址）。</p>
+<p>此处有参考兔酱的<a href=https://www.b612.me/code/223.html>这篇文章</a>，运行：</p>
+<pre tabindex=0><code>docker run --name postgres10 -v /data/postgres:/var/lib/postgresql/data -e   POSTGRES_PASSWORD=自己设置的数据库密码 -d postgres:10.5-alpine
+#拉取pg镜像并初始化pg库，将临时容器命名为postgres10，挂载volume到上面的持久化数据所在文件夹
 
-</code></pre><p>把以上内容写入<code>docker-compose.yml</code>中，保存，然后运行<code>docker-compose up -d</code>就搭好了。</p>
-<h2 id=nginx反向代理>Nginx反向代理</h2>
-<p>如果你没有域名，可以跳过这步。</p>
-<p>首先去DNS服务商添加一条指向服务器ip，内容为域名的A记录，然后回到服务器运行以下命令：</p>
-<pre tabindex=0><code>sudo -i   #切换至root用户
-apt install nginx -y    #安装nginx
-</code></pre><p>运行<code>nano /etc/nginx/conf.d/rsshub.conf</code>，内容如下：</p>
+docker exec -it postgres10 createuser -U postgres --pwprompt plume
+#创建一个用于连接数据库的用户plume并输入你的密码
+
+docker exec -it postgres10 psql -U postgres  #进入数据库
+</code></pre><p>运行以下命令创建一个数据库名<code>plume</code>，所有者为数据库用户<code>plume</code>的数据库：</p>
+<pre tabindex=0><code>CREATE DATABASE plume
+ ENCODING 'UTF8'
+ LC_COLLATE='C'
+ LC_CTYPE='C'
+ template=template0
+ OWNER plume;
+ \q
+</code></pre><p>终止临时postgres容器并删除：</p>
+<pre tabindex=0><code>docker stop postgres10
+docker rm postgres10
+</code></pre><h2 id=安装plume>安装plume</h2>
+<p>由于持久化数据<code>volume</code>所在文件夹<code>/opt/plume/data/postgres</code>未被删除，所以可以给plume使用：</p>
+<pre tabindex=0><code>docker-compose pull     #拉取plume所需的镜像
+docker-compose up -d postgres     #启动数据库容器
+docker-compose run --rm plume plm migration run     #数据库第一次迁移运行
+
+docker-compose run --rm plume plm search init   #设置你的站点
+docker-compose run --rm plume plm instance new -d 'domain.name' -n 'instance name' -l 'default licence'
+#domain.com改为你的域名，instance name改为你的站点名（支持中文，可在网页上更改），default licence是默认文章许可协议（可在网页上更改）
+
+#注册管理员帐号
+docker-compose run --rm plume plm users new -n 'admin' -N 'name' -b 'bio' -e 'admin@domain.name' -p 'pass' --admin
+#参数n的值为用户名，参数N的值为你的昵称，参数b的值为你的摘要（个人资料，先不用管，可以在网页上改）,参数e的值为你的邮箱，参数p的值是管理员帐号的密码
+
+docker-compose up -d  #站点启动
+</code></pre><h2 id=nginx反向代理>Nginx反向代理</h2>
+<p>官方文档的教程到这里就结束了，但是反向代理还没完成，参考<a href=https://snowcode.ovh/plume/>Installing Plume (fediverse blog platform)</a>一文，为站点添加反向代理。</p>
+<p>首先切换到<code>root</code>用户，安装nginx（已安装则跳过）：</p>
+<pre tabindex=0><code>sudo -i
+apt install nginx -y
+</code></pre><p>开启VPS的80/443端口：</p>
+<pre tabindex=0><code>ufw allow 80
+ufw allow 443
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+</code></pre><p>去DNS服务商添加一条指向服务器ip，内容为域名的A记录。这里给出两种添加反向代理的方法，效果和配置文件都是完全一样的。第一种方法比较简单。</p>
+<h3 id=第一种方法>第一种方法</h3>
+<pre tabindex=0><code>nano /etc/nginx/conf.d/plume.conf    #新建plume.conf
+</code></pre><p>将以下配置贴入并替换你的域名，保存。</p>
 <pre tabindex=0><code>server {
-    listen 80;
-    server_name 你的域名;       
-    location / {
-                proxy_pass http://localhost:1200;
-                proxy_redirect off;
-                proxy_set_header        Host    $host;
-                proxy_set_header        X-Real-IP       $remote_addr;
-                proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
+	listen 80;
+	listen [::]:80;
+
+	server_name 你的域名;
+
+	return 301 https://你的域名$request_uri;
+}
+
+server {
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+
+	location / {
+		proxy_pass http://localhost:7878;
+
+	    proxy_set_header Host $host;
+    	proxy_set_header Connection       $http_connection;
+	    proxy_set_header X-Forwarded-For  $proxy_add_x_forwarded_for;
+    	proxy_set_header X-Scheme         $scheme;
+	    proxy_buffering                   off;
+	}
+
+	server_name 你的域名;
+
+	#ssl_certificate /etc/letsencrypt/live/你的域名/fullchain.pem;
+	#ssl_certificate_key /etc/letsencrypt/live/你的域名/privkey.pem;
+	#ssl_trusted_certificate /etc/letsencrypt/live/你的域名/fullchain.pem;
+
+	access_log /var/log/nginx/plume.access.log;
+	error_log /var/log/nginx/plume.error.log;
 }
 </code></pre><p>测试配置文件是否有错误（试运行）：</p>
 <pre tabindex=0><code>nginx -t
@@ -293,16 +359,36 @@ apt install nginx -y    #安装nginx
 <pre tabindex=0><code>nginx -s reload
 systemctl start nginx
 systemctl enable nginx
-</code></pre><p>运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
-<h2 id=使用>使用</h2>
-<p>如果此时访问你的域名（没有域名则访问<code>https://服务器ip:1200/</code>）显示这个页面：</p>
-<p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/startrsshub.png alt></p>
-<p>那么恭喜你，你已经有了自己的RSSHub了。如何使用你的RSSHub请看<a href=https://docs.rsshub.app/usage.html>官方文档</a>，按照官方文档的路由格式替换订阅信息，将示例域名<code>https://rsshub.app</code>直接替换为你自部署的域名即可。如有问题请看<a href=https://docs.rsshub.app/faq.html>常见问题</a>。</p>
-<h2 id=后记>后记</h2>
-<p>关于女性主义播客的推荐，<a href=https://www.douban.com/group/topic/251885206/#8526833ouh88GW>这个豆瓣帖</a>有列出九个质量不错的播客。为了防止此帖也404（可能有点杞人忧天），而Archive也不能备份豆瓣内容，所以我手动备份到了<a href=https://github.com/MicroSic/Archive/issues/1>Github Issue</a>上，操作方式参考<a href=https://github.com/duty-machine/duty-machine-action>这里</a>。</p>
-<p>
-<img src=/emoji/blobsignok.png align=left title=blobsignok alt=blobsignok width=30 height=30>
-万物皆可 RSS！</p>
+</code></pre><h3 id=第二种方法>第二种方法</h3>
+<pre tabindex=0><code>nano /etc/nginx/sites-available/plume.conf    #新建plume.conf
+</code></pre><p>将方法一中<code>plume.conf</code>的配置贴入并替换你的域名，保存。</p>
+<p>将配置文件映射到<code>/etc/nginx/sites-enabled/plume.conf</code>：</p>
+<pre tabindex=0><code>ln -s /etc/nginx/sites-available/plume.conf /etc/nginx/sites-enabled/plume.conf
+</code></pre><p>测试配置文件是否有错误（试运行）：</p>
+<pre tabindex=0><code>nginx -t
+</code></pre><p>若没有错误，生效新的配置文件并运行 Nginx，开机启动：</p>
+<pre tabindex=0><code>nginx -s reload
+systemctl start nginx
+systemctl enable nginx
+</code></pre><h2 id=配置ssl>配置SSL</h2>
+<pre tabindex=0><code>sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot python3-certbot-nginx -y
+sudo certbot --nginx
+</code></pre><p>Let‘s encrypt的证书90天到期后需要续期，届时只需运行<code>sudo certbot --nginx</code>按提示操作即可。</p>
+<h2 id=补充中文支持>补充中文支持</h2>
+<p>经<code>pullopen</code>建议，补充两点中文支持内容：</p>
+<ul>
+<li>
+<p>建议在.env中设置<code>SEARCH_CONTENT_TOKENIZER=ngram</code>，并且可选<code>SEARCH_TAG_TOKENIZER=ngram</code>，<code>docker-compose down</code>随后清空search_index文件夹，<code>docker-compose up -d</code>重启之后运行<code>docker-compose run --rm plume plm search init</code>重建索引。这样如果是官方repo，则会以2-8个字符的词组作为搜索关键词，而非默认的空格为分界。<a href=https://github.com/Plume-org/Plume/issues/829>具体参考</a>。</p>
+</li>
+<li>
+<p>字数上限调整：在.env中添加<code>FORM_SIZE=xx</code>（默认128，可增加）即可提升字数上限（默认是128*1024字节，即差不多一万多字）。</p>
+</li>
+</ul>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -356,23 +442,20 @@ See Also
 </h1>
 <ul class=related-ul>
 <li>
-<a href=/posts/build-plume-in-docker/ class=related__link>Plume | 利用Docker-compose搭建Fedi开源博客平台</a>
-</li>
-<li>
 <a href=/posts/how-to-run-your-mastodon-by-docker/ class=related__link>Mastodon | 采用docker建站后的使用与维护</a>
 </li>
 </ul>
 </section>
 <div class=grow></div>
 <nav class=pagination-single>
-<a href=http://blog.tantalum.life/posts/build-plume-in-docker/ class=pagination-single__left>
+<a href=http://blog.tantalum.life/posts/hugo-fast-search/ class=pagination-single__left>
 <div class=pagination-single__icon><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentcolor" d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03.0-1.42s-1.02-.39-1.41.0l-6.59 6.59c-.39.39-.39 1.02.0 1.41l6.59 6.59c.39.39 1.02.39 1.41.0s.39-1.02.0-1.41L7.83 13H19c.55.0 1-.45 1-1s-.45-1-1-1z"/></svg>
 </div>
-<div class=pagination-single__left-title>Plume | 利用Docker-compose搭建Fedi开源博客平台</div>
+<div class=pagination-single__left-title>Hugo | 为Mogege主题添加搜索功能</div>
 </a>
 <div class=grow></div>
-<a href=http://blog.tantalum.life/posts/reverse-proxy-websites/ class=pagination-single__right>
-<div class=pagination-single__right-title>Nginx | 记录反向代理过程</div>
+<a href=http://blog.tantalum.life/posts/deploy-rsshub-in-docker/ class=pagination-single__right>
+<div class=pagination-single__right-title>RSSHub | 利用Docker-compose搭建RSS生成器</div>
 <div class=pagination-single__icon><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentcolor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03.0 1.42.39.39 1.02.39 1.41.0l6.59-6.59c.39-.39.39-1.02.0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41.0s-.39 1.02.0 1.41L16.17 11H5c-.55.0-1 .45-1 1s.45 1 1 1z"/></svg>
 </div>
 </a>
@@ -447,11 +530,18 @@ See Also
 <div class=toc data-dir=ltr data-folding=true data-ani=true>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#前言>前言</a></li>
-<li><a href=#搭建过程>搭建过程</a></li>
-<li><a href=#nginx反向代理>Nginx反向代理</a></li>
-<li><a href=#使用>使用</a></li>
-<li><a href=#后记>后记</a></li>
+<li><a href=#安装dockerdocker-compose>安装docker&docker-compose</a></li>
+<li><a href=#拉取plume配置文件与docker文件>拉取plume配置文件与docker文件</a></li>
+<li><a href=#配置数据库>配置数据库</a></li>
+<li><a href=#安装plume>安装plume</a></li>
+<li><a href=#nginx反向代理>Nginx反向代理</a>
+<ul>
+<li><a href=#第一种方法>第一种方法</a></li>
+<li><a href=#第二种方法>第二种方法</a></li>
+</ul>
+</li>
+<li><a href=#配置ssl>配置SSL</a></li>
+<li><a href=#补充中文支持>补充中文支持</a></li>
 </ul>
 </nav>
 </div>
