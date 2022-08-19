@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Dec 24, 2021 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;8&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;10&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -378,9 +378,57 @@ aws s3 sync files s3://储存桶名/ --endpoint-url=https://s3.fr-par.scw.cloud 
 <li><a href=https://shyamean4151.com/2021/05/04/misskey%e5%b8%96%e6%96%87%e5%8f%af%e8%a7%81%e8%8c%83%e5%9b%b4%e5%92%8c%e5%88%a0%e9%99%a4%e5%b8%96%e6%96%87%e8%af%b4%e6%98%8e/>Misskey帖文可见范围和删除帖文说明</a></li>
 </ul>
 <p>Misskey和Mastodon的中继是通用的，尽情探索你的站点吧！</p>
-<p>最后附上Misskey官方实例<a href=https://misskey.io/>Misskey.io</a>的介绍：</p>
+<p>最后附上Misskey最大最知名实例<a href=https://misskey.io/>Misskey.io</a>的介绍：</p>
 <p>Misskey.ioは、地球で生まれた分散マイクロブログSNSです。Fediverse（様々なSNSで構成される宇宙）の中に存在するため、他のSNSと相互に繋がっています。<br>
 暫し都会の喧騒から離れて、新しいインターネットにダイブしてみませんか。</p>
+<h2 id=后续设置>后续设置</h2>
+<h3 id=防止被搜索引擎爬取>防止被搜索引擎爬取</h3>
+<p>参考<a href=https://tech.notomorrow.club/posts/2022050801/>Misskey 防搜索引擎抓取</a>一文。</p>
+<p>就像参考文章里所说的，Misskey默认的<code>robots.txt</code>不阻止任何搜索引擎爬取页面。在搭建Misskey之前我也多次在Google搜索公开旧嘟文内容时顺着Misskey站点的tag页面找到，很难不心慌。</p>
+<p>Misskey站点的<code>robots.txt</code>在<code>https://yourdomain.com/robots.txt</code>下，默认配置是：</p>
+<pre tabindex=0><code>user-agent: *
+allow: /
+
+# todo: sitemap
+</code></pre><p>此配置允许搜索引擎搜索任何内容。<code>robots.txt</code>的源码位于<a href=https://github.com/misskey-dev/misskey/>Misskey项目</a>下的<code>/packages/backend/assets/robots.txt</code>。可以直接修改此文件，或是添加Nginx规则。</p>
+<p>运行<code>nano /etc/nginx/conf.d/misskey.conf</code>，，在最后一个花括号前加上：</p>
+<pre tabindex=0><code>    location =/robots.txt {
+        default_type text/html;
+        add_header Content-Type &quot;text/plain; charset=UTF-8&quot;;
+        return 200 &quot;User-agent: *\nDisallow: /\n&quot;;
+    }
+</code></pre><p>并直接运行<code>systemctl restart nginx</code>重启Nginx即可生效。生效后查看<code>robots.txt</code>，内容变为：</p>
+<pre tabindex=0><code>User-agent: *
+Disallow: /
+</code></pre><p>但实际上修改<code>robots.txt</code>也并不能完全保证不被搜索引擎抓取。当一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在<code>robots.txt</code>，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。<br>
+Robots协议是国际互联网界通行的道德规范，基于以下原则建立：</p>
+<ol>
+<li>搜索技术应服务于人类，同时尊重信息提供者的意愿，并维护其隐私权；</li>
+<li>网站有义务保护其使用者的个人信息和隐私不被侵犯。<br>
+如果搜索引擎不遵守约定的Robots协议，那么通过在网站下增加<code>robots.txt</code>也是不起作用的，它只是一个“君子协定”，并不是实质性的保证。</li>
+</ol>
+<p>若想禁止特定的<code>user-agent</code>（即用户代理），可以修改Misskey的Nginx配置文件，这里举个例子：</p>
+<pre tabindex=0><code>    if ($http_user_agent ~* '360|sougou') {
+
+        return 403;
+
+    }
+</code></pre><p>其中<code>~</code>表示不区分大小写。</p>
+<p>若站点开启了cdn如Cloudflare（即打开Proxy小橙云），则可以建立防火墙规则：<a href=https://bin.disroot.org/?48dbb29e16e26960#8KSgBJbuTPNTug9F63ygZnQy847CyH4YbYu1p2SsVbbK>屏蔽受审查的浏览器/设备</a>，满足条件即封锁/质询即可。此规则来自wxw管理员，感谢ta。</p>
+<h3 id=开启bot防护>开启bot防护</h3>
+<p>实际上就是注册时检查你是否是人类，可以选择Google的reCAPTCHA(v2/v3)或是hCaptcha。二者都有免费方案配置也非常简单，介绍一下hCaptcha的使用方式。</p>
+<p>首先<a href=https://www.hcaptcha.com/signup-interstitial>注册hCaptcha</a>并选择免费方案，随后网页跳转到以下页面：</p>
+<p><img src=https://cdn.jsdelivr.net/gh/MicroSic/images_for_views@main/hCaptchakey.png alt></p>
+<p>复制这两个密钥粘贴到Misskey管理控制台即可。</p>
+<h3 id=service-worker设置>Service Worker设置</h3>
+<p>参考<a href=https://hide.ac/articles/Y504SIabp>Misskeyインスタンスで最初に設定するべきインスタンス設定とその他設定の説明</a>一文。</p>
+<p>开启后将站点设置为PWA应用（安装到桌面）即可收取消息推送。还是能提高使用体验的，推荐一试。</p>
+<p>开启此功能需要生成一对公私钥，在任何一台服务器中都可以生成。</p>
+<p>Linux运行：</p>
+<pre tabindex=0><code>npx web-push generate-vapid-keys
+</code></pre><p>或是使用Docker生成密钥对</p>
+<pre tabindex=0><code>docker run --rm node npx web-push generate-vapid-keys
+</code></pre><p>填入Misskey管理控制台即可。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -545,6 +593,13 @@ See Also
 </ul>
 </li>
 <li><a href=#开始食用>开始食用</a></li>
+<li><a href=#后续设置>后续设置</a>
+<ul>
+<li><a href=#防止被搜索引擎爬取>防止被搜索引擎爬取</a></li>
+<li><a href=#开启bot防护>开启bot防护</a></li>
+<li><a href=#service-worker设置>Service Worker设置</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 </div>
