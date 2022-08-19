@@ -408,10 +408,10 @@ Disallow: /
 </ol>
 <p>如果搜索引擎不遵守约定的Robots协议，那么通过在网站下增加<code>robots.txt</code>也是不起作用的，它只是一个“君子协定”，并不是实质性的保证。</p>
 <p>若想禁止特定的<code>user-agent</code>（即用户代理），可以修改Misskey的Nginx配置文件，这里举个例子：</p>
-<pre tabindex=0><code>    if ($http_user_agent ~* '360|sougou') {
+<pre tabindex=0><code>    if ($http_user_agent ~* (2345|360|ali-|alipay|archive|baidu|bingbot|bytespider|coolnovo|duckduckgo|easou|facebook|google|huaweibrowser|iaskspider|iqiyi|jike|lbbrowser|liebao|maxthon|meizu|metasr|micromessenger|miui|miuibrowser|msnbot|oneplus|oppo|qihoo|qiyu|qq|saayaa|se\ 1.x|se\ 2.x|sina|sogou|soso|taobao|taobrowser|tencent|teoma|the\ world|twitter|ucweb|vivo|wechat|weibo|xiaomi|yahoo|yandexbot|yisou|yodao|youdao|zte)) {
 
         return 403;
-
+   
     }
 </code></pre><p>其中<code>~</code>表示不区分大小写。</p>
 <p>若站点开启了cdn如Cloudflare（即打开Proxy小橙云），则可以建立防火墙规则：<a href=https://bin.disroot.org/?48dbb29e16e26960#8KSgBJbuTPNTug9F63ygZnQy847CyH4YbYu1p2SsVbbK>屏蔽受审查的浏览器/设备</a>，满足条件即封锁/质询即可。此规则来自wxw管理员，感谢ta。</p>
