@@ -385,13 +385,13 @@ aws s3 sync files s3://储存桶名/ --endpoint-url=https://s3.fr-par.scw.cloud 
 <h3 id=防止被搜索引擎爬取>防止被搜索引擎爬取</h3>
 <p>参考<a href=https://tech.notomorrow.club/posts/2022050801/>Misskey 防搜索引擎抓取</a>一文。</p>
 <p>就像参考文章里所说的，Misskey默认的<code>robots.txt</code>不阻止任何搜索引擎爬取页面。在搭建Misskey之前我也多次在Google搜索公开旧嘟文内容时顺着Misskey站点的tag页面找到，很难不心慌。</p>
-<p>Misskey站点的<code>robots.txt</code>在<code>https://yourdomain.com/robots.txt</code>下，默认配置是：</p>
+<p>站点的<code>robots.txt</code>在<code>https://yourdomain.com/robots.txt</code>下，默认配置是：</p>
 <pre tabindex=0><code>user-agent: *
 allow: /
 
 # todo: sitemap
 </code></pre><p>此配置允许搜索引擎搜索任何内容。<code>robots.txt</code>的源码位于<a href=https://github.com/misskey-dev/misskey/>Misskey项目</a>下的<code>/packages/backend/assets/robots.txt</code>。可以直接修改此文件，或是添加Nginx规则。</p>
-<p>运行<code>nano /etc/nginx/conf.d/misskey.conf</code>，，在最后一个花括号前加上：</p>
+<p>运行<code>nano /etc/nginx/conf.d/misskey.conf</code>，在最后一个花括号前加上：</p>
 <pre tabindex=0><code>    location =/robots.txt {
         default_type text/html;
         add_header Content-Type &quot;text/plain; charset=UTF-8&quot;;
@@ -400,13 +400,13 @@ allow: /
 </code></pre><p>并直接运行<code>systemctl restart nginx</code>重启Nginx即可生效。生效后查看<code>robots.txt</code>，内容变为：</p>
 <pre tabindex=0><code>User-agent: *
 Disallow: /
-</code></pre><p>但实际上修改<code>robots.txt</code>也并不能完全保证不被搜索引擎抓取。当一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在<code>robots.txt</code>，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。<br>
-Robots协议是国际互联网界通行的道德规范，基于以下原则建立：</p>
+</code></pre><p>但实际上修改<code>robots.txt</code>也并不能完全保证不被搜索引擎抓取。当一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在<code>robots.txt</code>，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。</p>
+<p>Robots协议是国际互联网界通行的道德规范，基于以下原则建立：</p>
 <ol>
 <li>搜索技术应服务于人类，同时尊重信息提供者的意愿，并维护其隐私权；</li>
-<li>网站有义务保护其使用者的个人信息和隐私不被侵犯。<br>
-如果搜索引擎不遵守约定的Robots协议，那么通过在网站下增加<code>robots.txt</code>也是不起作用的，它只是一个“君子协定”，并不是实质性的保证。</li>
+<li>网站有义务保护其使用者的个人信息和隐私不被侵犯。</li>
 </ol>
+<p>如果搜索引擎不遵守约定的Robots协议，那么通过在网站下增加<code>robots.txt</code>也是不起作用的，它只是一个“君子协定”，并不是实质性的保证。</p>
 <p>若想禁止特定的<code>user-agent</code>（即用户代理），可以修改Misskey的Nginx配置文件，这里举个例子：</p>
 <pre tabindex=0><code>    if ($http_user_agent ~* '360|sougou') {
 
@@ -426,9 +426,9 @@ Robots协议是国际互联网界通行的道德规范，基于以下原则建�
 <p>开启此功能需要生成一对公私钥，在任何一台服务器中都可以生成。</p>
 <p>Linux运行：</p>
 <pre tabindex=0><code>npx web-push generate-vapid-keys
-</code></pre><p>或是使用Docker生成密钥对</p>
+</code></pre><p>或是使用Docker生成密钥对：</p>
 <pre tabindex=0><code>docker run --rm node npx web-push generate-vapid-keys
-</code></pre><p>填入Misskey管理控制台即可。</p>
+</code></pre><p>将密钥对填入Misskey管理控制台即可。不过在实际使用时如果因为网络问题没有及时刷新页面，PWA英勇会白屏并显示<code>Offline Service Worker</code>，此时强制刷新即可恢复。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
