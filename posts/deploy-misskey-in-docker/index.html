@@ -241,7 +241,7 @@ cd .config
 </code></pre><p>运行<code>nano default.yml</code>新建<code>default.yml</code>，复制官方项目的<a href=https://github.com/misskey-dev/misskey/blob/develop/.config/example.yml>example.yml</a>内容，回到服务器中粘贴，部分改动如下：</p>
 <ul>
 <li>将<code>url</code>项改为你的域名。由于分布式属性，一旦开启站点则不可更改。</li>
-<li>文件中提到的<code>Option 1</code>和<code>Option 2</code>，我们选择<code>Option 1</code>，因此将<code>#port: 3000 # A port that your Misskey server should listen.</code>这一行取消注释，端口号不用更改。</li>
+<li>确保<code>port: 3000</code>这一行取消注释，端口号不用更改。</li>
 <li>将<code>db</code>和<code>Redis</code>的<code>host</code>由<code>localhost</code>分别改为<code>db</code>和<code>redis</code>。</li>
 <li>将<code>db</code>项的<code>user</code>和<code>pass</code>改为你想设置的数据库用户和数据库密码。</li>
 <li>如有ActivityPub协议连通性需求（例如与Mastodon站点互动）需要开启<code>signToActivityPubGet: true</code>选项（默认关闭），位置在文件末尾部分。</li>
