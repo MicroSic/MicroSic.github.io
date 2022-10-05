@@ -188,11 +188,11 @@ kimbie
 <p>Misskey是日本开发者<a href=https://github.com/syuilo>syuilo</a>基于Fediverse开发的一个去中心化社交平台，可以与Mastodon互通，且拥有一些Mastodon没有的复杂小玩意（毕竟源自霓虹嘛）。虽然官方文档写得真的很烂，而且是个人项目，但Misskey本身确实是个好东西，而且由于有公司资金支持，近期更新非常频繁。相比于Mastodon，Misskey更适合搭建个站。</p>
 <h2 id=搭建过程>搭建过程</h2>
 <p>2021年了<a href=https://misskey-hub.net/en/docs/install/docker.html>官方教程</a>居然在推荐自行build镜像。虽然说也不是不行但对小型服务器的压力太大了，而且Dockerhub中已经有官方推送的Misskey镜像，所以直接使用就好。</p>
-<p>另外我发现如果使用官方教程的搭建方法，如果使用的是Debian系统，会遇到一些问题：</p>
+<p>另外我发现如果使用Debian系统按照官方文档来搭建，会遇到一些问题：</p>
 <blockquote>
 <p>但是用debian系统会有很多问题，比如不能上传附件，smtp和对象存储全都出错，新用户不能注册，反正问题多多就是了。后来我发现是node.js原因，misskey最好用16版本号的node.js。<br>
-debian系统下安装misskey前先安装node.js。<br>
-详见<a href="https://www.bilibili.com/read/mobile?id=17044956">这篇文章</a>。</p>
+debian系统下安装misskey前先安装node.js。</p>
+<p>详见<a href="https://www.bilibili.com/read/mobile?id=17044956">这篇文章</a>。</p>
 </blockquote>
 <p>运行以下命令解决：</p>
 <pre tabindex=0><code>sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
@@ -429,6 +429,7 @@ Disallow: /
 </code></pre><p>或是使用Docker生成密钥对：</p>
 <pre tabindex=0><code>docker run --rm node npx web-push generate-vapid-keys
 </code></pre><p>将密钥对填入Misskey管理控制台即可。不过在实际使用时如果因为网络问题没有及时刷新页面，PWA应用会白屏并显示<code>Offline. Service Worker @12.118.1</code>，此时强制刷新即可恢复。</p>
+<h2 id=关于misskey使用上的小问题>关于Misskey使用上的小问题</h2>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -600,6 +601,7 @@ See Also
 <li><a href=#service-worker设置>Service Worker设置</a></li>
 </ul>
 </li>
+<li><a href=#关于misskey使用上的小问题>关于Misskey使用上的小问题</a></li>
 </ul>
 </nav>
 </div>
