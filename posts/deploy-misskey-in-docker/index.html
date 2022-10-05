@@ -432,6 +432,7 @@ Disallow: /
 <h2 id=关于misskey使用上的小问题>关于Misskey使用上的小问题</h2>
 <h3 id=媒体文件的存储>媒体文件的存储</h3>
 <p>Misskey的策略是只存储站内用户的媒体资源，使用的策略是网盘，所有内容保存在<code>files</code>目录下。上传任意文件至网盘之后，发帖文的时候可以随时引用文件！而Mastodon如果要在不同嘟里发同一张图得上传两次。当然也可以选择缓存外站用户的媒体(缩略图），相关所有操作都在控制面板->常规设置里。</p>
+<p>另外需要注意的是，Misskey上传媒体文件的时候会保留图片中记录的设备、位置还有文件名等等敏感信息，真正意义上的原图上传。而Mastodon上传过程中会给文件重命名，并且去掉图片中包含的敏感信息。对于想要保护个人隐私的朋友这里一定要注意一下。</p>
 <h3 id=misskey的站点维护>Misskey的站点维护</h3>
 <p>不像Mastodon有功能极为丰富的tootctl命令集，Misskey几乎是用网页端就能完全控制你的站点。Misskey也有一个CLI命令，就是那个把普通用户标记成管理员的命令，<a href=https://misskey-hub.net/en/docs/install/docker.html>官方文档</a>有提到。但Misskey是个年轻的项目，路径变动比较频繁，可能用不了。</p>
 <p>删除旧数据的操作使用的是docker命令<code>docker system prune</code>，该命令用来清理没有使用的数据，包括那些已停止的容器、dangling镜像（未被任何镜像引用的镜像）、未被容器引用的network和构建过程中的cache。</p>
