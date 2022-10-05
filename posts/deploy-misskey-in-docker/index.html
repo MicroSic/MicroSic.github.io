@@ -188,8 +188,17 @@ kimbie
 <p>Misskey是日本开发者<a href=https://github.com/syuilo>syuilo</a>基于Fediverse开发的一个去中心化社交平台，可以与Mastodon互通，且拥有一些Mastodon没有的复杂小玩意（毕竟源自霓虹嘛）。虽然官方文档写得真的很烂，而且是个人项目，但Misskey本身确实是个好东西，而且由于有公司资金支持，近期更新非常频繁。相比于Mastodon，Misskey更适合搭建个站。</p>
 <h2 id=搭建过程>搭建过程</h2>
 <p>2021年了<a href=https://misskey-hub.net/en/docs/install/docker.html>官方教程</a>居然在推荐自行build镜像。虽然说也不是不行但对小型服务器的压力太大了，而且Dockerhub中已经有官方推送的Misskey镜像，所以直接使用就好。</p>
-<div class=box>注意：<br>
-本教程省略了一些与Docker&Docker compose相关的知识。如果没有安装，请参考<a href=https://blog.tantalum.life/posts/deploy-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose>这里</a>安装。</div>
+<p>另外我发现如果使用官方教程的搭建方法，如果使用的是Debian系统，会遇到一些问题：</p>
+<blockquote>
+<p>但是用debian系统会有很多问题，比如不能上传附件，smtp和对象存储全都出错，新用户不能注册，反正问题多多就是了。后来我发现是node.js原因，misskey最好用16版本号的node.js。<br>
+debian系统下安装misskey前先安装node.js。<br>
+详见<a href="https://www.bilibili.com/read/mobile?id=17044956">这篇文章</a>。</p>
+</blockquote>
+<p>运行以下命令解决：</p>
+<pre tabindex=0><code>sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt install nodejs
+</code></pre><div class=box>注意：<br>
+本教程省略了一些与Docker&Docker compose相关的知识。如果没有安装，请参考<a href=https://blog.tantalum.life/posts/deploy-plume-in-docker/#%E5%AE%89%E8%A3%85dockerdocker-compose>这里</a>安装。本教程实用Debian 10。</div>
 <p>在任意目录下新建<code>docker-compose.yml</code>文件：</p>
 <pre tabindex=0><code>cd /opt &amp;&amp; mkdir misskey &amp;&amp; cd misskey
 nano docker-compose.yml
@@ -342,7 +351,7 @@ systemctl enable nginx
 </code></pre><p>运行<code>sudo certbot --nginx</code>获取SSL证书。</p>
 <h2 id=注册管理员帐号>注册管理员帐号</h2>
 <p>访问你的域名注册一个帐号，此帐号会被设置为管理员。</p>
-<p>可以将普通权限帐号升级为管理员。参考<a href=https://github.com/misskey-dev/misskey/issues/8087>这个issue</a>，在服务器中运行<code>docker-compose run --rm web node packages/backend/built/tools/mark-admin @用户名</code>即可，注意需要先注册才行。</p>
+<p>可以将普通权限帐号升级为管理员。参考<a href=https://github.com/misskey-dev/misskey/issues/8087>这个issue</a>，在服务器中运行<code>docker-compose run --rm web node packages/backend/built/tools/mark-admin @用户名</code>（路径可能有变动），注意需要先注册才行。</p>
 <h2 id=媒体文件外部存储>媒体文件外部存储</h2>
 <p>参考salt站长<a href=https://www.notion.so/3f645c4a2ab14f34aef37703ee286d3a>部署媒体文件外部存储服务</a>。以<a href=https://console.scaleway.com/>Scaleway</a>为例进行配置，使用其他s3存储服务请查找官方文档及相似文章。</p>
 <p>注册帐号、新建Project&储存桶以及获取API key的具体步骤请看参考文章，没有难度，本文不再赘述。但需要注意的是，储存桶名要<strong>填写媒体服务子域名</strong>，例如<code>im.yourdomain.com</code>。</p>
