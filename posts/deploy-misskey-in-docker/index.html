@@ -370,7 +370,6 @@ systemctl enable nginx
 <li><code>SECRET KEY</code>：填写在Scaleway获取的Secret key</li>
 </ul>
 <p>打开SSL（声明<code>Endpoint</code>使用HTTPS），关闭媒体代理，打开public-read，打开s3ForcePathStyle，保存。上传一张图片，若发note没有出现问题且图片清晰，则部署成功。</p>
-<p>回到服务器，运行<code>docker-compose down</code>，将<code>docker-compose.yml</code>中<code>- ./files:/misskey/files</code>这一行注释掉，然后运行<code>docker-compose up -d</code>重新让站点启动。</p>
 <h2 id=开始食用>开始食用</h2>
 <ul>
 <li><a href=https://candinya.com/posts/minimal-misskey-docker-deploy/>本文部分参考：使用Docker最小化部署Misskey</a></li>
