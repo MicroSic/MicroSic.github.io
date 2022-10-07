@@ -221,6 +221,9 @@ services:
 <p>首先去DNS服务商添加一条指向服务器ip，内容为域名的A记录，然后回到服务器运行以下命令：</p>
 <pre tabindex=0><code>sudo -i   #切换至root用户
 apt install nginx -y    #安装nginx
+apt install snapd
+snap install core   #安装snap
+snap install certbot --classic  #使用snap安装certbot
 </code></pre><p>运行<code>nano /etc/nginx/conf.d/miniflux.conf</code>，内容如下：</p>
 <pre tabindex=0><code>server {
     listen 80;
