@@ -429,7 +429,7 @@ Disallow: /
 </code></pre><p>或是使用Docker生成密钥对：</p>
 <pre tabindex=0><code>docker run --rm node npx web-push generate-vapid-keys
 </code></pre><p>刚刚发现一个网站可以在线生成VAPID密钥对，不会有什么安全隐患。如果不想使用服务器的话可以直接在线生成：<a href=https://www.attheminute.com/vapid-key-generator>VAPID Key Generator</a>。</p>
-<p>将生成密钥对填入Misskey管理控制台即可。不过在实际使用时如果因为网络问题没有及时刷新页面，PWA应用会白屏并显示<code>Offline. Service Worker @12.118.1</code>，此时强制刷新即可恢复。</p>
+<p>将生成的密钥对填入Misskey管理控制台即可。不过在实际使用时如果因为网络问题没有及时刷新页面，PWA应用会白屏并显示<code>Offline. Service Worker @12.118.1</code>，此时强制刷新即可恢复。</p>
 <h2 id=关于misskey使用上的小问题>关于Misskey使用上的小问题</h2>
 <h3 id=媒体文件的存储>媒体文件的存储</h3>
 <p>Misskey的策略是只存储站内用户的媒体资源，使用的策略是网盘，所有内容保存在<code>files</code>目录下。上传任意文件至网盘之后，发帖文的时候可以随时引用文件！而Mastodon如果要在不同嘟里发同一张图得上传两次。当然也可以选择缓存外站用户的媒体(缩略图），相关所有操作都在控制面板->常规设置里。</p>
@@ -437,7 +437,13 @@ Disallow: /
 <h3 id=misskey的站点维护>Misskey的站点维护</h3>
 <p>不像Mastodon有功能极为丰富的tootctl命令集，Misskey几乎是用网页端就能完全控制你的站点。Misskey也有一个CLI命令，就是那个把普通用户标记成管理员的命令，<a href=https://misskey-hub.net/en/docs/install/docker.html>官方文档</a>有提到。但Misskey是个年轻的项目，路径变动比较频繁，可能用不了。</p>
 <p>删除旧数据的操作使用的是docker命令<code>docker system prune</code>，该命令用来清理没有使用的数据，包括那些已停止的容器、dangling镜像（未被任何镜像引用的镜像）、未被容器引用的network和构建过程中的cache。</p>
-<h3 id=修改默认字数限制>修改默认字数限制</h3>
+<p>对于升级操作，一般来说只要：</p>
+<pre tabindex=0><code>docker-compose down   #关闭Misskey
+docker pull misskey/misskey:latest   ##拉取最新镜像
+cp -r db db1   #备份数据库，防止升级过程翻车。待站点重启确认无问题后运行rm -rf db1删除备份即可
+docker-compose up -d   #重启Misskey
+docker rmi -f  `docker images | grep '&lt;none&gt;' | awk '{print $3}'`    #删除旧镜像
+</code></pre><h3 id=修改默认字数限制>修改默认字数限制</h3>
 <p>应该是在<a href=https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/const.ts#L1>https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/const.ts#L1</a>。目前Misskey的默认字数是3000字，并且不考虑将默认字数上限放到网页端控制面板或者配置文件中，详见<a href=https://github.com/misskey-dev/misskey/issues/8323>这个issue</a>。</p>
 <h3 id=elasticsearches搜索>Elasticsearch（ES搜索)</h3>
 <p>不像Mastodon的搜索那么鸡肋必须靠ES才能正常使用，Misskey默认的搜索就足够使用了。而且对于小站点来说，开了ES很耗费内存，性价比不高。如果默认搜索出了问题，可以重建Misskey数据库的索引，相当于磁盘碎片整理。附上<a href=https://misskey.chn.moe/notes/8zw5ao7nqh>可以参考的帖子</a>。</p>
