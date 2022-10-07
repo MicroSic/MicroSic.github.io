@@ -448,7 +448,15 @@ docker rmi -f  `docker images | grep '&lt;none&gt;' | awk '{print $3}'`    #删�
 </code></pre><h3 id=修改默认字数限制>修改默认字数限制</h3>
 <p>应该是在<a href=https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/const.ts#L1>https://github.com/misskey-dev/misskey/blob/develop/packages/backend/src/const.ts#L1</a>。目前Misskey的默认字数是3000字，并且不考虑将默认字数上限放到网页端控制面板或者配置文件中，详见<a href=https://github.com/misskey-dev/misskey/issues/8323>这个issue</a>。</p>
 <h3 id=elasticsearches搜索>Elasticsearch（ES搜索)</h3>
-<p>不像Mastodon的搜索那么鸡肋必须靠ES才能正常使用，Misskey默认的搜索就足够使用了。而且对于小站点来说，开了ES很耗费内存，性价比不高。如果默认搜索出了问题，可以重建Misskey数据库的索引，相当于磁盘碎片整理。附上<a href=https://misskey.chn.moe/notes/8zw5ao7nqh>可以参考的帖子</a>。</p>
+<p>不像Mastodon的搜索那么鸡肋必须靠ES才能正常使用，Misskey默认的搜索就足够使用了。而且对于小站点来说，开了ES很耗费内存，性价比不高。如果默认搜索出了问题，可以重建Misskey数据库的索引，相当于磁盘碎片整理。具体操作应该是：</p>
+<pre tabindex=0><code>docker-compose down 
+cp -r db db1   #备份数据库
+docker-compose up -d db
+docker exec -it db psql -U postgres   #进入容器。若报错数据库用户postgres不存在，则换成Misskey的数据库用户
+REINDEX DATABASE Misskey数据库名   #重建数据库索引
+\q   #回车退出容器
+docker-compose up -d
+</code></pre><p>附上<a href=https://misskey.chn.moe/notes/8zw5ao7nqh>可以参考的帖子</a>。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
