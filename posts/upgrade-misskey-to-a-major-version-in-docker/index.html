@@ -170,7 +170,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title="Written At">📅&nbsp;Feb 6, 2024 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;12&nbsp;min read </span>
+&nbsp;&#183;&nbsp; <span class=single__info title="Reading Time"> ☕&nbsp;10&nbsp;min read </span>
 <span class=single__info>
 </span>
 </div>
@@ -191,13 +191,11 @@ kimbie
 <p>在本人沉迷于日制校供和美妆区的过去一年间，Misskey项目又新增了好多分支，甚至有一些分支的功能颠覆了本Fedi老人的认知，比如迁移到新账号后导入过去的贴文之类的，在以前想都不敢想。Fedi宇宙日渐活跃，又经历一波微博迁移潮，Misskey项目及其分支开发工作也稳定输出，真的有一种百花齐放的感觉。但是作为建站不想维护的我有难了，最后还是选择在DDL（农历新年开始前）面前放弃一切尊严。</p>
 <p>本人搭建Misskey的全步骤在这篇博客：<a href=https://blog.tantalum.life/posts/deploy-misskey-in-docker/>Misskey | 利用Docker-compose搭建Fedi开源社交平台</a>，搭建好之后升级过一次小版本（从v12.118升至v12.119）修复了上文提到的安全性bug，除此之外再无升级维护操作。正好借此机会记录Misskey v12.119跨一整个v13大版本升级至2023年终版本全过程。</p>
 <h2 id=环境介绍>环境介绍</h2>
-<p>先说一下，我搭建使用的是docker-compose，并且使用的是dockerhub中的官方现有镜像，并不是把项目源码拉到本地后自己构建。当然如果是在服务器里构建镜像的话步骤几乎是一样的。用docker-compose方式搭建Misskey是最小化、自定义程度不错且新手友好的方式。我的项目目录是'/opt/misskey'，不使用s3对象存储而是将文件储存在本地的&rsquo;files&rsquo;目录下。&lsquo;docker-compose.yml&rsquo;、'.config/docker.env'、'.config/default.yml&rsquo;这三个文件使用的是官方项目一年前的版本，现在均已经经过了巨大改动。</p>
-<p>服务器系统是Debian 10，Misskey的重要依赖Node.js版本号是16。docker和docker-compose应该是哪个版本都可以，但最好不要用过于旧的。Misskey v12.119使用的&rsquo;docker-compose.yml&rsquo;文件内声明postgres版本号是'12.2-alpine'，redis用的是'4.0-alpine'。</p>
+<p>先说一下，我搭建使用的是docker-compose，并且使用的是dockerhub中的官方现有镜像，并不是把项目源码拉到本地后自己构建。当然如果是在服务器里构建镜像的话步骤几乎是一样的。用docker-compose方式搭建Misskey是最小化、自定义程度不错且新手友好的方式。我的项目目录是<code>/opt/misskey</code>，不使用s3对象存储而是将文件储存在本地的<code>files</code>目录下。<code>docker-compose.yml</code>、<code>.config/docker.env</code>、<code>.config/default.yml</code>这三个文件使用的是官方项目一年前的版本，现在均已经经过了巨大改动。</p>
+<p>服务器系统是Debian 10，Misskey的重要依赖Node.js版本号是16。docker和docker-compose应该是哪个版本都可以，但最好不要用过于旧的。Misskey v12.119使用的<code>docker-compose.yml</code>文件内声明postgres版本号是<code>12.2-alpine</code>，redis用的是<code>4.0-alpine</code>。</p>
 <p>打开官方项目的<a href=https://github.com/misskey-dev/misskey/blob/master/CHANGELOG.md#changes-7>更新历史</a>，可以看到在13.0.0 (2023/01/16)这个大版本升级的时候要进行的改动：</p>
 <blockquote>
 <p>For server admins</p>
-</blockquote>
-<blockquote>
 <p>Node.js 18.x or later is required<br>
 PostgreSQL 15.x is required<br>
 Misskey not using 15 specific features at 13.0.0, but may do so in the future.<br>
@@ -207,253 +205,193 @@ Elasticsearchのサポートが削除されました<br>
 Yarnからpnpmに移行されました corepackの有効化を推奨します: sudo corepack enable<br>
 &mldr;&mldr;</p>
 </blockquote>
-<p>也就是说，在Misskey v13 以及更高版本中，Node.js要从'16.x&rsquo;升到'18.x'，postgres要升到'15-alpine'，redis作为缓存也可以从'4.0-alpine&rsquo;升到'7-alpine&rsquo;但不是必须。同时ES搜索已经不提供支持了。</p>
+<p>也就是说，在Misskey v13 以及更高版本中，Node.js要从<code>16.x</code>升到<code>18.x</code>，postgres要升到<code>15-alpine</code>，redis作为缓存也可以从<code>4.0-alpine</code>升到<code>7-alpine</code>但不是必须。同时ES搜索已经不提供支持了。</p>
 <h2 id=升级操作>升级操作</h2>
 <p>如果不幸因为各种各样的原因升级失败需要备份一下旧的文件与环境。登入服务器，进入到Misskey的项目目录，先停掉web容器，防止有新的数据写到数据库：</p>
-<p>'''<br>
-cd /opt/misskey<br>
-docker compose stop web<br>
-'''</p>
-<p>然后掏出VPS的服务提供商，全盘做一个系统快照。这样如果不幸失败了也有很大机会找回数据。注意一下系统快照不是万能的，虽然能很方便地将服务器一键回滚到之前的状态，但也是有极极极小概率回滚失败。祝大家武运昌隆。</p>
-<p>然后先查看一下数据库的用户密码和数据库名是什么，这些都设置在'.config/docker.env&rsquo;里面。运行&rsquo;nano .config/docker.env&rsquo;就可以看到。然后运行&rsquo;pg_dump&rsquo;命令来备份数据库。</p>
-<p>'''<br>
-docker compose exec db pg_dump -Fc misskey -U misskey-user > db.dump<br>
-'''</p>
-<p>上面的命令将&rsquo;misskey&rsquo;换成数据库名，&lsquo;misskey-user&rsquo;换成数据库用户。等待一会在&rsquo;/opt/misskey&rsquo;目录下就会有一个&rsquo;db.dump&rsquo;文件啦，这个就是备份出来的二进制数据。数据备份完成后停止并删除所有容器：</p>
-<p>'''<br>
-docker-compose down<br>
-'''</p>
-<p>这样Misskey的所有服务就全部停掉了。为了避免翻车再备份一下数据库的持久化数据：运行&rsquo;mv db db1'，把&rsquo;db&rsquo;目录重命名成&rsquo;db1'，如果升失败了可以直接恢复，等之后确认升级成功了可以删除。</p>
-<p>接下来编辑&rsquo;docker-compose.yml&rsquo;文件。因为&rsquo;docker-compose.yml&rsquo;做了很大改动，所以也备份一下旧的：</p>
-<p>'''<br>
-mv docker-compose.yml docker-compose.yml.save #将docker-compose.yml文件重命名，等之后确认升级成功了可以删除<br>
-nano docker-compose.yml #创建新的docker-compose.yml文件<br>
-'''</p>
-<p>文件内容如下：</p>
-<p>'''<br>
-version: &ldquo;3&rdquo;</p>
-<p>services:<br>
-web:</p>
-<h1 id=build->build: .</h1>
-<pre><code>restart: always
-image: misskey/misskey:2023      #我准备将Misskey升级到2023年终版本，改成latest也可以
-links:
-  - db
-  - redis
-</code></pre>
-<h1 id=--mcaptcha>- mcaptcha</h1>
-<h1 id=--meilisearch>- meilisearch</h1>
-<pre><code>depends_on:
-  db:
-    condition: service_healthy
+<pre tabindex=0><code>cd /opt/misskey
+docker compose stop web
+</code></pre><p>然后掏出VPS的服务提供商，全盘做一个系统快照。这样如果不幸失败了也有很大机会找回数据。注意一下系统快照不是万能的，虽然能很方便地将服务器一键回滚到之前的状态，但也是有极极极小概率回滚失败。祝大家武运昌隆。</p>
+<p>然后先查看一下数据库的用户密码和数据库名是什么，这些都设置在<code>.config/docker.env</code>里面。运行<code>nano .config/docker.env</code>就可以看到。然后运行<code>pg_dump</code>命令来备份数据库。</p>
+<pre tabindex=0><code>docker compose exec db pg_dump -Fc misskey -U misskey-user &gt; db.dump
+</code></pre><p>上面的命令将<code>misskey</code>换成数据库名，<code>misskey-user</code>换成数据库用户。等待一会在<code>/opt/misskey</code>目录下就会有一个<code>db.dump</code>文件啦，这个就是备份出来的二进制数据。数据备份完成后停止并删除所有容器：</p>
+<pre tabindex=0><code>docker-compose down
+</code></pre><p>这样Misskey的所有服务就全部停掉了。为了避免翻车再备份一下数据库的持久化数据：运行<code>mv db db1</code>，把<code>db</code>目录重命名成<code>db1</code>，如果升失败了可以直接恢复，等之后确认升级成功了可以删除。</p>
+<p>接下来编辑<code>docker-compose.yml</code>文件。因为<code>docker-compose.yml</code>做了很大改动，所以也备份一下旧的：</p>
+<pre tabindex=0><code>mv docker-compose.yml docker-compose.yml.save   #将docker-compose.yml文件重命名，等之后确认升级成功了可以删除
+nano docker-compose.yml   #创建新的docker-compose.yml文件
+</code></pre><p>文件内容如下：</p>
+<pre tabindex=0><code>version: &quot;3&quot;
+
+services:
+  web:
+#    build: .
+    restart: always
+    image: misskey/misskey:2023      #我准备将Misskey升级到2023年终版本，改成latest也可以
+    links:
+      - db
+      - redis
+#     - mcaptcha
+#     - meilisearch
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - &quot;3000:3000&quot;              #如果服务器端口3000已被使用，可改为其他端口，例如127.0.0.1:5210:3000
+    networks:
+      - internal_network
+      - external_network
+    volumes:
+      - ./files:/misskey/files      #用户上传到本地的文件，如果您一开始就接入外部存储（如wasabi或是AWS S3）您可以忽略这块配置
+      - ./.config:/misskey/.config:ro        #.config目录下有两个配置文件，设置成让Misskey只读
+
   redis:
-    condition: service_healthy
-ports:
-  - &quot;3000:3000&quot;              #如果服务器端口3000已被使用，可改为其他端口，例如127.0.0.1:5210:3000
+    restart: always
+    image: redis:7-alpine
+    networks:
+      - internal_network
+    volumes:
+      - ./redis:/data
+    healthcheck:
+      test: &quot;redis-cli ping&quot;
+      interval: 5s
+      retries: 20
+
+  db:
+    restart: always
+    image: postgres:15-alpine
+    networks:
+      - internal_network
+    env_file:
+      - .config/docker.env
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    healthcheck:
+      test: &quot;pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB&quot;
+      interval: 5s
+      retries: 20
+
+#  mcaptcha:
+#    restart: always
+#    image: mcaptcha/mcaptcha:latest
+#    networks:
+#      internal_network:
+#      external_network:
+#        aliases:
+#          - localhost
+#    ports:
+#      - 7493:7493
+#    env_file:
+#      - .config/docker.env
+#    environment:
+#      PORT: 7493
+#      MCAPTCHA_redis_URL: &quot;redis://mcaptcha_redis/&quot;
+#    depends_on:
+#      db:
+#        condition: service_healthy
+#      mcaptcha_redis:
+#        condition: service_healthy
+#
+#  mcaptcha_redis:
+#    image: mcaptcha/cache:latest
+#    networks:
+#      - internal_network
+#    healthcheck:
+#      test: &quot;redis-cli ping&quot;
+#      interval: 5s
+#      retries: 20
+
+#  meilisearch:
+#    restart: always
+#    image: getmeili/meilisearch:v1.3.4
+#    environment:
+#      - MEILI_NO_ANALYTICS=true
+#      - MEILI_ENV=production
+#    env_file:
+#      - .config/meilisearch.env
+#    networks:
+#      - internal_network
+#    volumes:
+#      - ./meili_data:/meili_data
+
 networks:
-  - internal_network
-  - external_network
-volumes:
-  - ./files:/misskey/files      #用户上传到本地的文件，如果您一开始就接入外部存储（如wasabi或是AWS S3）您可以忽略这块配置
-  - ./.config:/misskey/.config:ro        #.config目录下有两个配置文件，设置成让Misskey只读
-</code></pre>
-<p>redis:<br>
-restart: always<br>
-image: redis:7-alpine<br>
-networks:<br>
-- internal_network<br>
-volumes:<br>
-- ./redis:/data<br>
-healthcheck:<br>
-test: &ldquo;redis-cli ping&rdquo;<br>
-interval: 5s<br>
-retries: 20</p>
-<p>db:<br>
-restart: always<br>
-image: postgres:15-alpine<br>
-networks:<br>
-- internal_network<br>
-env_file:<br>
-- .config/docker.env<br>
-volumes:<br>
-- ./db:/var/lib/postgresql/data<br>
-healthcheck:<br>
-test: &ldquo;pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB&rdquo;<br>
-interval: 5s<br>
-retries: 20</p>
-<h1 id=mcaptcha>mcaptcha:</h1>
-<h1 id=restart-always>restart: always</h1>
-<h1 id=image-mcaptchamcaptchalatest>image: mcaptcha/mcaptcha:latest</h1>
-<h1 id=networks>networks:</h1>
-<h1 id=internal_network>internal_network:</h1>
-<h1 id=external_network>external_network:</h1>
-<h1 id=aliases>aliases:</h1>
-<h1 id=--localhost>- localhost</h1>
-<h1 id=ports>ports:</h1>
-<h1 id=--74937493>- 7493:7493</h1>
-<h1 id=env_file>env_file:</h1>
-<h1 id=--configdockerenv>- .config/docker.env</h1>
-<h1 id=environment>environment:</h1>
-<h1 id=port-7493>PORT: 7493</h1>
-<h1 id=mcaptcha_redis_url-redismcaptcha_redis>MCAPTCHA_redis_URL: &ldquo;redis://mcaptcha_redis/&rdquo;</h1>
-<h1 id=depends_on>depends_on:</h1>
-<h1 id=db>db:</h1>
-<h1 id=condition-service_healthy>condition: service_healthy</h1>
-<h1 id=mcaptcha_redis>mcaptcha_redis:</h1>
-<h1 id=condition-service_healthy-1>condition: service_healthy</h1>
-<h1 id=heading></h1>
-<h1 id=mcaptcha_redis-1>mcaptcha_redis:</h1>
-<h1 id=image-mcaptchacachelatest>image: mcaptcha/cache:latest</h1>
-<h1 id=networks-1>networks:</h1>
-<h1 id=--internal_network>- internal_network</h1>
-<h1 id=healthcheck>healthcheck:</h1>
-<h1 id=test-redis-cli-ping>test: &ldquo;redis-cli ping&rdquo;</h1>
-<h1 id=interval-5s>interval: 5s</h1>
-<h1 id=retries-20>retries: 20</h1>
-<h1 id=meilisearch>meilisearch:</h1>
-<h1 id=restart-always-1>restart: always</h1>
-<h1 id=image-getmeilimeilisearchv134>image: getmeili/meilisearch:v1.3.4</h1>
-<h1 id=environment-1>environment:</h1>
-<h1 id=--meili_no_analyticstrue>- MEILI_NO_ANALYTICS=true</h1>
-<h1 id=--meili_envproduction>- MEILI_ENV=production</h1>
-<h1 id=env_file-1>env_file:</h1>
-<h1 id=--configmeilisearchenv>- .config/meilisearch.env</h1>
-<h1 id=networks-2>networks:</h1>
-<h1 id=--internal_network-1>- internal_network</h1>
-<h1 id=volumes>volumes:</h1>
-<h1 id=--meili_datameili_data>- ./meili_data:/meili_data</h1>
-<p>networks:<br>
-internal_network:<br>
-internal: true<br>
-external_network:<br>
-'''</p>
-<p>然后Ctrl+X，按Y保存。上述文件将postgres升到15，redis升到7。但是'.config/docker.env'、'.config/default.yml&rsquo;这两个配置文件还没有修改，要修改一下：</p>
-<p>'''<br>
-mv .config/default.yml default.yml.save #重命名default.yml文件并且放到/opt/misskey目录下，也就是.config目录的外面。等之后确认升级成功了可以删除<br>
-nano .config/default.yml #新建文件<br>
-'''</p>
-<p>文件内容在这里：<a href=https://github.com/misskey-dev/misskey/blob/develop/.config/docker_example.yml>default.yml</a>。注意改动：</p>
+  internal_network:
+    internal: true
+  external_network:
+</code></pre><p>然后Ctrl+X，按Y保存。上述文件将postgres升到15，redis升到7。但是<code>.config/docker.env</code>、<code>.config/default.yml</code>这两个配置文件还没有修改，要修改一下：</p>
+<pre tabindex=0><code>mv .config/default.yml default.yml.save  #重命名default.yml文件并且放到/opt/misskey目录下，也就是.config目录的外面。等之后确认升级成功了可以删除
+nano .config/default.yml  #新建文件
+</code></pre><p>文件内容在这里：<a href=https://github.com/misskey-dev/misskey/blob/develop/.config/docker_example.yml>default.yml</a>。注意改动：</p>
 <ul>
-<li>将&rsquo;url&rsquo;项改为你的域名。<strong>重要</strong>，由于分布式属性，一旦开启站点则不可更改。所以要和之前的设置保持一致</li>
+<li>将<code>url</code>项改为你的域名。<strong>重要</strong>，由于分布式属性，一旦开启站点则不可更改。所以要和之前的设置保持一致</li>
 <li>将db项的user和pass改为数据库用户和数据库密码。和docker.env文件保持相同</li>
 </ul>
-<p>其他配置都可以保持默认。然后Ctrl+X，按Y保存。接下来修改&rsquo;docker.env&rsquo;文件：运行&rsquo;nano .config/docker.env'，直接再后面加一行：</p>
-<p>'''<br>
-DATABASE_URL=&ldquo;postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}&rdquo;<br>
-'''</p>
-<p>Ctrl+X，按Y保存退出就好。还有一个Node.js没有升级，将它升到'18.x'：</p>
-<p>'''<br>
-sudo curl -fsSL <a href=https://deb.nodesource.com/setup_16.x>https://deb.nodesource.com/setup_16.x</a> | sudo bash -<br>
-sudo apt install nodejs<br>
-'''</p>
-<p>如果报错提示sudo命令不存在，把这两行里面的三个&rsquo;sudo&rsquo;都删掉就好了。到此为止环境的部分就配好了。把刚刚导出来的'12.2-alpine&rsquo;版本的db数据库备份文件再导入进'15-alpine&rsquo;版本的db数据库里，这个步骤就是数据库的升级。</p>
-<p>'''<br>
-docker compose up -d db<br>
-'''<br>
-启动'15-alpine&rsquo;版本的db数据库容器，会在'/opt/misskey&rsquo;目录下面新增一个&rsquo;db&rsquo;文件夹。</p>
-<p>'''<br>
-docker compose exec -T db pg_restore -U misskey-user -d misskey &lt; db.dump<br>
-'''</p>
-<p>上面的命令将&rsquo;misskey&rsquo;换成数据库名，&lsquo;misskey-user&rsquo;换成数据库用户。这样就会把&rsquo;db.dump&rsquo;这个二进制文件里的数据导入进'15-alpine&rsquo;版本的db数据库容器，完成数据库从12.2到15的升级操作。</p>
-<p>'&rsquo;'<br>
-docker compose logs db<br>
-'''</p>
-<p>查看db容器的日志，确保没有报错信息，就可以将Misskey服务全部启动：</p>
-<p>'''<br>
-docker-compose up -d<br>
-'''</p>
-<p>至此Misskey的大版本升级就完成了。不过lala又提供了另一种数据库的升级方法，使用&rsquo;pg_dumpall&rsquo;备份数据。虽然说是要记录下来做参考，但是我实际运行的时候是导出不了全局备份文件的，而且第一种方法真的很简单为什么不用第一种。顺便说一下官方给的<a href=https://github.com/misskey-dev/misskey/pull/9641#issue-1536336620>数据库升级步骤</a>就是第二种，有大坑。</p>
+<p>其他配置都可以保持默认。然后Ctrl+X，按Y保存。接下来修改<code>docker.env</code>文件：运行<code>nano .config/docker.env</code>，直接再后面加一行：</p>
+<pre tabindex=0><code>DATABASE_URL=&quot;postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}&quot;
+</code></pre><p>Ctrl+X，按Y保存退出就好。还有一个Node.js没有升级，将它升到<code>18.x</code>：</p>
+<pre tabindex=0><code>sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt install nodejs
+</code></pre><p>如果报错提示sudo命令不存在，把这两行里面的三个<code>sudo</code>都删掉就好了。到此为止环境的部分就配好了。把刚刚导出来的<code>12.2-alpine</code>版本的db数据库备份文件再导入进<code>15-alpine</code>版本的db数据库里，这个步骤就是数据库的升级。</p>
+<pre tabindex=0><code>docker compose up -d db
+</code></pre><p>启动<code>15-alpine</code>版本的db数据库容器，会在<code>/opt/misskey</code>目录下面新增一个<code>db</code>文件夹。</p>
+<pre tabindex=0><code>docker compose exec -T db pg_restore -U misskey-user -d misskey &lt; db.dump
+</code></pre><p>上面的命令将<code>misskey</code>换成数据库名，<code>misskey-user</code>换成数据库用户。这样就会把<code>db.dump</code>这个二进制文件里的数据导入进<code>15-alpine</code>版本的db数据库容器，完成数据库从12.2到15的升级操作。</p>
+<pre tabindex=0><code>docker compose logs db
+</code></pre><p>查看db容器的日志，确保没有报错信息，就可以将Misskey服务全部启动：</p>
+<pre tabindex=0><code>docker-compose up -d
+</code></pre><p>至此Misskey的大版本升级就完成了。不过lala又提供了另一种数据库的升级方法，使用<code>pg_dumpall</code>备份数据。虽然说是要记录下来做参考，但是我实际运行的时候是导出不了全局备份文件的，而且第一种方法真的很简单为什么不用第一种。顺便说一下官方给的<a href=https://github.com/misskey-dev/misskey/pull/9641#issue-1536336620>数据库升级步骤</a>就是第二种，有大坑。</p>
 <h2 id=第二种数据库升级方法不推荐>第二种数据库升级方法（不推荐）</h2>
-<p>下面来说第二种方法，使用&rsquo;pg_dumpall&rsquo;备份数据，使用&rsquo;psql&rsquo;恢复数据。（不推荐这种方法）</p>
-<p>这种方法和上面的区别在于&rsquo;pg_dumpall&rsquo;备份出来的数据是纯文本的，&lsquo;pg_dumpall&rsquo;也只支持这一种格式。</p>
-<p>纯文本格式的数据不能使用&rsquo;pg_restore&rsquo;恢复，只能使用&rsquo;psql&rsquo;恢复。并且&rsquo;pg_dumpall&rsquo;会导出&rsquo;Roles&rsquo;，这里就是大坑所在。</p>
+<p>下面来说第二种方法，使用<code>pg_dumpall</code>备份数据，使用<code>psql</code>恢复数据。（不推荐这种方法）</p>
+<p>这种方法和上面的区别在于<code>pg_dumpall</code>备份出来的数据是纯文本的，<code>pg_dumpall</code>也只支持这一种格式。</p>
+<p>纯文本格式的数据不能使用<code>pg_restore</code>恢复，只能使用<code>psql</code>恢复。并且<code>pg_dumpall</code>会导出<code>Roles</code>，这里就是大坑所在。</p>
 <p>还是先停止web容器：</p>
-<p>'''<br>
-docker compose stop web<br>
-'''</p>
-<p>使用&rsquo;pg_dumpall&rsquo;备份数据：</p>
-<p>'''<br>
-docker compose exec db pg_dumpall -U misskey-user > db.sql #misskey-user换成你的数据库用户<br>
-'''</p>
-<p>停止并删除其他所有容器：</p>
-<p>'''<br>
-docker compose down<br>
-'''</p>
-<p>重命名挂载目录：</p>
-<p>'''<br>
-mv db/ db.backup<br>
-'''</p>
-<p>由于postgresql15将默认的&rsquo;host&rsquo;验证方式从&rsquo;md5&rsquo;改成了&rsquo;scram-sha-256'（在postgresql14之前都是&rsquo;md5'，14之后就是&rsquo;scram-sha-256'）</p>
-<p>又因为&rsquo;pg_dumpall&rsquo;备份出来的数据是包含&rsquo;roles&rsquo;的，所以这里需要把postgresql15容器的&rsquo;host&rsquo;验证方式改回和之前一样的都使用&rsquo;md5'，否则会导致misskey程序无法连接数据库。</p>
-<p>编辑&rsquo;docker-compose.yml&rsquo;文件里面指定的envfile：</p>
-<p>'''<br>
-nano ./config/docker.env<br>
-'''</p>
-<p>加入如下配置：</p>
-<p>'''<br>
-POSTGRES_HOST_AUTH_METHOD=md5<br>
-'''</p>
-<p>修改image的tag：</p>
-<p>'''<br>
-image: postgres:12.2-alpine<br>
-'''</p>
-<p>将12.2改为15：</p>
-<p>'''<br>
-image: postgres:15-alpine<br>
-'''</p>
-<p>（可选）redis的tag也可以改一下：</p>
-<p>'''<br>
-image: redis:4.0-alpine<br>
-'''</p>
-<p>目前官方的docker-compose.yml文件里面已经是7了：</p>
-<p>'''<br>
-image: redis:7-alpine<br>
-'''</p>
-<p>拉新的image：</p>
-<p>'''<br>
-docker compose pull<br>
-'''</p>
-<p>启动db容器：</p>
-<p>'''<br>
-docker compose up -d db<br>
-'''</p>
-<p>导入数据：</p>
-<p>'''<br>
-docker compose exec -T db psql -U misskey-user &lt; db.sql #misskey-user换成你自己的数据库用户<br>
-'''</p>
-<p>导入完成后查看日志，看看有没有报错：</p>
-<p>'''<br>
-docker compose logs db<br>
-'''</p>
-<p>如果遇到下面的这些错误可以忽略，这是因为容器在启动的时候已经创建了同名的&rsquo;role&rsquo;和数据库：</p>
-<p>'''<br>
-ERROR: role &ldquo;misskey&rdquo; already exists<br>
-ERROR: database &ldquo;misskey&rdquo; already exists<br>
-'''</p>
-<p>最后将全部容器都启动：</p>
-<p>'''<br>
-docker compose up -d<br>
-'''</p>
-<h3 id=数据库升级小记>数据库升级小记</h3>
-<p>使用这种方法需要注意的是&rsquo;POSTGRES_HOST_AUTH_METHOD&rsquo;变量仅在容器初始化的时候生效，也就是说如果容器已经启动过一次了，再设置这个变量是不起作用的：</p>
+<pre tabindex=0><code>docker compose stop web
+</code></pre><p>使用<code>pg_dumpall</code>备份数据：</p>
+<pre tabindex=0><code>docker compose exec db pg_dumpall -U misskey-user &gt; db.sql     #misskey-user换成你的数据库用户
+</code></pre><p>停止并删除其他所有容器：</p>
+<pre tabindex=0><code>docker compose down
+</code></pre><p>重命名挂载目录：</p>
+<pre tabindex=0><code>mv db/ db.backup
+</code></pre><p>由于postgresql15将默认的<code>host</code>验证方式从<code>md5</code>改成了<code>scram-sha-256</code>（在postgresql14之前都是<code>md5</code>，14之后就是<code>scram-sha-256</code>）</p>
+<p>又因为<code>pg_dumpall</code>备份出来的数据是包含<code>roles</code>的，所以这里需要把postgresql15容器的<code>host</code>验证方式改回和之前一样的都使用<code>md5</code>，否则会导致misskey程序无法连接数据库。</p>
+<p>编辑<code>docker-compose.yml</code>文件里面指定的envfile：</p>
+<pre tabindex=0><code>nano ./config/docker.env
+</code></pre><p>加入如下配置：</p>
+<pre tabindex=0><code>POSTGRES_HOST_AUTH_METHOD=md5
+</code></pre><p>修改image的tag：</p>
+<pre tabindex=0><code>image: postgres:12.2-alpine
+</code></pre><p>将12.2改为15：</p>
+<pre tabindex=0><code>image: postgres:15-alpine
+</code></pre><p>（可选）redis的tag也可以改一下：</p>
+<pre tabindex=0><code>image: redis:4.0-alpine
+</code></pre><p>目前官方的docker-compose.yml文件里面已经是7了：</p>
+<pre tabindex=0><code>image: redis:7-alpine
+</code></pre><p>拉新的image：</p>
+<pre tabindex=0><code>docker compose pull
+</code></pre><p>启动db容器：</p>
+<pre tabindex=0><code>docker compose up -d db
+</code></pre><p>导入数据：</p>
+<pre tabindex=0><code>docker compose exec -T db psql -U misskey-user &lt; db.sql   #misskey-user换成你自己的数据库用户
+</code></pre><p>导入完成后查看日志，看看有没有报错：</p>
+<pre tabindex=0><code>docker compose logs db
+</code></pre><p>如果遇到下面的这些错误可以忽略，这是因为容器在启动的时候已经创建了同名的<code>role</code>和数据库：</p>
+<pre tabindex=0><code>ERROR:  role &quot;misskey&quot; already exists
+ERROR:  database &quot;misskey&quot; already exists
+</code></pre><p>最后将全部容器都启动：</p>
+<pre tabindex=0><code>docker compose up -d
+</code></pre><h3 id=数据库升级小记>数据库升级小记</h3>
+<p>使用这种方法需要注意的是<code>POSTGRES_HOST_AUTH_METHOD</code>变量仅在容器初始化的时候生效，也就是说如果容器已经启动过一次了，再设置这个变量是不起作用的：</p>
 <p><a href=https://github.com/docker-library/postgres/issues/981>https://github.com/docker-library/postgres/issues/981</a></p>
-<p>如果要修改已经启动过的容器，可以编辑&rsquo;pg_hba.conf'：</p>
-<p>'''<br>
-nano db/pg_hba.conf<br>
-'''</p>
-<p>文件的末尾有一行这样的配置：</p>
-<p>'''<br>
-host all all all scram-sha-256<br>
-'''</p>
-<p>修改为：</p>
-<p>'''<br>
-host all all all md5<br>
-'''</p>
-<p>重启容器使其生效：</p>
-<p>'''<br>
-docker compose restart db<br>
-'''</p>
-<p>至此两种postgresql数据库备份、恢复方法都介绍完了。剩下的是与misskey相关的操作。</p>
+<p>如果要修改已经启动过的容器，可以编辑<code>pg_hba.conf</code>：</p>
+<pre tabindex=0><code>nano db/pg_hba.conf
+</code></pre><p>文件的末尾有一行这样的配置：</p>
+<pre tabindex=0><code>host all all all scram-sha-256
+</code></pre><p>修改为：</p>
+<pre tabindex=0><code>host all all all md5
+</code></pre><p>重启容器使其生效：</p>
+<pre tabindex=0><code>docker compose restart db
+</code></pre><p>至此两种postgresql数据库备份、恢复方法都介绍完了。剩下的是与misskey相关的操作。</p>
 <h3 id=misskey赋权>Misskey赋权</h3>
 <p>根据这个新的更改：</p>
 <p><a href=https://github.com/misskey-dev/misskey/pull/9560>https://github.com/misskey-dev/misskey/pull/9560</a></p>
@@ -461,33 +399,27 @@ docker compose restart db<br>
 <p><a href=https://github.com/misskey-dev/misskey/issues/9564>https://github.com/misskey-dev/misskey/issues/9564</a></p>
 <p><a href=https://github.com/misskey-dev/misskey/issues/9564>https://github.com/misskey-dev/misskey/issues/9608</a></p>
 <p>那么你还需要修改misskey文件目录所有者，然后重启：</p>
-<p>'''<br>
-cd /opt/misskey<br>
-chown -hR 991.991 files<br>
-docker compose restart<br>
-'''</p>
-<p>最后清理下无用的&rsquo;docker image'：</p>
-<p>'''<br>
-docker images // 找到镜像的id，然后用rmi命令删除<br>
-docker rmi 755f15b2f8cd<br>
-docker rmi ae192c4d3ada<br>
-docker rmi -f <code>docker images | grep '&lt;none>' | awk '{print $3}'</code><br>
-'''</p>
-<p>总结遇到的问题，一开始我是使用的&rsquo;pg_dumpall&rsquo;备份的数据库，这个工具备份出来的数据包含了数据库共有的全局对象，即数据库角色、表空间、配置参数等数据。这就是&rsquo;pg_dumpall&rsquo;和&rsquo;pg_dump&rsquo;最大的区别所在，&lsquo;pg_dump&rsquo;备份出来的数据是不含这些内容的。这是我后来仔细看了官方文档才发现的：</p>
+<pre tabindex=0><code>cd /opt/misskey
+chown -hR 991.991 files
+docker compose restart
+</code></pre><p>最后清理下无用的<code>docker image</code>：</p>
+<pre tabindex=0><code>docker images // 找到镜像的id，然后用rmi命令删除
+docker rmi 755f15b2f8cd
+docker rmi ae192c4d3ada
+docker rmi -f  `docker images | grep `&lt;none&gt;` | awk `{print $3}`` 
+</code></pre><p>总结遇到的问题，一开始我是使用的<code>pg_dumpall</code>备份的数据库，这个工具备份出来的数据包含了数据库共有的全局对象，即数据库角色、表空间、配置参数等数据。这就是<code>pg_dumpall</code>和<code>pg_dump</code>最大的区别所在，<code>pg_dump</code>备份出来的数据是不含这些内容的。这是我后来仔细看了官方文档才发现的：</p>
 <p><a href=https://www.postgresql.org/docs/current/app-pg-dumpall.html#Description>https://www.postgresql.org/docs/current/app-pg-dumpall.html#Description</a></p>
-<p>又由于postgresql14之后的版本将默认的&rsquo;host&rsquo;验证方式从&rsquo;md5&rsquo;改为了&rsquo;scram-sha-256&rsquo;，这是我翻了半天在官方docker镜像页面发现的：</p>
+<p>又由于postgresql14之后的版本将默认的<code>host</code>验证方式从<code>md5</code>改为了<code>scram-sha-256</code>，这是我翻了半天在官方docker镜像页面发现的：</p>
 <p><a href=https://hub.docker.com/_/postgres>https://hub.docker.com/_/postgres</a></p>
 <p>里面有这样一段话：</p>
 <blockquote>
 <p>This optional variable can be used to control the auth-method for host connections for all databases, all users, and all addresses. If unspecified then scram-sha-256 password authentication is used (in 14+; md5 in older releases).</p>
 </blockquote>
-<p>这样就导致恢复后的数据库还用的是旧的&rsquo;md5&rsquo;验证方式，与现有postgresql15默认的配置不兼容。最后就导致程序连接不上数据库。</p>
-<p>最后我看了下通过&rsquo;pg_dumpall&rsquo;备份出来的纯文本数据，里面确实有这样的内容：</p>
-<p>'''<br>
-CREATE ROLE misskey;<br>
-ALTER ROLE misskey WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD &lsquo;md5xxxxx&rsquo;;<br>
-'''</p>
-<p>所以，以后备份数据最好用&rsquo;pg_dump'。。。</p>
+<p>这样就导致恢复后的数据库还用的是旧的<code>md5</code>验证方式，与现有postgresql15默认的配置不兼容。最后就导致程序连接不上数据库。</p>
+<p>最后我看了下通过<code>pg_dumpall</code>备份出来的纯文本数据，里面确实有这样的内容：</p>
+<pre tabindex=0><code>CREATE ROLE misskey;
+ALTER ROLE misskey WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD `md5xxxxx`;
+</code></pre><p>所以，以后备份数据最好用<code>pg_dump</code>。。。</p>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -639,8 +571,6 @@ See Also
 <li><a href=#简要介绍>简要介绍</a></li>
 <li><a href=#环境介绍>环境介绍</a></li>
 <li><a href=#升级操作>升级操作</a></li>
-</ul>
-<ul>
 <li><a href=#第二种数据库升级方法不推荐>第二种数据库升级方法（不推荐）</a>
 <ul>
 <li><a href=#数据库升级小记>数据库升级小记</a></li>
